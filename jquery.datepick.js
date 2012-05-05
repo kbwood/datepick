@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Date picker for jQuery v4.0.3.
+   Date picker for jQuery v4.0.4.
    Written by Keith Wood (kbwood{at}iinet.com.au) February 2010.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -653,8 +653,9 @@ $.extend(Datepicker.prototype, {
 	   @param  month  (number) the month (1 to 12)
 	   @return  (number) the number of days in this month */
 	daysInMonth: function(year, month) {
-		var date = (year.getFullYear ? year : this.newDate(year, month, 1));
-		return 32 - this.newDate(date.getFullYear(), date.getMonth() + 1, 32).getDate();
+		month = (year.getFullYear ? year.getMonth() + 1 : month);
+		year = (year.getFullYear ? year.getFullYear() : year);
+		return this.newDate(year, month + 1, 0).getDate();
 	},
 
 	/* Calculate the day of the year for a date.
@@ -666,7 +667,7 @@ $.extend(Datepicker.prototype, {
 	dayOfYear: function(year, month, day) {
 		var date = (year.getFullYear ? year : this.newDate(year, month, day));
 		var newYear = this.newDate(date.getFullYear(), 1, 1);
-		return (date.getTime() - newYear.getTime()) / this._msPerDay + 1;
+		return Math.floor((date.getTime() - newYear.getTime()) / this._msPerDay) + 1;
 	},
 
 	/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
@@ -676,12 +677,12 @@ $.extend(Datepicker.prototype, {
 	   @param  day    (number) the day
 	   @return  (number) the number of the week within the year that contains this date */
 	iso8601Week: function(year, month, day) {
-		var checkDate = (year.getFullYear ? new Date(year.getTime()) : this.newDate(year, month, day));
+		var checkDate = (year.getFullYear ?
+			new Date(year.getTime()) : this.newDate(year, month, day));
 		// Find Thursday of this week starting on Monday
 		checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
 		var time = checkDate.getTime();
-		checkDate.setMonth(0); // Compare with Jan 1
-		checkDate.setDate(1);
+		checkDate.setMonth(0, 1); // Compare with Jan 1
 		return Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
 	},
 
@@ -698,25 +699,17 @@ $.extend(Datepicker.prototype, {
 	   @param  day    (number) the day
 	   @return  (Date) the date */
 	newDate: function(year, month, day) {
-		return (!year ? null : this._normaliseDate(
-			year.getFullYear ? new Date(year.getTime()) : new Date(year, month - 1, day)));
+		return (!year ? null : (year.getFullYear ? this._normaliseDate(new Date(year.getTime())) :
+			new Date(year, month - 1, day, 12)));
 	},
 
-	/* Standardise a date into a common format - zero all time values.
-	   Also cater for JavaScript peculiarities when swapping to/from
-	   daylight saving at midnight. Hours may reset to previous night when midnight
-	   changeover, but then cannot generate midnight datetime, so jump to 1AM.
+	/* Standardise a date into a common format - time portion is 12 noon.
 	   @param  date  (Date) the date to standardise
 	   @return  (Date) the normalised date */
 	_normaliseDate: function(date) {
-		if (!date) {
-			return date;
+		if (date) {
+			date.setHours(12, 0, 0, 0);
 		}
-		date.setHours(0);
-		date.setMinutes(0);
-		date.setSeconds(0);
-		date.setMilliseconds(0);
-		date.setHours(date.getHours() > 12 ? date.getHours() + 2 : 0);
 		return date;
 	},
 
@@ -754,13 +747,14 @@ $.extend(Datepicker.prototype, {
 	   @return  the updated date */
 	add: function(date, amount, period) {
 		if (period == 'd' || period == 'w') {
+			this._normaliseDate(date);
 			date.setDate(date.getDate() + amount * (period == 'w' ? 7 : 1));
 		}
 		else {
 			var year = date.getFullYear() + (period == 'y' ? amount : 0);
 			var month = date.getMonth() + (period == 'm' ? amount : 0);
-			date.setTime(this._normaliseDate(new Date(year, month,
-				Math.min(date.getDate(), this.daysInMonth(year, month + 1)))).getTime());
+			date.setTime($.datepick.newDate(year, month + 1,
+				Math.min(date.getDate(), this.daysInMonth(year, month + 1))).getTime());
 		}
 		return date;
 	},
@@ -895,7 +889,7 @@ $.extend(Datepicker.prototype, {
 	   @param  inst  (object) the current instance settings */
 	_autoSize: function(target, inst) {
 		if (inst.get('autoSize') && !inst.inline) {
-			var date = new Date(2009, 10 - 1, 20); // Ensure double digits
+			var date = $.datepick.newDate(2009, 10, 20); // Ensure double digits
 			var dateFormat = inst.get('dateFormat');
 			if (dateFormat.match(/[DM]/)) {
 				var findMax = function(names) {
@@ -1058,7 +1052,13 @@ $.extend(Datepicker.prototype, {
 						height: inst.div.outerHeight() + borders[1]});
 			};
 			if ($.effects && $.effects[showAnim]) {
-				inst.div.show(showAnim, inst.get('showOptions'), showSpeed, postProcess);
+				var data = inst.div.data(); // Update old effects data
+				for (var key in data) {
+					if (key.match(/^ec\.storage\./)) {
+						data[key] = inst._mainDiv.css(key.replace(/ec\.storage\./, ''));
+					}
+				}
+				inst.div.data(data).show(showAnim, inst.get('showOptions'), showSpeed, postProcess);
 			}
 			else {
 				inst.div[showAnim || 'show']((showAnim ? showSpeed : ''), postProcess);

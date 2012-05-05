@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker extensions for jQuery v4.0.3.
+   Datepicker extensions for jQuery v4.0.4.
    Written by Keith Wood (kbwood{at}iinet.com.au) August 2009.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
