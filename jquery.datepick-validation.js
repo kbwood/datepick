@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker Validation extension for jQuery 3.6.1.
+   Datepicker Validation extension for jQuery 3.7.0.
    Requires Jörn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
    Written by Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -102,7 +102,7 @@ if ($.fn.validate) {
 	/* Validate format and against a minimum date. */
 	$.validator.addMethod('dpMinDate', function(value, element, params) {
 			var inst = $.datepick._getInst(element);
-			params[0] = $.datepick._determineDate($.datepick._get(inst, 'minDate'), null);
+			params[0] = $.datepick._determineDate(inst, $.datepick._get(inst, 'minDate'), null);
 			return this.optional(element) ||
 				validateEach(value, element, function(date) {
 					return (!date || !params[0] || date >= params[0]);
@@ -114,7 +114,7 @@ if ($.fn.validate) {
 	/* Validate format and against a maximum date. */
 	$.validator.addMethod('dpMaxDate', function(value, element, params) {
 			var inst = $.datepick._getInst(element);
-			params[0] = $.datepick._determineDate($.datepick._get(inst, 'maxDate'), null);
+			params[0] = $.datepick._determineDate(inst, $.datepick._get(inst, 'maxDate'), null);
 			return this.optional(element) ||
 				validateEach(value, element, function(date) {
 					return (!date || !params[0] || date <= params[0]);
@@ -126,8 +126,8 @@ if ($.fn.validate) {
 	/* Validate format and against minimum/maximum dates. */
 	$.validator.addMethod('dpMinMaxDate', function(value, element, params) {
 			var inst = $.datepick._getInst(element);
-			params[0] = $.datepick._determineDate($.datepick._get(inst, 'minDate'), null);
-			params[1] = $.datepick._determineDate($.datepick._get(inst, 'maxDate'), null);
+			params[0] = $.datepick._determineDate(inst, $.datepick._get(inst, 'minDate'), null);
+			params[1] = $.datepick._determineDate(inst, $.datepick._get(inst, 'maxDate'), null);
 			return this.optional(element) ||
 				validateEach(value, element, function(date) {
 					return (!date || ((!params[0] || date >= params[0]) &&

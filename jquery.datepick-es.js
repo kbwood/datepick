@@ -19,7 +19,7 @@
 		dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
 		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
 		dayStatus: 'DD', dateStatus: 'D, M d',
-		dateFormat: 'dd/mm/yy', firstDay: 0,
+		dateFormat: 'dd/mm/yy', firstDay: 1,
 		initStatus: '', isRTL: false,
 		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['es']);
