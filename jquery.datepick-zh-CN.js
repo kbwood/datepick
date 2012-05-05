@@ -21,6 +21,6 @@
 		dayStatus: '设置 DD 为一周起始', dateStatus: '选择 m月 d日, DD',
 		dateFormat: 'yy-mm-dd', firstDay: 1,
 		initStatus: '请选择日期', isRTL: false,
-		showMonthAfterYear: false, yearSuffix: ''};
+		showMonthAfterYear: false, yearSuffix: '年'};
 	$.datepick.setDefaults($.datepick.regional['zh-CN']);
 })(jQuery);

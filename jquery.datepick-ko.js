@@ -21,6 +21,6 @@
 		dayStatus: 'DD', dateStatus: 'D, M d',
 		dateFormat: 'yy-mm-dd', firstDay: 0,
 		initStatus: '', isRTL: false,
-		showMonthAfterYear: false, yearSuffix: ''};
+		showMonthAfterYear: false, yearSuffix: '년'};
 	$.datepick.setDefaults($.datepick.regional['ko']);
 })(jQuery);

@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker for jQuery 3.7.4.
+   Datepicker for jQuery 3.7.5.
    Written by Marc Grabanski (m@marcgrabanski.com) and
               Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -636,7 +636,7 @@ $.extend(Datepick.prototype, {
 		if ($.datepick._get(inst, 'constrainInput')) {
 			var chars = $.datepick._possibleChars(inst);
 			var chr = String.fromCharCode(event.keyCode || event.charCode);
-			return inst.ctrlKey || (chr < ' ' || !chars || chars.indexOf(chr) > -1);
+			return event.metaKey || inst.ctrlKey || chr < ' ' || !chars || chars.indexOf(chr) > -1;
 		}
 	},
 
@@ -788,6 +788,7 @@ $.extend(Datepick.prototype, {
 		var beforeShow = $.datepick._get(inst, 'beforeShow');
 		var useTR = $.datepick._get(inst, 'useThemeRoller') ? 1 : 0;
 		extendRemove(inst.settings, (beforeShow ? beforeShow.apply(input, [input, inst]) : {}));
+		inst.lastVal = null;
 		$.datepick._datepickerShowing = true;
 		$.datepick._lastInput = input;
 		$.datepick._setDateFromField(inst);
@@ -834,7 +835,7 @@ $.extend(Datepick.prototype, {
 				inst.dpDiv[showAnim || 'show'](showAnim ? duration : '', postProcess);
 			if (!showAnim)
 				postProcess();
-			if (inst.input[0].type != 'hidden')
+			if (inst.input.is(':visible') && !inst.input.is(':disabled'))
 				inst.input.focus();
 			$.datepick._curInst = inst;
 		}
@@ -858,7 +859,8 @@ $.extend(Datepick.prototype, {
 			addClass(numMonths[0] != 1 || numMonths[1] != 1 ? this._multiClass[useTR] : '').
 			removeClass(this._rtlClass.join(' ')).
 			addClass(this._get(inst, 'isRTL') ? this._rtlClass[useTR] : '');
-		if (inst.input && inst.input[0].type != 'hidden' && inst == $.datepick._curInst)
+		if (inst == $.datepick._curInst && inst.input &&
+				inst.input.is(':visible') && !inst.input.is(':disabled'))
 			$(inst.input).focus();
 	},
 
@@ -883,8 +885,10 @@ $.extend(Datepick.prototype, {
 		var alignment = this._get(inst, 'alignment');
 		var isRTL = this._get(inst, 'isRTL');
 		var pos = inst.input ? this._findPos(inst.input[0]) : null;
-		var browserWidth = document.documentElement.clientWidth;
-		var browserHeight = document.documentElement.clientHeight;
+		var browserWidth = (!$.browser.mozilla || document.doctype ?
+			document.documentElement.clientWidth : 0) || document.body.clientWidth;
+		var browserHeight = (!$.browser.mozilla || document.doctype ?
+			document.documentElement.clientHeight : 0) || document.body.clientHeight;
 		if (browserWidth == 0)
 			return offset;
 		var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
@@ -1507,11 +1511,13 @@ $.extend(Datepick.prototype, {
 	/* Parse existing date and initialise date picker.
 	   @param  inst  (object) the instance settings for this datepicker */
 	_setDateFromField: function(inst) {
+		if (inst.input.val() == inst.lastVal) {
+			return;
+		}
 		var dateFormat = this._get(inst, 'dateFormat');
 		var rangeSelect = this._get(inst, 'rangeSelect');
 		var multiSelect = this._get(inst, 'multiSelect');
-		inst.lastVal = (inst.input ? inst.input.val() : '');
-		var dates = inst.lastVal;
+		var dates = inst.lastVal = (inst.input ? inst.input.val() : '');
 		dates = (rangeSelect ? dates.split(this._get(inst, 'rangeSeparator')) :
 			(multiSelect ? dates.split(this._get(inst, 'multiSeparator')) : [dates]));
 		inst.dates = [];
@@ -1564,7 +1570,8 @@ $.extend(Datepick.prototype, {
 				// Ignore
 			}
 			var date = (offset.toLowerCase().match(/^c/) ?
-				$.datepick._getDate(inst) : null) || new Date();
+				$.datepick._getDate(inst) : null);
+			date = ($.isArray(date) ? date[0] : date) || new Date();
 			var year = date.getFullYear();
 			var month = date.getMonth();
 			var day = date.getDate();

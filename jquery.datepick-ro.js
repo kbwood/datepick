@@ -14,12 +14,12 @@
 		monthNamesShort: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun',
 		'Iul', 'Aug', 'Sep', 'Oct', 'Noi', 'Dec'],
 		monthStatus: 'Arata o luna diferita', yearStatus: 'Arat un an diferit',
-		weekHeader: 'Sapt', weekStatus: 'Saptamana anului',
-		dayNames: ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sâmbata'],
+		weekHeader: 'Săpt', weekStatus: 'Săptamana anului',
+		dayNames: ['Duminică', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'],
 		dayNamesShort: ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'],
 		dayNamesMin: ['Du','Lu','Ma','Mi','Jo','Vi','Sâ'],
 		dayStatus: 'Seteaza DD ca prima saptamana zi', dateStatus: 'Selecteaza D, M d',
-		dateFormat: 'dd MM yy', firstDay: 1,
+		dateFormat: 'dd.mm.yy', firstDay: 1,
 		initStatus: 'Selecteaza o data', isRTL: false,
 		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['ro']);
