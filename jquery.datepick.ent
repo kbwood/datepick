@@ -1,0 +1,76 @@
+<!ATTLIST input 
+  date:altField                CDATA #IMPLIED
+  date:altFormat               CDATA #IMPLIED
+  date:appendText              CDATA #IMPLIED
+  date:beforeShow              CDATA #IMPLIED
+  date:beforeShowDay           CDATA #IMPLIED
+  date:buttonImage             CDATA #IMPLIED
+  date:buttonImageOnly         (true | false) #IMPLIED
+  date:buttonText              CDATA #IMPLIED
+  date:calculateWeek           CDATA #IMPLIED
+  date:changeFirstDay          (true | false) #IMPLIED
+  date:changeMonth             (true | false) #IMPLIED
+  date:changeYear              (true | false) #IMPLIED
+  date:clearStatus             CDATA #IMPLIED
+  date:clearText               CDATA #IMPLIED
+  date:closeAtTop              (true | false) #IMPLIED
+  date:closeStatus             CDATA #IMPLIED
+  date:closeText               CDATA #IMPLIED
+  date:constrainInput          (true | false) #IMPLIED
+  date:currentStatus           CDATA #IMPLIED
+  date:currentText             CDATA #IMPLIED
+  date:dateFormat              CDATA #IMPLIED
+  date:dateStatus              CDATA #IMPLIED
+  date:dayNames                CDATA #IMPLIED
+  date:dayNamesMin             CDATA #IMPLIED
+  date:dayNamesShort           CDATA #IMPLIED
+  date:dayStatus               CDATA #IMPLIED
+  date:defaultDate             CDATA #IMPLIED
+  date:duration                CDATA #IMPLIED
+  date:firstDay                CDATA #IMPLIED
+  date:gotoCurrent             (true | false) #IMPLIED
+  date:hideIfNoPrevNext        (true | false) #IMPLIED
+  date:highlightWeek           (true | false) #IMPLIED
+  date:initStatus              CDATA #IMPLIED
+  date:isRTL                   (true | false) #IMPLIED
+  date:mandatory               (true | false) #IMPLIED
+  date:maxDate                 CDATA #IMPLIED
+  date:minDate                 CDATA #IMPLIED
+  date:monthNames              CDATA #IMPLIED
+  date:monthNamesShort         CDATA #IMPLIED
+  date:monthStatus             CDATA #IMPLIED
+  date:navigationAsDateFormat  (true | false) #IMPLIED
+  date:nextBigStatus           CDATA #IMPLIED
+  date:nextBigText             CDATA #IMPLIED
+  date:nextStatus              CDATA #IMPLIED
+  date:nextText                CDATA #IMPLIED
+  date:numberOfMonths          CDATA #IMPLIED
+  date:onChangeMonthYear       CDATA #IMPLIED
+  date:onClose                 CDATA #IMPLIED
+  date:onHover                 CDATA #IMPLIED
+  date:onSelect                CDATA #IMPLIED
+  date:prevBigStatus           CDATA #IMPLIED
+  date:prevBigText             CDATA #IMPLIED
+  date:prevStatus              CDATA #IMPLIED
+  date:prevText                CDATA #IMPLIED
+  date:rangeSelect             (true | false) #IMPLIED
+  date:rangeSeparator          CDATA #IMPLIED
+  date:selectOtherMonths       (true | false) #IMPLIED
+  date:shortYearCutoff         CDATA #IMPLIED
+  date:showAnim                CDATA #IMPLIED
+  date:showBigPrevNext         (true | false) #IMPLIED
+  date:showCurrentAtPos        CDATA #IMPLIED
+  date:showMonthAfterYear      (true | false) #IMPLIED
+  date:showOn                  (focus | button | both) #IMPLIED
+  date:showOptions             CDATA #IMPLIED
+  date:showOtherMonths         (true | false) #IMPLIED
+  date:showStatus              (true | false) #IMPLIED
+  date:showWeeks               (true | false) #IMPLIED
+  date:statusForDate           CDATA #IMPLIED
+  date:stepBigMonths           CDATA #IMPLIED
+  date:stepMonths              CDATA #IMPLIED
+  date:weekHeader              CDATA #IMPLIED
+  date:weekStatus              CDATA #IMPLIED
+  date:yearRange               CDATA #IMPLIED
+  date:yearStatus              CDATA #IMPLIED
+>

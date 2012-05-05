@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker for jQuery 3.5.0.
+   Datepicker for jQuery 3.5.1.
    Written by Marc Grabanski (m@marcgrabanski.com) and
               Keith Wood (kbwood@virginbroadband.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -544,10 +544,43 @@ $.extend(Datepick.prototype, {
 	_doKeyPress: function(event) {
 		var inst = $.datepick._getInst(event.target);
 		if ($.datepick._get(inst, 'constrainInput')) {
-			var chars = $.datepick._possibleChars($.datepick._get(inst, 'dateFormat'));
+			var chars = $.datepick._possibleChars(inst);
 			var chr = String.fromCharCode(event.charCode == undefined ? event.keyCode : event.charCode);
 			return event.ctrlKey || (chr < ' ' || !chars || chars.indexOf(chr) > -1);
 		}
+	},
+
+	/* Extract all possible characters from the date format.
+	   @param  inst  (object) the instance settings for this datepicker
+	   @return  (string) the set of characters allowed by this format */
+	_possibleChars: function (inst) {
+		var dateFormat = $.datepick._get(inst, 'dateFormat');
+		var chars = ($.datepick._get(inst, 'rangeSelect') ?
+			$.datepick._get(inst, 'rangeSeparator') : '');
+		var literal = false;
+		for (var iFormat = 0; iFormat < dateFormat.length; iFormat++)
+			if (literal)
+				if (dateFormat.charAt(iFormat) == "'" && !lookAhead("'"))
+					literal = false;
+				else
+					chars += dateFormat.charAt(iFormat);
+			else
+				switch (dateFormat.charAt(iFormat)) {
+					case 'd': case 'm': case 'y': case '@':
+						chars += '0123456789';
+						break;
+					case 'D': case 'M':
+						return null; // Accept anything
+					case "'":
+						if (lookAhead("'"))
+							chars += "'";
+						else
+							literal = true;
+						break;
+					default:
+						chars += dateFormat.charAt(iFormat);
+				}
+		return chars;
 	},
 
 	/* Pop-up the date picker for a given input field.
@@ -600,7 +633,7 @@ $.extend(Datepick.prototype, {
 			var postProcess = function() {
 				$.datepick._datepickerShowing = true;
 				if ($.browser.msie && parseInt($.browser.version, 10) < 7) { // fix IE < 7 select problems
-					var extras = $.datpick._getExtras(inst.dpDiv[0]);
+					var extras = $.datepick._getExtras(inst.dpDiv);
 					$('iframe.' + $.datepick._coverClass).css({width: inst.dpDiv.width() + extras[0],
 						height: inst.dpDiv.height() + extras[1]});
 				}
@@ -661,6 +694,8 @@ $.extend(Datepick.prototype, {
 			document.documentElement.clientWidth : document.body.clientWidth);
 		var browserHeight = window.innerHeight || (document.documentElement ?
 			document.documentElement.clientHeight : document.body.clientHeight);
+		if (browserWidth == 0)
+			return offset;
 		var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
 		var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
 		// reposition date picker horizontally if outside the browser window
@@ -749,9 +784,9 @@ $.extend(Datepick.prototype, {
 		if (!$.datepick._curInst)
 			return;
 		var $target = $(event.target);
-		if (($target.parents('#' + $.datepick._mainDivId).length == 0) &&
+		if (!$target.parents().andSelf().is('#' + $.datepick._mainDivId) &&
 				!$target.hasClass($.datepick.markerClassName) &&
-				!$target.hasClass($.datepick._triggerClass) &&
+				!$target.parents().andSelf().hasClass($.datepick._triggerClass) &&
 				$.datepick._datepickerShowing && !($.datepick._inDialog && $.blockUI))
 			$.datepick._hideDatepick(null, '');
 	},
@@ -1072,6 +1107,8 @@ $.extend(Datepick.prototype, {
 						checkLiteral();
 				}
 		}
+		if (iValue < value.length)
+			throw 'Additional text found at end';
 		if (year == -1)
 			year = new Date().getFullYear();
 		else if (year < 100)
@@ -1204,37 +1241,6 @@ $.extend(Datepick.prototype, {
 					}
 			}
 		return output;
-	},
-
-	/* Extract all possible characters from the date format.
-	   @param  format  (string) the current format
-	   @return  (string) the set of characters allowed by this format */
-	_possibleChars: function (format) {
-		var chars = '';
-		var literal = false;
-		for (var iFormat = 0; iFormat < format.length; iFormat++)
-			if (literal)
-				if (format.charAt(iFormat) == "'" && !lookAhead("'"))
-					literal = false;
-				else
-					chars += format.charAt(iFormat);
-			else
-				switch (format.charAt(iFormat)) {
-					case 'd': case 'm': case 'y': case '@':
-						chars += '0123456789';
-						break;
-					case 'D': case 'M':
-						return null; // Accept anything
-					case "'":
-						if (lookAhead("'"))
-							chars += "'";
-						else
-							literal = true;
-						break;
-					default:
-						chars += format.charAt(iFormat);
-				}
-		return chars;
 	},
 
 	/* Get a setting value, defaulting if necessary.
@@ -1851,11 +1857,11 @@ $.fn.datepick = function(options){
 
 $.datepick = new Datepick(); // singleton instance
 $.datepick.uuid = new Date().getTime();
-$.datepick.version = '3.5.0';
+$.datepick.version = '3.5.1';
 
 $(function() {
-	$(document.body).append($.datepick.dpDiv).
-		mousedown($.datepick._checkExternalClick);
+	$(document).mousedown($.datepick._checkExternalClick).
+		find('body').append($.datepick.dpDiv);
 });
 
 })(jQuery);
