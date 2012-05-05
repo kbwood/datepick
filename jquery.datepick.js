@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Date picker for jQuery v4.0.1.
+   Date picker for jQuery v4.0.2.
    Written by Keith Wood (kbwood{at}iinet.com.au) February 2010.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -653,7 +653,7 @@ $.extend(Datepicker.prototype, {
 	   @return  (number) the number of days in this month */
 	daysInMonth: function(year, month) {
 		var date = (year.getFullYear ? year : this.newDate(year, month, 1));
-		return 32 - new Date(date.getFullYear(), date.getMonth(), 32).getDate();
+		return 32 - this.newDate(date.getFullYear(), date.getMonth() + 1, 32).getDate();
 	},
 
 	/* Calculate the day of the year for a date.
@@ -805,6 +805,9 @@ $.extend(Datepicker.prototype, {
 			target.bind('keydown.' + this.dataName, this._keyDown).
 				bind('keypress.' + this.dataName, this._keyPress).
 				bind('keyup.' + this.dataName, this._keyUp);
+			if (target.attr('disabled')) {
+				this.disable(target[0]);
+			}
 		}
 	},
 
@@ -1030,13 +1033,12 @@ $.extend(Datepicker.prototype, {
 			$.datepick._update(target, true);
 			// Adjust position before showing
 			var offset = $.datepick._checkOffset(inst);
-			var zIndex = $(target).css('zIndex');
-			zIndex = (zIndex == 'auto' ? 0 : parseInt(zIndex, 10)) + 1;
-			inst.div.css({left: offset.left, top: offset.top, zIndex: zIndex});
+			inst.div.css({left: offset.left, top: offset.top});
 			// And display
 			var showAnim = inst.get('showAnim');
 			var showSpeed = inst.get('showSpeed');
-			showSpeed = (showSpeed == 'normal' ? '_default' : showSpeed);
+			showSpeed = (showSpeed == 'normal' && $.ui && $.ui.version >= '1.8' ?
+				'_default' : showSpeed);
 			var postProcess = function() {
 				var borders = $.datepick._getBorders(inst.div);
 				inst.div.find('.' + $.datepick._coverClass). // IE6- only
@@ -1256,7 +1258,8 @@ $.extend(Datepicker.prototype, {
 		if (inst && inst == $.datepick.curInst) {
 			var showAnim = (immediate ? '' : inst.get('showAnim'));
 			var showSpeed = inst.get('showSpeed');
-			showSpeed = (showSpeed == 'normal' ? '_default' : showSpeed);
+			showSpeed = (showSpeed == 'normal' && $.ui && $.ui.version >= '1.8' ?
+				'_default' : showSpeed);
 			var postProcess = function() {
 				inst.div.remove();
 				inst.div = null;
@@ -1322,12 +1325,12 @@ $.extend(Datepicker.prototype, {
 				handled = true;
 			}
 		}
+		inst.ctrlKey = ((event.keyCode < 48 && event.keyCode != 32) ||
+			event.ctrlKey || event.metaKey);
 		if (handled) {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-		inst.ctrlKey = ((event.keyCode < 48 && event.keyCode != 32) ||
-			event.ctrlKey || event.metaKey);
 		return !handled;
 	},
 

@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Datepicker extensions for jQuery v4.0.1.
+   Datepicker extensions for jQuery v4.0.2.
    Written by Keith Wood (kbwood{at}iinet.com.au) August 2009.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -127,7 +127,6 @@ $.extend($.datepick, {
 	   @param  picker  (jQuery) the completed datepicker division
 	   @param  inst    (object) the current instance settings */
 	showStatus: function(picker, inst) {
-		var target = this;
 		var renderer = inst.get('renderer');
 		var isTR = (renderer.selectedClass == 'ui-state-active');
 		var defaultStatus = inst.get('defaultStatus') || '&nbsp;';
@@ -141,6 +140,54 @@ $.extend($.datepick, {
 					function() { status.text(title || defaultStatus); },
 					function() { status.text(defaultStatus); });
 			});
+	},
+
+	/* Allow easier navigation by month/year.
+	   Usage: onShow: $.datepick.monthNavigation.
+	   @param  picker  (jQuery) the completed datepicker division
+	   @param  inst    (object) the current instance settings */
+	monthNavigation: function(picker, inst) {
+		var target = $(this);
+		var renderer = inst.get('renderer');
+		var isTR = (renderer.selectedClass == 'ui-state-active');
+		var minDate = inst.curMinDate();
+		var maxDate = inst.get('maxDate');
+		var monthNames = inst.get('monthNames');
+		var monthNamesShort = inst.get('monthNamesShort');
+		var month = inst.drawDate.getMonth();
+		var year = inst.drawDate.getFullYear();
+		var html = '<div class="' + (!isTR ? 'datepick-month-nav' : 'ui-datepicker-month-nav') + '"' +
+			' style="display: none;">';
+		for (var i = 0; i < monthNames.length; i++) {
+			var inRange = ((!minDate || new Date(year, i + 1, 0).getTime() >= minDate.getTime()) &&
+				(!maxDate || new Date(year, i, 1).getTime() <= maxDate.getTime()));
+			html += '<div>' +
+				(inRange ? '<a href="#" class="dp' + new Date(year, i, 1).getTime() + '"' : '<span') +
+				' title="' + monthNames[i] + '">' + monthNamesShort[i] +
+				(inRange ? '</a>' : '</span>') + '</div>';
+		}
+		for (var i = -6; i <= 6; i++) {
+			if (i == 0) {
+				continue;
+			}
+			var inRange =
+				((!minDate || new Date(year + i, 12 - 1, 31).getTime() >= minDate.getTime()) &&
+				(!maxDate || new Date(year + i, 1 - 1, 1).getTime() <= maxDate.getTime()));
+			html += '<div>' + (inRange ? '<a href="#" class="dp' +
+				new Date(year + i, month, 1).getTime() + '"' : '<span') +
+				' title="' + (year + i) + '">' + (year + i) +
+				(inRange ? '</a>' : '</span>') + '</div>';
+		}
+		html += '</div>';
+		html = $(html).insertAfter(picker.find('div.datepick-nav,div.ui-datepicker-header:first'));
+		html.find('a').click(function() {
+				var date = $.datepick.retrieveDate(target[0], this);
+				target.datepick('showMonth', date.getFullYear(), date.getMonth() + 1);
+				return false;
+			});
+		picker.find('div.datepick-month-header,div.ui-datepicker-month-header').click(function() {
+			html.slideToggle();
+		}).css('cursor', 'pointer');
 	},
 
 	/* Select an entire week when clicking on a week number.

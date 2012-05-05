@@ -1,4 +1,4 @@
-/* Default styling for jQuery Datepicker v4.0.0. */
+/* Default styling for jQuery Datepicker v4.0.2. */
 .datepick {
 	background-color: #fff;
 	color: #000;
@@ -12,8 +12,12 @@
 .datepick-rtl {
 	direction: rtl;
 }
+.datepick-popup {
+	z-index: 1000;
+}
 .datepick-disable {
 	position: absolute;
+	z-index: 100;
 	background-color: white;
 	opacity: 0.5;
 	filter: alpha(opacity=50);
@@ -96,6 +100,20 @@ button.datepick-cmd {
 	padding-right: 0%;
 	text-align: left;
 }
+.datepick-month-nav {
+	float: left;
+	background-color: #777;
+	text-align: center;
+}
+.datepick-month-nav div {
+	float: left;
+	width: 12.5%;
+	margin: 1%;
+	padding: 1%;
+}
+.datepick-month-nav span {
+	color: #888;
+}
 .datepick-month-row {
 	clear: left;
 }
@@ -149,6 +167,7 @@ button.datepick-cmd {
 .datepick-month td.datepick-week * {
 	background-color: #777;
 	color: #fff;
+	border: none;
 }
 .datepick-month a {
 	display: block;

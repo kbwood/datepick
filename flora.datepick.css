@@ -1,4 +1,4 @@
-/* Flora style sheet for jQuery Datepicker v4.0.0. */
+/* Flora style sheet for jQuery Datepicker v4.0.2. */
 .datepick {
 	background-color: #e0f4d7;
 	color: #000;
@@ -12,8 +12,12 @@
 .datepick-rtl {
 	direction: rtl;
 }
+.datepick-popup {
+	z-index: 1000;
+}
 .datepick-disable {
 	position: absolute;
+	z-index: 100;
 	background-color: white;
 	opacity: 0.5;
 	filter: alpha(opacity=50);
@@ -96,13 +100,27 @@ button.datepick-cmd {
 	padding-right: 0%;
 	text-align: left;
 }
+.datepick-month-nav {
+	float: left;
+	background-color: #b1db87;
+	text-align: center;
+}
+.datepick-month-nav div {
+	float: left;
+	width: 12.5%;
+	margin: 1%;
+	padding: 1%;
+}
+.datepick-month-nav span {
+	color: #888;
+}
 .datepick-month-row {
 	clear: left;
 }
 .datepick-month {
 	float: left;
 	width: 15em;
-	border: 1px solid #629636;
+	border: 1px solid #83c948;
 	text-align: center;
 }
 .datepick-month-header, .datepick-month-header select, .datepick-month-header input {
@@ -133,7 +151,7 @@ button.datepick-cmd {
 	text-align: center;
 }
 .datepick-month th {
-	border: 1px solid #777;
+	border: 1px solid #b1db87;
 }
 .datepick-month th, .datepick-month th a {
 	background-color: #b1db87;
@@ -171,18 +189,18 @@ button.datepick-cmd {
 	background-color: #e0f4d7;
 }
 .datepick-month td .datepick-today {
-	background-color: #fc8;
+	background-color: #b1db87;
 }
 .datepick-month td .datepick-highlight {
 	background-color: #fc8;
 }
 .datepick-month td .datepick-selected {
-	background-color: #83c948;
+	background-color: #f90;
 	color: #fff;
 }
 .datepick-status {
 	clear: both;
-	background-color: #e0f4d7;
+	background-color: #b1db87;
 	text-align: center;
 }
 .datepick-clear-fix {

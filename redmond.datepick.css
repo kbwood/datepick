@@ -1,4 +1,4 @@
-/* Redmond style sheet for jQuery Datepicker v4.0.0. */
+/* Redmond style sheet for jQuery Datepicker v4.0.2. */
 .datepick {
 	background-color: #fff;
 	color: #222;
@@ -12,8 +12,12 @@
 .datepick-rtl {
 	direction: rtl;
 }
+.datepick-popup {
+	z-index: 1000;
+}
 .datepick-disable {
 	position: absolute;
+	z-index: 100;
 	background-color: white;
 	opacity: 0.5;
 	filter: alpha(opacity=50);
@@ -29,7 +33,8 @@
 .datepick button {
     margin: 0.25em;
     padding: 0.125em 0em;
-    background-color: #dfeffc;
+	background-color: #5c9ccc;
+	color: #fff;
     border: none;
     border-radius: 0.25em;
     -moz-border-radius: 0.25em;
@@ -44,7 +49,7 @@
 	font-weight: bold;
 }
 .datepick-ctrl {
-	background-color: #5c9ccc;
+	background-color: #d0e5f5;
 }
 .datepick-cmd {
 	width: 30%;
@@ -52,8 +57,8 @@
 .datepick-cmd:hover {
 	background-color: #dfeffc;
 }
-.datepick-ctrl .datepick-cmd:hover {
-	background-color: #fff;
+button.datepick-cmd:hover {
+	background-color: #79b7e7;
 }
 .datepick-cmd-prevJump, .datepick-cmd-nextJump {
 	width: 8%;
@@ -95,6 +100,19 @@ button.datepick-cmd {
 	padding-right: 0%;
 	text-align: left;
 }
+.datepick-month-nav {
+	float: left;
+	text-align: center;
+}
+.datepick-month-nav div {
+	float: left;
+	width: 12.5%;
+	margin: 1%;
+	padding: 1%;
+}
+.datepick-month-nav span {
+	color: #888;
+}
 .datepick-month-row {
 	clear: left;
 }
@@ -131,11 +149,16 @@ button.datepick-cmd {
 	font-weight: normal;
 	text-align: center;
 }
+.datepick-month th {
+	border: 1px solid #fff;
+	border-bottom: 1px solid #c5dbec;
+}
 .datepick-month td {
 	border: 1px solid #c5dbec;
 }
 .datepick-month td.datepick-week * {
 	background-color: #d0e5f5;
+	color: #222;
 	border: none;
 }
 .datepick-month a {
@@ -143,6 +166,7 @@ button.datepick-cmd {
 	width: 100%;
 	padding: 0.125em 0em;
 	background-color: #dfeffc;
+	color: #000;
 	text-decoration: none;
 }
 .datepick-month span {
@@ -157,13 +181,13 @@ button.datepick-cmd {
 	background-color: #fff;
 }
 .datepick-month td .datepick-today {
-	background-color: #fbec88;
+	background-color: #fad42e;
 }
 .datepick-month td .datepick-highlight {
-	background-color: #fbec88;
+	background-color: #79b7e7;
 }
 .datepick-month td .datepick-selected {
-	background-color: #5c9ccc;
+	background-color: #4297d7;
 	color: #fff;
 }
 .datepick-status {
