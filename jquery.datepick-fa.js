@@ -20,6 +20,7 @@
 		dayNamesMin: ['ي','د','س','چ','پ','ج', 'ش'],
 		dayStatus: 'قبول DD بعنوان اولين روز هفته', dateStatus: 'انتخاب D, M d',
 		dateFormat: 'yy/mm/dd', firstDay: 6,
-		initStatus: 'انتخاب تاريخ', isRTL: true};
+		initStatus: 'انتخاب تاريخ', isRTL: true,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['fa']);
 })(jQuery);

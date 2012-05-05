@@ -20,6 +20,7 @@
 		dayNamesMin: ['ne','po','út','st','čt','pá','so'],
 		dayStatus: 'Nastavit DD jako první den v týdnu', dateStatus: '\'Vyber\' DD, M d',
 		dateFormat: 'dd.mm.yy', firstDay: 1,
-		initStatus: 'Vyberte datum', isRTL: false};
+		initStatus: 'Vyberte datum', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['cs']);
 })(jQuery);

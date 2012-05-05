@@ -20,6 +20,7 @@
 		dayNamesMin: ['א\'','ב\'','ג\'','ד\'','ה\'','ו\'','שבת'],
 		dayStatus: 'DD', dateStatus: 'DD, M d',
 		dateFormat: 'dd/mm/yy', firstDay: 0,
-		initStatus: '', isRTL: true};
+		initStatus: '', isRTL: true,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['he']);
 })(jQuery);

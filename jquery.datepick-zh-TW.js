@@ -20,6 +20,7 @@
 		dayNamesMin: ['日','一','二','三','四','五','六'],
 		dayStatus: '設定 DD 為一周起始', dateStatus: '選擇 m月 d日, DD',
 		dateFormat: 'yy/mm/dd', firstDay: 1,
-		initStatus: '請選擇日期', isRTL: false};
+		initStatus: '請選擇日期', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['zh-TW']);
 })(jQuery);

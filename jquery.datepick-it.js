@@ -1,4 +1,4 @@
-/* Italian initialisation for the jQuery UI date picker plugin. */
+﻿/* Italian initialisation for the jQuery UI date picker plugin. */
 /* Written by Apaella (apaella@gmail.com). */
 (function($) {
 	$.datepick.regional['it'] = {
@@ -15,11 +15,12 @@
 		'Lug','Ago','Set','Ott','Nov','Dic'],
 		monthStatus: 'Seleziona un altro mese', yearStatus: 'Seleziona un altro anno',
 		weekHeader: 'Sm', weekStatus: 'Settimana dell\'anno',
-		dayNames: ['Domenica','Luned&#236','Marted&#236','Mercoled&#236','Gioved&#236','Venerd&#236','Sabato'],
+		dayNames: ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'],
 		dayNamesShort: ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'],
 		dayNamesMin: ['Do','Lu','Ma','Me','Gio','Ve','Sa'],
 		dayStatus: 'Usa DD come primo giorno della settimana', dateStatus: '\'Seleziona\' D, M d',
 		dateFormat: 'dd/mm/yy', firstDay: 1,
-		initStatus: 'Scegliere una data', isRTL: false};
+		initStatus: 'Scegliere una data', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['it']);
 })(jQuery);

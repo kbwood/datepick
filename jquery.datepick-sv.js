@@ -15,11 +15,12 @@
         'Jul','Aug','Sep','Okt','Nov','Dec'],
 		monthStatus: '', yearStatus: '',
 		weekHeader: 'Ve', weekStatus: '',
-		dayNamesShort: ['Sön','Mån','Tis','Ons','Tor','Fre','Lör'],
 		dayNames: ['Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag'],
+		dayNamesShort: ['Sön','Mån','Tis','Ons','Tor','Fre','Lör'],
 		dayNamesMin: ['Sö','Må','Ti','On','To','Fr','Lö'],
 		dayStatus: 'DD', dateStatus: 'D, M d',
         dateFormat: 'yy-mm-dd', firstDay: 1,
-		initStatus: '', isRTL: false};
+		initStatus: '', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
     $.datepick.setDefaults($.datepick.regional['sv']);
 })(jQuery);

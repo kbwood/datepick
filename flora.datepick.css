@@ -1,4 +1,4 @@
-/* Flora style sheet for jQuery date picker v3.5.1. */
+/* Flora style sheet for jQuery date picker v3.5.2. */
 #datepick-div, .datepick-inline {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 14px;
@@ -177,6 +177,7 @@ img.datepick-trigger {
 	cursor: pointer;
 	margin: 0;
 	padding: 0;
+	text-decoration: none;
 }
 .datepick-inline .datepick-links a {
 	padding: 0 5px !important;
@@ -206,14 +207,15 @@ img.datepick-trigger {
 .datepick-new-row {
 	clear: left;
 }
+/* ___________ IE6 IFRAME FIX ________ */
 .datepick-cover {
-	display: none;
-	display/**/: block;
-	position: absolute;
-	z-index: -1;
-	filter: mask();
-	top: -4px;
-	left: -4px;
-	width: 200px;
-	height: 200px;
+    display: none; /*sorry for IE5*/
+    display/**/: block; /*sorry for IE5*/
+    position: absolute; /*must have*/
+    z-index: -1; /*must have*/
+    filter: mask(); /*must have*/
+    top: -1px; /*must have*/
+    left: -1px; /*must have*/
+    width: 187px; /*must have*/
+    height: 187px; /*must have*/
 }

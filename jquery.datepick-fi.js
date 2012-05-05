@@ -20,6 +20,7 @@
 		dayNamesMin: ['Su','Ma','Ti','Ke','To','Pe','La'],
 		dayStatus: 'DD', dateStatus: 'D, M d',
         dateFormat: 'dd.mm.yy', firstDay: 1,
-		initStatus: '', isRTL: false};
+		initStatus: '', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
     $.datepick.setDefaults($.datepick.regional['fi']);
 })(jQuery);

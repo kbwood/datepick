@@ -20,6 +20,7 @@
 		dayNamesMin: ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo'],
 		dayStatus: 'DD', dateStatus: 'D, M d',
 		dateFormat: 'yy-mm-dd', firstDay: 1,
-		initStatus: '', isRTL: false};
+		initStatus: '', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['hu']);
 })(jQuery);

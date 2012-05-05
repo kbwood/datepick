@@ -9,17 +9,18 @@
 		nextText: '&#x3e;', nextStatus: 'Prikaži slijedeći mjesec',
 		nextBigText: '&#x3e;&#x3e;', nextBigStatus: '',
 		currentText: 'Danas', currentStatus: 'Današnji datum',
-		monthNames: ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipani',
+		monthNames: ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj',
 		'Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'],
 		monthNamesShort: ['Sij','Velj','Ožu','Tra','Svi','Lip',
 		'Srp','Kol','Ruj','Lis','Stu','Pro'],
 		monthStatus: 'Prikaži mjesece', yearStatus: 'Prikaži godine',
 		weekHeader: 'Tje', weekStatus: 'Tjedan',
-		dayNames: ['Nedjalja','Ponedjeljak','Utorak','Srijeda','Četvrtak','Petak','Subota'],
+		dayNames: ['Nedjelja','Ponedjeljak','Utorak','Srijeda','Četvrtak','Petak','Subota'],
 		dayNamesShort: ['Ned','Pon','Uto','Sri','Čet','Pet','Sub'],
 		dayNamesMin: ['Ne','Po','Ut','Sr','Če','Pe','Su'],
 		dayStatus: 'Odaber DD za prvi dan tjedna', dateStatus: '\'Datum\' D, M d',
 		dateFormat: 'dd.mm.yy.', firstDay: 1,
-		initStatus: 'Odaberi datum', isRTL: false};
+		initStatus: 'Odaberi datum', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['hr']);
 })(jQuery);

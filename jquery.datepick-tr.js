@@ -20,6 +20,7 @@
 		dayNamesMin: ['Pz','Pt','Sa','Ça','Pe','Cu','Ct'],
 		dayStatus: 'Haftanın ilk gününü belirleyin', dateStatus: 'D, M d seçiniz',
 		dateFormat: 'dd.mm.yy', firstDay: 1,
-		initStatus: 'Bir tarih seçiniz', isRTL: false};
+		initStatus: 'Bir tarih seçiniz', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['tr']);
 })(jQuery);

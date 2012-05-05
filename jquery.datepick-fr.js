@@ -20,6 +20,7 @@
 		dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
 		dayStatus: 'Utiliser DD comme premier jour de la semaine', dateStatus: '\'Choisir\' le DD d MM',
 		dateFormat: 'dd/mm/yy', firstDay: 1,
-		initStatus: 'Choisir la date', isRTL: false};
+		initStatus: 'Choisir la date', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['fr']);
 })(jQuery);

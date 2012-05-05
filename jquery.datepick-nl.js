@@ -20,6 +20,7 @@
 		dayNamesMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
 		dayStatus: 'Stel DD in als eerste dag van de week', dateStatus: 'dd/mm/yy',
 		dateFormat: 'dd/mm/yy', firstDay: 1,
-		initStatus: 'Kies een datum', isRTL: false};
+		initStatus: 'Kies een datum', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['nl']);
 })(jQuery);

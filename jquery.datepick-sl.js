@@ -21,6 +21,7 @@
 		dayNamesMin: ['Ne','Po','To','Sr','&#x10C;e','Pe','So'],
 		dayStatus: 'Nastavi DD za prvi dan v tednu', dateStatus: 'Izberi DD, d MM yy',
 		dateFormat: 'dd.mm.yy', firstDay: 1,
-		initStatus: 'Izbira datuma', isRTL: false};
+		initStatus: 'Izbira datuma', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['sl']);
 })(jQuery);

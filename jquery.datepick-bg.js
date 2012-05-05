@@ -20,6 +20,7 @@
         dayNamesMin: ['Не','По','Вт','Ср','Че','Пе','Съ'],
         dayStatus: 'Сложи DD като първи ден от седмицата', dateStatus: 'Избери D, M d',
         dateFormat: 'dd.mm.yy', firstDay: 1,
-        initStatus: 'Избери дата', isRTL: false};
+        initStatus: 'Избери дата', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
     $.datepick.setDefaults($.datepick.regional['bg']);
 })(jQuery);

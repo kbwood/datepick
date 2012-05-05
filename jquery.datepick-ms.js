@@ -20,6 +20,7 @@
 		dayNamesMin: ['Ah','Is','Se','Ra','Kh','Ju','Sa'],
 		dayStatus: 'DD', dateStatus: 'DD, d MM',
 		dateFormat: 'dd/mm/yy', firstDay: 0,
-		initStatus: 'Sila pilih tarikh', isRTL: false};
+		initStatus: 'Sila pilih tarikh', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['ms']);
 })(jQuery);

@@ -20,6 +20,7 @@
 		dayNamesMin: ['So','Mo','Di','Mi','Do','Fr','Sa'],
 		dayStatus: 'Setze DD als ersten Wochentag', dateStatus: 'Wähle D, M d',
 		dateFormat: 'dd.mm.yy', firstDay: 1,
-		initStatus: 'Wähle ein Datum', isRTL: false};
+		initStatus: 'Wähle ein Datum', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['de']);
 })(jQuery);

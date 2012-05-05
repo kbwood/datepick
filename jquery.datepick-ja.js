@@ -21,6 +21,6 @@
 		dayStatus: '週の始まりをDDにします', dateStatus: 'Md日(D)',
 		dateFormat: 'yy/mm/dd', firstDay: 0,
 		initStatus: '日付を選択します', isRTL: false,
-		showMonthAfterYear: true};
+		showMonthAfterYear: true, yearSuffix: '年'};
 	$.datepick.setDefaults($.datepick.regional['ja']);
 })(jQuery);

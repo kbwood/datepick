@@ -15,11 +15,12 @@
 		'Лип','Сер','Вер','Жов','Лис','Гру'],
 		monthStatus: '', yearStatus: '',
 		weekHeader: 'Не', weekStatus: '',
-		dayNames: ['неділя','понеділок','вівторок','середа','четвер','пятниця','суббота'],
+		dayNames: ['неділя','понеділок','вівторок','середа','четвер','п\'ятниця','субота'],
 		dayNamesShort: ['нед','пнд','вів','срд','чтв','птн','сбт'],
 		dayNamesMin: ['Нд','Пн','Вт','Ср','Чт','Пт','Сб'],
 		dayStatus: 'DD', dateStatus: 'D, M d',
-		dateFormat: 'dd.mm.yy', firstDay: 1,
-		initStatus: '', isRTL: false};
+		dateFormat: 'dd/mm/yy', firstDay: 1,
+		initStatus: '', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['uk']);
 })(jQuery);

@@ -20,6 +20,7 @@
 		dayNamesMin: ['Mg','Sn','Sl','Rb','Km','jm','Sb'],
 		dayStatus: 'gunakan DD sebagai awal hari dalam minggu', dateStatus: 'pilih le DD, MM d',
 		dateFormat: 'dd/mm/yy', firstDay: 0,
-		initStatus: 'Pilih Tanggal', isRTL: false};
+		initStatus: 'Pilih Tanggal', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['id']);
 })(jQuery);

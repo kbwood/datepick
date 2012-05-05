@@ -1,4 +1,4 @@
-/* Default style sheet for jQuery date picker v3.5.1. */
+/* Default style sheet for jQuery date picker v3.5.2. */
 #datepick-div, .datepick-inline {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 14px;
@@ -135,9 +135,6 @@ img.datepick-trigger {
 	color: #000;
 	border: 1px solid #ddd;
 }
-.datepick-days-cell a {
-	display: block;
-}
 .datepick-other-month {
 	background: #fff;
 }
@@ -175,6 +172,7 @@ img.datepick-trigger {
 	cursor: pointer;
 	margin: 0;
 	padding: 0;
+	text-decoration: none;
 }
 .datepick-inline .datepick-links a {
 	padding: 0 5px !important;
@@ -211,8 +209,8 @@ img.datepick-trigger {
     position: absolute; /*must have*/
     z-index: -1; /*must have*/
     filter: mask(); /*must have*/
-    top: -4px; /*must have*/
-    left: -4px; /*must have*/
-    width: 200px; /*must have*/
-    height: 200px; /*must have*/
+    top: -1px; /*must have*/
+    left: -1px; /*must have*/
+    width: 187px; /*must have*/
+    height: 187px; /*must have*/
 }

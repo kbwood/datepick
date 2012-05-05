@@ -20,6 +20,7 @@
 		dayNamesMin: ['N','Pn','Wt','Śr','Cz','Pt','So'],
 		dayStatus: 'Ustaw DD jako pierwszy dzień tygodnia', dateStatus: '\'Wybierz\' D, M d',
 		dateFormat: 'yy-mm-dd', firstDay: 1,
-		initStatus: 'Wybierz datę', isRTL: false};
+		initStatus: 'Wybierz datę', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['pl']);
 })(jQuery);

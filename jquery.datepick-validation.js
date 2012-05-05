@@ -1,75 +1,84 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker Validation extension for jQuery 3.5.1.
+   Datepicker Validation extension for jQuery 3.5.2.
    Requires Jörn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
-   Written by Keith Wood (kbwood@virginbroadband.com.au).
+   Written by Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
    Please attribute the authors if you use it. */
 
 (function($) { // hide the namespace
 
-$.datepick._selectDate2 = $.datepick._selectDate;
-
-$.extend($.datepick, {
-
-	/* Trigger a validation after updating the input field with the selected date.
-	   @param  id       (string) the ID of the target field
-	   @param  dateStr  (string) the chosen date */
-	_selectDate: function(id, dateStr) {
-		this._selectDate2(id, dateStr);
-		var inst = this._getInst($(id)[0]);
-		if (!inst.inline && $.fn.validate)
-			$(id).parents('form').each(function() { $(this).valid(); });
-	},
-
-	/* Correct error placement for validation errors - after any trigger.
-	   @param  error    (jQuery) the error message
-	   @param  element  (jQuery) the field in error */
-	errorPlacement: function(error, element) {
-		var trigger = element.next('.' + $.datepick._triggerClass);
-		error.insertAfter(trigger.length > 0 ? trigger : element);
-	},
-
-	/* Format a validation error message involving dates.
-	   @param  source  (string) the error message
-	   @param  params  (Date[]) the dates
-	   @return  (string) the formatted message */
-	errorFormat: function(source, params) {
-		var format = ($.datepick._curInst ?
-			$.datepick._get($.datepick._curInst, 'dateFormat') :
-			$.datepick._defaults.dateFormat);
-		$.each(params, function(i, v) {
-			source = source.replace(new RegExp('\\{' + i + '\\}', 'g'),
-				$.datepick.formatDate(format, v) || 'nothing');
-		});
-		return source;
-	}
-});
-
-/* Apply a validation test to each date provided.
-   @param  value    (string) the current field value
-   @param  element  (element) the field control
-   @param  test     (function) the validation to apply
-   @return  (boolean) true if OK, false if failed validation */
-function validateEach(value, element, test) {
-	var inst = $.datepick._getInst(element);
-	var dates = ($.datepick._get(inst, 'rangeSelect') ?
-		value.split($.datepick._get(inst, 'rangeSeparator')) : [value]);
-	var ok = true;
-	try {
-		$.each(dates, function(i, v) {
-			var date = $.datepick.parseDate($.datepick._get(inst, 'dateFormat'), v);
-			ok = ok && test(date);
-		});
-	}
-	catch (e) {
-		ok = false;
-	}
-	return ok;
-}
-
 /* Add validation methods if validation plugin available. */
 if ($.fn.validate) {
+
+	$.datepick._selectDate2 = $.datepick._selectDate;
+
+	$.extend($.datepick, {
+
+		/* Trigger a validation after updating the input field with the selected date.
+		   @param  id       (string) the ID of the target field
+		   @param  dateStr  (string) the chosen date */
+		_selectDate: function(id, dateStr) {
+			this._selectDate2(id, dateStr);
+			var inst = this._getInst($(id)[0]);
+			if (!inst.inline && $.fn.validate)
+				$(id).parents('form').each(function() { $(this).valid(); });
+		},
+
+		/* Correct error placement for validation errors - after any trigger.
+		   @param  error    (jQuery) the error message
+		   @param  element  (jQuery) the field in error */
+		errorPlacement: function(error, element) {
+			var trigger = element.next('.' + $.datepick._triggerClass);
+			error.insertAfter(trigger.length > 0 ? trigger : element);
+		},
+
+		/* Format a validation error message involving dates.
+		   @param  source  (string) the error message
+		   @param  params  (Date[]) the dates
+		   @return  (string) the formatted message */
+		errorFormat: function(source, params) {
+			var format = ($.datepick._curInst ?
+				$.datepick._get($.datepick._curInst, 'dateFormat') :
+				$.datepick._defaults.dateFormat);
+			$.each(params, function(i, v) {
+				source = source.replace(new RegExp('\\{' + i + '\\}', 'g'),
+					$.datepick.formatDate(format, v) || 'nothing');
+			});
+			return source;
+		}
+	});
+
+	/* Apply a validation test to each date provided.
+	   @param  value    (string) the current field value
+	   @param  element  (element) the field control
+	   @param  test     (function) the validation to apply
+	   @return  (boolean) true if OK, false if failed validation */
+	function validateEach(value, element, test) {
+		var inst = $.datepick._getInst(element);
+		var rangeSelect = $.datepick._get(inst, 'rangeSelect');
+		var dates = (rangeSelect ?
+			value.split($.datepick._get(inst, 'rangeSeparator')) : [value]);
+		var ok = (rangeSelect && dates.length == 2) || (!rangeSelect && dates.length == 1);
+		if (ok) {
+			try {
+				var dateFormat = $.datepick._get(inst, 'dateFormat');
+				var config = $.datepick._getFormatConfig(inst);
+				$.each(dates, function(i, v) {
+					dates[i] = $.datepick.parseDate(dateFormat, v, config);
+					ok = ok && test(dates[i]);
+				});
+			}
+			catch (e) {
+				ok = false;
+			}
+		}
+		if (ok && rangeSelect) {
+			ok = (dates[0].getTime() <= dates[1].getTime());
+		}
+		return ok;
+	}
+
 	/* Validate basic date format. */
 	$.validator.addMethod('dpDate', function(value, element) {
 			return this.optional(element) ||

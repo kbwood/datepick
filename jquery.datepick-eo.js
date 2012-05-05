@@ -20,6 +20,7 @@
 		dayNamesMin: ['Di','Lu','Ma','Me','Ĵa','Ve','Sa'],
 		dayStatus: 'Uzi DD kiel unua tago de la semajno', dateStatus: 'Elekti DD, MM d',
 		dateFormat: 'dd/mm/yy', firstDay: 0,
-		initStatus: 'Elekti la daton', isRTL: false};
+		initStatus: 'Elekti la daton', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['eo']);
 })(jQuery);

@@ -9,7 +9,7 @@
 		nextText: 'Përpara&#x3e;', nextStatus: 'trego muajin tjetër',
 		nextBigText: '&#x3e;&#x3e;', nextBigStatus: '',
 		currentText: 'sot', currentStatus: '',
-		monthNames: ['Janar','Shkurt','Mars','Pril','Maj','Qershor',
+		monthNames: ['Janar','Shkurt','Mars','Prill','Maj','Qershor',
 		'Korrik','Gusht','Shtator','Tetor','Nëntor','Dhjetor'],
 		monthNamesShort: ['Jan','Shk','Mar','Pri','Maj','Qer',
 		'Kor','Gus','Sht','Tet','Nën','Dhj'],
@@ -20,6 +20,7 @@
 		dayNamesMin: ['Di','Hë','Ma','Më','En','Pr','Sh'],
 		dayStatus: 'Vendose DD si ditë të parë të javës', dateStatus: '\'Zgjedh\' D, M d',
 		dateFormat: 'dd.mm.yy', firstDay: 1,
-		initStatus: 'Zgjedhe një datë', isRTL: false};
+		initStatus: 'Zgjedhe një datë', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['sq']);
 })(jQuery);

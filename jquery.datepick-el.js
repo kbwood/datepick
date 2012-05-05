@@ -20,6 +20,7 @@
 		dayNamesMin: ['Κυ','Δε','Τρ','Τε','Πε','Πα','Σα'],
 		dayStatus: 'Ανάθεση ως πρώτη μέρα της εβδομάδος: DD', dateStatus: 'Επιλογή DD d MM',
 		dateFormat: 'dd/mm/yy', firstDay: 1,
-		initStatus: 'Επιλέξτε μια ημερομηνία', isRTL: false};
+		initStatus: 'Επιλέξτε μια ημερομηνία', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['el']);
 })(jQuery);

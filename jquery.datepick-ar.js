@@ -21,6 +21,7 @@
 		dayNamesMin: ['سبت', 'أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة'],
 		dayStatus: 'اختر DD لليوم الأول من الأسبوع', dateStatus: 'اختر D, M d',
 		dateFormat: 'dd/mm/yy', firstDay: 0,
-		initStatus: 'اختر يوم', isRTL: true};
+		initStatus: 'اختر يوم', isRTL: true,
+		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['ar']);
 })(jQuery);

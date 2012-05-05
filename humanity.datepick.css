@@ -1,4 +1,4 @@
-/* Humanity style sheet for jQuery date picker v3.5.1. */
+/* Humanity style sheet for jQuery date picker v3.5.2. */
 #datepick-div, .datepick-inline {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 14px;
@@ -156,12 +156,14 @@ img.datepick-trigger {
 	cursor: pointer;
 	margin: 0;
 	padding: 0;
+	text-decoration: none;
 }
 .datepick-inline .datepick-links a {
 	padding: 0 5px !important;
 }
 .datepick-control a, .datepick-links a {
 	padding: 2px 5px !important;
+	color: #1e1b1c !important;
 }
 .datepick-control a:hover, .datepick-links a:hover, .datepick-title-row a:hover {
 	background: #ede4d4;
@@ -183,8 +185,8 @@ img.datepick-trigger {
     position: absolute; /*must have*/
     z-index: -1; /*must have*/
     filter: mask(); /*must have*/
-    top: -4px; /*must have*/
-    left: -4px; /*must have*/
-    width: 200px; /*must have*/
-    height: 200px; /*must have*/
+    top: -1px; /*must have*/
+    left: -1px; /*must have*/
+    width: 187px; /*must have*/
+    height: 187px; /*must have*/
 }

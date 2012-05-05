@@ -20,6 +20,7 @@
 		dayNamesMin: ['Sø','Ma','Ti','On','To','Fr','Lø'],
 		dayStatus: 'Sæt DD som første ugedag', dateStatus: 'Vælg D, M d',
         dateFormat: 'dd-mm-yy', firstDay: 0,
-		initStatus: 'Vælg en dato', isRTL: false};
+		initStatus: 'Vælg en dato', isRTL: false,
+		showMonthAfterYear: false, yearSuffix: ''};
     $.datepick.setDefaults($.datepick.regional['da']);
 })(jQuery);

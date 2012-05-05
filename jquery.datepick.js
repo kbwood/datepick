@@ -1,7 +1,7 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker for jQuery 3.5.1.
+   Datepicker for jQuery 3.5.2.
    Written by Marc Grabanski (m@marcgrabanski.com) and
-              Keith Wood (kbwood@virginbroadband.com.au).
+              Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
    Please attribute the authors if you use it. */
@@ -16,7 +16,7 @@ var PROP_NAME = 'datepick';
    allowing multiple different settings on the same page. */
 
 function Datepick() {
-	this.debug = false; // Change this to true to start debugging
+	this._uuid = new Date().getTime(); // Unique identifier seed
 	this._curInst = null; // The current instance in use
 	this._keyEvent = false; // If the last event was a key event
 	this._disabledInputs = []; // List of date picker inputs that have been disabled
@@ -53,7 +53,9 @@ function Datepick() {
 		dateFormat: 'mm/dd/yy', // See format options on parseDate
 		firstDay: 0, // The first day of the week, Sun = 0, Mon = 1, ...
 		initStatus: 'Select a date', // Initial Status text on opening
-		isRTL: false // True if right-to-left language, false if left-to-right
+		isRTL: false, // True if right-to-left language, false if left-to-right
+		showMonthAfterYear: false, // True if the year select precedes month, false for month then year
+		yearSuffix: '' // Additional text to append to the year in the month headers
 	};
 	this._defaults = { // Global defaults for all the date picker instances
 		showOn: 'focus', // 'focus' for popup on focus,
@@ -79,7 +81,6 @@ function Datepick() {
 		gotoCurrent: false, // True if today link goes back to current selection instead
 		changeMonth: true, // True if month can be selected directly, false if only prev/next
 		changeYear: true, // True if year can be selected directly, false if only prev/next
-		showMonthAfterYear: false, // True if the year select precedes month, false for month then year
 		yearRange: '-10:+10', // Range of years to display in drop-down,
 			// either relative to current year (-nn:+nn) or absolute (nnnn:nnnn)
 		changeFirstDay: false, // True to click on day name to change, false to remain as set
@@ -90,8 +91,8 @@ function Datepick() {
 		calculateWeek: this.iso8601Week, // How to calculate the week of the year,
 			// takes a Date and returns the number of the week for it
 		shortYearCutoff: '+10', // Short year values < this are in the current century,
-			// > this are in the previous century,
-			// string value starting with '+' for current year + value
+			// > this are in the previous century, string value starting with '+'
+			// for current year + value, -1 for no change
 		showStatus: false, // True to show status bar at bottom, false to not show it
 		statusForDate: this.dateStatus, // Function to provide status text for a date -
 			// takes date and instance as parameters, returns display text
@@ -119,6 +120,8 @@ function Datepick() {
 }
 
 $.extend(Datepick.prototype, {
+	version: '3.5.2', // Current version
+	
 	/* Class name added to elements to indicate already configured with a date picker. */
 	markerClassName: 'hasDatepick',
 
@@ -164,7 +167,7 @@ $.extend(Datepick.prototype, {
 		var nodeName = target.nodeName.toLowerCase();
 		var inline = (nodeName == 'div' || nodeName == 'span');
 		if (!target.id)
-			target.id = 'dp' + (++this.uuid);
+			target.id = 'dp' + (++this._uuid);
 		var inst = this._newInst($(target), inline);
 		inst.settings = $.extend({}, settings || {}, inlineSettings || {});
 		if (nodeName == 'input') {
@@ -184,7 +187,8 @@ $.extend(Datepick.prototype, {
 			drawMonth: 0, drawYear: 0, // month being drawn
 			inline: inline, // is datepicker inline or not
 			dpDiv: (!inline ? this.dpDiv : // presentation div
-			$('<div class="' + this._inlineClass + '"></div>'))};
+			$('<div class="' + this._inlineClass + '"></div>')),
+			siblings: $([])}; // created siblings (trigger/append)
 	},
 
 	/* Attach the date picker to an input field.
@@ -196,8 +200,11 @@ $.extend(Datepick.prototype, {
 			return;
 		var appendText = this._get(inst, 'appendText');
 		var isRTL = this._get(inst, 'isRTL');
-		if (appendText)
-			input[isRTL ? 'before' : 'after']('<span class="' + this._appendClass + '">' + appendText + '</span>');
+		if (appendText) {
+			var append = $('<span class="' + this._appendClass + '">' + appendText + '</span>');
+			input[isRTL ? 'before' : 'after'](append);
+			inst.siblings = inst.siblings.add(append);
+		}
 		var showOn = this._get(inst, 'showOn');
 		if (showOn == 'focus' || showOn == 'both') // pop-up date picker when in the marked field
 			input.focus(this._showDatepick);
@@ -206,11 +213,12 @@ $.extend(Datepick.prototype, {
 			var buttonImage = this._get(inst, 'buttonImage');
 			var trigger = $(this._get(inst, 'buttonImageOnly') ?
 				$('<img/>').addClass(this._triggerClass).
-					attr({ src: buttonImage, alt: buttonText, title: buttonText }) :
+					attr({src: buttonImage, alt: buttonText, title: buttonText}) :
 				$('<button type="button"></button>').addClass(this._triggerClass).
 					html(buttonImage == '' ? buttonText : $('<img/>').attr(
-					{ src:buttonImage, alt:buttonText, title:buttonText })));
+					{src: buttonImage, alt: buttonText, title: buttonText})));
 			input[isRTL ? 'before' : 'after'](trigger);
+			inst.siblings = inst.siblings.add(trigger);
 			trigger.click(function() {
 				if ($.datepick._datepickerShowing && $.datepick._lastInput == target)
 					$.datepick._hideDatepick();
@@ -219,12 +227,7 @@ $.extend(Datepick.prototype, {
 				return false;
 			});
 		}
-		input.addClass(this.markerClassName).keydown(this._doKeyDown).keypress(this._doKeyPress).
-			bind("setData.datepick", function(event, key, value) {
-				inst.settings[key] = value;
-			}).bind("getData.datepick", function(event, key) {
-				return this._get(inst, key);
-			});
+		input.addClass(this.markerClassName).keydown(this._doKeyDown).keypress(this._doKeyPress);
 		$.data(target, PROP_NAME, inst);
 	},
 
@@ -235,12 +238,7 @@ $.extend(Datepick.prototype, {
 		var divSpan = $(target);
 		if (divSpan.hasClass(this.markerClassName))
 			return;
-		divSpan.addClass(this.markerClassName).
-			bind("setData.datepick", function(event, key, value){
-				inst.settings[key] = value;
-			}).bind("getData.datepick", function(event, key){
-				return this._get(inst, key);
-			});
+		divSpan.addClass(this.markerClassName);
 		$.data(target, PROP_NAME, inst);
 		this._setDate(inst, this._getDefaultDate(inst));
 		$('body').append(inst.dpDiv);
@@ -263,7 +261,7 @@ $.extend(Datepick.prototype, {
 	_dialogDatepick: function(input, dateText, onSelect, settings, pos) {
 		var inst = this._dialogInst; // internal instance
 		if (!inst) {
-			var id = 'dp' + (++this.uuid);
+			var id = 'dp' + (++this._uuid);
 			this._dialogInput = $('<input type="text" id="' + id +
 				'" size="1" style="position: absolute; top: -100px;"/>');
 			this._dialogInput.keydown(this._doKeyDown);
@@ -304,15 +302,14 @@ $.extend(Datepick.prototype, {
 			return;
 		}
 		var nodeName = target.nodeName.toLowerCase();
+		var inst = $.data(target, PROP_NAME);
 		$.removeData(target, PROP_NAME);
 		if (nodeName == 'input') {
-			$target.siblings('.' + this._appendClass).remove().end().
-				siblings('.' + this._triggerClass).remove().end().
-				removeClass(this.markerClassName).
-				unbind('focus', this._showDatepick).
-				unbind('keydown', this._doKeyDown).
-				unbind('keypress', this._doKeyPress);
-		} else if (nodeName == 'div' || nodeName == 'span')
+			$(inst.siblings).remove();
+			$target.removeClass(this.markerClassName).unbind('focus', this._showDatepick).
+				unbind('keydown', this._doKeyDown).unbind('keypress', this._doKeyPress);
+		}
+		else if (nodeName == 'div' || nodeName == 'span')
 			$target.removeClass(this.markerClassName).empty();
 	},
 
@@ -324,15 +321,17 @@ $.extend(Datepick.prototype, {
 			return;
 		}
 		var nodeName = target.nodeName.toLowerCase();
+		var inst = $.data(target, PROP_NAME);
 		if (nodeName == 'input') {
-		target.disabled = false;
-			$target.siblings('button.' + this._triggerClass).
-			each(function() { this.disabled = false; }).end().
-				siblings('img.' + this._triggerClass).
+			target.disabled = false;
+			inst.siblings.filter('button.' + this._triggerClass).
+				each(function() { this.disabled = false; }).end().
+				filter('img.' + this._triggerClass).
 				css({opacity: '1.0', cursor: ''});
 		}
 		else if (nodeName == 'div' || nodeName == 'span') {
-			$target.children('.' + this._disableClass).remove();
+			$target.children('.' + this._disableClass).remove().end().
+				find('select').attr('disabled', '');
 		}
 		this._disabledInputs = $.map(this._disabledInputs,
 			function(value) { return (value == target ? null : value); }); // delete entry
@@ -346,11 +345,12 @@ $.extend(Datepick.prototype, {
 			return;
 		}
 		var nodeName = target.nodeName.toLowerCase();
+		var inst = $.data(target, PROP_NAME);
 		if (nodeName == 'input') {
-		target.disabled = true;
-			$target.siblings('button.' + this._triggerClass).
-			each(function() { this.disabled = true; }).end().
-				siblings('img.' + this._triggerClass).
+			target.disabled = true;
+			inst.siblings.filter('button.' + this._triggerClass).
+				each(function() { this.disabled = true; }).end().
+				filter('img.' + this._triggerClass).
 				css({opacity: '0.5', cursor: 'default'});
 		}
 		else if (nodeName == 'div' || nodeName == 'span') {
@@ -366,7 +366,8 @@ $.extend(Datepick.prototype, {
 			$target.prepend('<div class="' + this._disableClass + '" style="' +
 				'width: ' + inline.width() + 'px; height: ' + inline.height() +
 				'px; left: ' + (offset.left - relOffset.left) +
-				'px; top: ' + (offset.top - relOffset.top) + 'px;"></div>');
+				'px; top: ' + (offset.top - relOffset.top) + 'px;"></div>').
+				find('select').attr('disabled', 'disabled');
 		}
 		this._disabledInputs = $.map(this._disabledInputs,
 			function(value) { return (value == target ? null : value); }); // delete entry
@@ -393,31 +394,36 @@ $.extend(Datepick.prototype, {
 		}
 	},
 
-	/* Update the settings for a date picker attached to an input field or division.
+	/* Update or retrieve the settings for a date picker attached to an input field or division.
 	   @param  target  (element) the target input field or division or span
 	   @param  name    (object) the new settings to update or
-	                   (string) the name of the setting to change or
-	   @param  value   (any) the new value for the setting (omit if above is an object) */
+	                   (string) the name of the setting to change or retrieve,
+	                   when retrieving also 'all' for all instance settings or
+	                   'defaults' for all global defaults
+	   @param  value   (any) the new value for the setting
+	                   (omit if above is an object or to retrieve value) */
 	_optionDatepick: function(target, name, value) {
+		var inst = this._getInst(target);
+		if (arguments.length == 2 && typeof name == 'string') {
+			return (name == 'defaults' ? $.extend({}, $.datepick._defaults) :
+				(inst ? (name == 'all' ? $.extend({}, inst.settings) :
+				this._get(inst, name)) : null));
+		}
 		var settings = name || {};
 		if (typeof name == 'string') {
 			settings = {};
 			settings[name] = value;
 		}
-		var inst = this._getInst(target);
 		if (inst) {
 			if (this._curInst == inst) {
 				this._hideDatepick(null);
 			}
+			var date = this._getDateDatepick(target);
+			date = (isArray(date) ? date : [date]);
 			extendRemove(inst.settings, settings);
-			var date = new Date();
 			extendRemove(inst, {rangeStart: null, // start of range
-				endDay: null, endMonth: null, endYear: null, // end of range
-				selectedDay: date.getDate(), selectedMonth: date.getMonth(),
-				selectedYear: date.getFullYear(), // starting point
-				currentDay: date.getDate(), currentMonth: date.getMonth(),
-				currentYear: date.getFullYear(), // current selection
-				drawMonth: date.getMonth(), drawYear: date.getFullYear()}); // month being drawn
+				endDay: null, endMonth: null, endYear: null}); // end of range
+			this._setDateDatepick(target, date[0], date[1]);
 			this._updateDatepick(inst);
 		}
 	},
@@ -465,9 +471,9 @@ $.extend(Datepick.prototype, {
 	   @return  (boolean) true to continue, false to discard */
 	_doKeyDown: function(event) {
 		var inst = $.datepick._getInst(event.target);
+		inst._keyEvent = true;
 		var handled = true;
 		var isRTL = $.datepick._get(inst, 'isRTL');
-		inst._keyEvent = true;
 		if ($.datepick._datepickerShowing)
 			switch (event.keyCode) {
 				case 9:  $.datepick._hideDatepick(null, '');
@@ -621,7 +627,7 @@ $.extend(Datepick.prototype, {
 		$.datepick._updateDatepick(inst);
 		// fix width for dynamic number of date pickers
 		inst.dpDiv.width($.datepick._getNumberOfMonths(inst)[1] *
-			$('.' + $.datepick._oneMonthClass, inst.dpDiv)[0].offsetWidth);
+			$('.' + $.datepick._oneMonthClass, inst.dpDiv).width());
 		// and adjust position before showing
 		offset = $.datepick._checkOffset(inst, offset, isFixed);
 		inst.dpDiv.css({position: ($.datepick._inDialog && $.blockUI ?
@@ -632,11 +638,10 @@ $.extend(Datepick.prototype, {
 			var duration = $.datepick._get(inst, 'duration');
 			var postProcess = function() {
 				$.datepick._datepickerShowing = true;
-				if ($.browser.msie && parseInt($.browser.version, 10) < 7) { // fix IE < 7 select problems
-					var extras = $.datepick._getExtras(inst.dpDiv);
-					$('iframe.' + $.datepick._coverClass).css({width: inst.dpDiv.width() + extras[0],
-						height: inst.dpDiv.height() + extras[1]});
-				}
+				var borders = $.datepick._getBorders(inst.dpDiv);
+				inst.dpDiv.find('iframe.' + $.datepick._coverClass). // IE6- only
+					css({left: -borders[0], top: -borders[1],
+						width: inst.dpDiv.outerWidth(), height: inst.dpDiv.outerHeight()});
 			};
 			if ($.effects && $.effects[showAnim])
 				inst.dpDiv.show(showAnim, $.datepick._get(inst, 'showOptions'), duration, postProcess);
@@ -645,7 +650,7 @@ $.extend(Datepick.prototype, {
 			if (duration == '')
 				postProcess();
 			if (inst.input[0].type != 'hidden')
-				inst.input[0].focus();
+				inst.input.focus();
 			$.datepick._curInst = inst;
 		}
 	},
@@ -653,34 +658,29 @@ $.extend(Datepick.prototype, {
 	/* Generate the date picker content.
 	   @param  inst  (object) the instance settings for this datepicker */
 	_updateDatepick: function(inst) {
-		var extras = this._getExtras(inst.dpDiv);
-		var dims = {width: inst.dpDiv.width() + extras[0],
-			height: inst.dpDiv.height() + extras[1]};
+		var borders = this._getBorders(inst.dpDiv);
 		inst.dpDiv.empty().append(this._generateHTML(inst)).
-			find('iframe.' + this._coverClass).
-			css({width: dims.width, height: dims.height});
+			find('iframe.' + this._coverClass). // IE6- only
+			css({left: -borders[0], top: -borders[1],
+				width: inst.dpDiv.outerWidth(), height: inst.dpDiv.outerHeight()});
 		var numMonths = this._getNumberOfMonths(inst);
-		inst.dpDiv[(numMonths[0] != 1 || numMonths[1] != 1 ? 'add' : 'remove') +
-			'Class']('datepick-multi');
-		inst.dpDiv[(this._get(inst, 'isRTL') ? 'add' : 'remove') +
-			'Class']('datepick-rtl');
+		inst.dpDiv[(numMonths[0] != 1 || numMonths[1] != 1 ?
+			'add' : 'remove') + 'Class']('datepick-multi');
+		inst.dpDiv[(this._get(inst, 'isRTL') ?
+			'add' : 'remove') + 'Class']('datepick-rtl');
 		if (inst.input && inst.input[0].type != 'hidden' && inst == $.datepick._curInst)
-			$(inst.input[0]).focus();
+			$(inst.input).focus();
 	},
 
-	/* Retrieve the size of borders and padding for an element.
+	/* Retrieve the size of left and top borders for an element.
 	   @param  elem  (jQuery object) the element of interest
-	   @return  (number[2]) the horizontal and vertical sizes */
-	_getExtras: function(elem) {
+	   @return  (number[2]) the left and top borders */
+	_getBorders: function(elem) {
 		var convert = function(value) {
 			return {thin: 1, medium: 2, thick: 3}[value] || value;
 		};
-		return [parseInt(convert(elem.css('border-left-width'))) +
-			parseInt(convert(elem.css('border-right-width'))) +
-			parseInt(elem.css('padding-left')) + parseInt(elem.css('padding-right')),
-			parseInt(convert(elem.css('border-top-width'))) +
-			parseInt(convert(elem.css('border-bottom-width'))) +
-			parseInt(elem.css('padding-top')) + parseInt(elem.css('padding-bottom'))];
+		return [parseFloat(convert(elem.css('border-left-width'))),
+			parseFloat(convert(elem.css('border-top-width')))];
 	},
 
 	/* Check positioning to remain on the screen.
@@ -701,14 +701,15 @@ $.extend(Datepick.prototype, {
 		// reposition date picker horizontally if outside the browser window
 		if (this._get(inst, 'isRTL') || (offset.left + inst.dpDiv.width() - scrollX) > browserWidth)
 			offset.left = Math.max((isFixed ? 0 : scrollX),
-				pos[0] + (inst.input ? inst.input.width() : 0) - (isFixed ? scrollX : 0) - inst.dpDiv.width() -
+				pos[0] + (inst.input ? inst.input.outerWidth() : 0) -
+				(isFixed ? scrollX : 0) - inst.dpDiv.outerWidth() -
 				(isFixed && $.browser.opera ? document.documentElement.scrollLeft : 0));
 		else
 			offset.left -= (isFixed ? scrollX : 0);
 		// reposition date picker vertically if outside the browser window
 		if ((offset.top + inst.dpDiv.height() - scrollY) > browserHeight)
 			offset.top = Math.max((isFixed ? 0 : scrollY),
-				pos[1] - (isFixed ? scrollY : 0) - (this._inDialog ? 0 : inst.dpDiv.height()) -
+				pos[1] - (isFixed ? scrollY : 0) - (this._inDialog ? 0 : inst.dpDiv.outerHeight()) -
 				(isFixed && $.browser.opera ? document.documentElement.scrollTop : 0));
 		else
 			offset.top -= (isFixed ? scrollY : 0);
@@ -732,7 +733,7 @@ $.extend(Datepick.prototype, {
 	_hideDatepick: function(input, duration) {
 		var inst = this._curInst;
 		if (!inst || (input && inst != $.data(input, PROP_NAME)))
-			return;
+			return false;
 		var rangeSelect = this._get(inst, 'rangeSelect');
 		if (rangeSelect && inst.stayOpen)
 			this._selectDate('#' + inst.id, this._formatDate(inst,
@@ -755,7 +756,7 @@ $.extend(Datepick.prototype, {
 			var onClose = this._get(inst, 'onClose');
 			if (onClose)
 				onClose.apply((inst.input ? inst.input[0] : null),
-					[(inst.input ? inst.input.val() : ''), inst]);  // trigger custom callback
+					[(inst.input ? inst.input.val() : ''), this._getDate(inst), inst]);  // trigger custom callback
 			this._datepickerShowing = false;
 			this._lastInput = null;
 			inst.settings.prompt = null;
@@ -769,6 +770,7 @@ $.extend(Datepick.prototype, {
 			this._inDialog = false;
 		}
 		this._curInst = null;
+		return false;
 	},
 
 	/* Tidy up after a dialog display.
@@ -801,6 +803,7 @@ $.extend(Datepick.prototype, {
 			(period == 'M' ? this._get(inst, 'showCurrentAtPos') : 0), // undo positioning
 			period);
 		this._updateDatepick(inst);
+		return false;
 	},
 
 	/* Show the month for today or the current selection.
@@ -814,13 +817,14 @@ $.extend(Datepick.prototype, {
 			inst.drawYear = inst.selectedYear = inst.currentYear;
 		}
 		else {
-		var date = new Date();
-		inst.selectedDay = date.getDate();
-		inst.drawMonth = inst.selectedMonth = date.getMonth();
-		inst.drawYear = inst.selectedYear = date.getFullYear();
+			var date = new Date();
+			inst.selectedDay = date.getDate();
+			inst.drawMonth = inst.selectedMonth = date.getMonth();
+			inst.drawYear = inst.selectedYear = date.getFullYear();
 		}
 		this._notifyChange(inst);
 		this._adjustDate(target);
+		return false;
 	},
 
 	/* Selecting a new month/year.
@@ -833,7 +837,7 @@ $.extend(Datepick.prototype, {
 		inst._selectingMonthYear = false;
 		inst['selected' + (period == 'M' ? 'Month' : 'Year')] =
 		inst['draw' + (period == 'M' ? 'Month' : 'Year')] =
-			parseInt(select.options[select.selectedIndex].value,10);
+			parseInt(select.options[select.selectedIndex].value, 10);
 		this._notifyChange(inst);
 		this._adjustDate(target);
 	},
@@ -843,7 +847,7 @@ $.extend(Datepick.prototype, {
 	_clickMonthYear: function(id) {
 		var inst = this._getInst($(id)[0]);
 		if (inst.input && inst._selectingMonthYear && !$.browser.msie)
-			inst.input[0].focus();
+			inst.input.focus();
 		inst._selectingMonthYear = !inst._selectingMonthYear;
 	},
 
@@ -854,6 +858,7 @@ $.extend(Datepick.prototype, {
 		var inst = this._getInst($(id)[0]);
 		inst.settings.firstDay = day;
 		this._updateDatepick(inst);
+		return false;
 	},
 
 	/* Hover over a particular day.
@@ -866,8 +871,10 @@ $.extend(Datepick.prototype, {
 			return;
 		var inst = this._getInst($(id)[0]);
 		var onHover = this._get(inst, 'onHover');
+		var date = (year ?
+			this._daylightSavingAdjust(new Date(year, month, $(td).text())) : null);
 		onHover.apply((inst.input ? inst.input[0] : null),
-			[(year ? new Date(year, month, $(td).text()) : null), inst]);
+			[(date ? this._formatDate(inst, date) : ''), date, inst]);
 	},
 
 	/* Select a particular day.
@@ -877,7 +884,7 @@ $.extend(Datepick.prototype, {
 	   @param  td     (element) the table cell containing the selection */
 	_selectDay: function(id, year, month, td) {
 		if ($(td).hasClass(this._unselectableClass))
-			return;
+			return false;
 		var inst = this._getInst($(id)[0]);
 		var rangeSelect = this._get(inst, 'rangeSelect');
 		if (rangeSelect) {
@@ -913,6 +920,7 @@ $.extend(Datepick.prototype, {
 			if (inst.inline)
 				this._updateDatepick(inst);
 		}
+		return false;
 	},
 
 	/* Erase the input field and hide the date picker.
@@ -921,10 +929,11 @@ $.extend(Datepick.prototype, {
 		var target = $(id);
 		var inst = this._getInst(target[0]);
 		if (this._get(inst, 'mandatory'))
-			return;
+			return false;
 		inst.stayOpen = false;
 		inst.endDay = inst.endMonth = inst.endYear = inst.rangeStart = null;
 		this._selectDate(target, '');
+		return false;
 	},
 
 	/* Update the input field with the selected date.
@@ -941,7 +950,8 @@ $.extend(Datepick.prototype, {
 		this._updateAlternate(inst);
 		var onSelect = this._get(inst, 'onSelect');
 		if (onSelect)
-			onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);  // trigger custom callback
+			onSelect.apply((inst.input ? inst.input[0] : null),
+				[dateStr, this._getDate(inst), inst]);  // trigger custom callback
 		else if (inst.input)
 			inst.input.trigger('change'); // fire the change event
 		if (inst.inline)
@@ -950,9 +960,10 @@ $.extend(Datepick.prototype, {
 			this._hideDatepick(null, this._get(inst, 'duration'));
 			this._lastInput = inst.input[0];
 			if (typeof(inst.input[0]) != 'object')
-				inst.input[0].focus(); // restore focus
+				inst.input.focus(); // restore focus
 			this._lastInput = null;
 		}
+		return false;
 	},
 
 	/* Update any alternate field to synchronise with the main field.
@@ -988,7 +999,7 @@ $.extend(Datepick.prototype, {
 		var time = checkDate.getTime();
 		checkDate.setMonth(0); // Compare with Jan 1
 		checkDate.setDate(1);
-		return Math.floor((time - checkDate) / (86400000 * 7)) + 1;
+		return Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
 	},
 
 	/* Provide status text for a particular date.
@@ -1002,7 +1013,6 @@ $.extend(Datepick.prototype, {
 
 	/* Parse a string value into a date object.
 	   See formatDate below for the possible formats.
-
 	   @param  format    (string) the expected format of the date
 	   @param  value     (string) the date in the above format
 	   @param  settings  (object) attributes include:
@@ -1020,6 +1030,8 @@ $.extend(Datepick.prototype, {
 			return null;
 		settings = settings || {};
 		var shortYearCutoff = settings.shortYearCutoff || this._defaults.shortYearCutoff;
+		shortYearCutoff = (typeof shortYearCutoff != 'string' ? shortYearCutoff :
+			new Date().getFullYear() % 100 + parseInt(shortYearCutoff, 10));
 		var dayNamesShort = settings.dayNamesShort || this._defaults.dayNamesShort;
 		var dayNames = settings.dayNames || this._defaults.dayNames;
 		var monthNamesShort = settings.monthNamesShort || this._defaults.monthNamesShort;
@@ -1039,7 +1051,8 @@ $.extend(Datepick.prototype, {
 		// Extract a number from the string value
 		var getNumber = function(match) {
 			lookAhead(match);
-			var size = (match == '@' ? 14 : (match == 'y' ? 4 : (match == 'o' ? 3 : 2)));
+			var size = (match == '@' ? 14 : (match == '!' ? 20 :
+				(match == 'y' ? 4 : (match == 'o' ? 3 : 2))));
 			var digits = new RegExp('^\\d{1,' + size + '}');
 			var num = value.substring(iValue).match(digits);
 			if (!num)
@@ -1097,6 +1110,12 @@ $.extend(Datepick.prototype, {
 						month = date.getMonth() + 1;
 						day = date.getDate();
 						break;
+					case '!':
+						var date = new Date((getNumber('!') - this._ticksTo1970) / 10000);
+						year = date.getFullYear();
+						month = date.getMonth() + 1;
+						day = date.getDate();
+						break;
 					case "'":
 						if (lookAhead("'"))
 							checkLiteral();
@@ -1112,8 +1131,8 @@ $.extend(Datepick.prototype, {
 		if (year == -1)
 			year = new Date().getFullYear();
 		else if (year < 100)
-			year += new Date().getFullYear() - new Date().getFullYear() % 100 +
-				(year <= shortYearCutoff ? 0 : -100);
+			year += (shortYearCutoff == -1 ? 1900 : new Date().getFullYear() -
+				new Date().getFullYear() % 100 - (year <= shortYearCutoff ? 0 : 100));
 		if (doy > -1) {
 			month = 1;
 			day = doy;
@@ -1141,8 +1160,12 @@ $.extend(Datepick.prototype, {
 	RFC_1123: 'D, d M yy',
 	RFC_2822: 'D, d M yy',
 	RSS: 'D, d M y', // RFC 822
+	TICKS: '!',
 	TIMESTAMP: '@',
 	W3C: 'yy-mm-dd', // ISO 8601
+
+	_ticksTo1970: (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) +
+		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000),
 
 	/* Format a date object into a string value.
 	   The format can be combinations of the following:
@@ -1159,9 +1182,9 @@ $.extend(Datepick.prototype, {
 	   y  - year (two digit)
 	   yy - year (four digit)
 	   @ - Unix timestamp (ms since 01/01/1970)
+	   ! - Windows ticks (100ns since 01/01/0001)
 	   '...' - literal text
 	   '' - single quote
-
 	   @param  format    (string) the desired format of the date
 	   @param  date      (Date) the date value to format
 	   @param  settings  (object) attributes include:
@@ -1225,10 +1248,13 @@ $.extend(Datepick.prototype, {
 							break;
 						case 'y':
 							output += (lookAhead('y') ? date.getFullYear() :
-								(date.getYear() % 100 < 10 ? '0' : '') + date.getYear() % 100);
+								(date.getFullYear() % 100 < 10 ? '0' : '') + date.getFullYear() % 100);
 							break;
 						case '@':
 							output += date.getTime();
+							break;
+						case '!':
+							output += date.getTime() * 10000 + this._ticksTo1970;
 							break;
 						case "'":
 							if (lookAhead("'"))
@@ -1286,12 +1312,8 @@ $.extend(Datepick.prototype, {
 	   @param  inst  (object) the instance settings for this datepicker
 	   @return  (Date) the default date */
 	_getDefaultDate: function(inst) {
-		var date = this._determineDate(this._get(inst, 'defaultDate'), new Date());
-		var minDate = this._getMinMaxDate(inst, 'min', true);
-		var maxDate = this._getMinMaxDate(inst, 'max');
-		date = (minDate && date < minDate ? minDate : date);
-		date = (maxDate && date > maxDate ? maxDate : date);
-		return date;
+		return this._restrictMinMax(inst,
+			this._determineDate(this._get(inst, 'defaultDate'), new Date()));
 	},
 
 	/* A date may be specified as an exact value or a relative one.
@@ -1309,24 +1331,24 @@ $.extend(Datepick.prototype, {
 			var year = date.getFullYear();
 			var month = date.getMonth();
 			var day = date.getDate();
-			var pattern = /([+-]?[0-9]+)\s*(d|D|w|W|m|M|y|Y)?/g;
-			var matches = pattern.exec(offset);
+			var pattern = /([+-]?[0-9]+)\s*(d|w|m|y)?/g;
+			var matches = pattern.exec(offset.toLowerCase());
 			while (matches) {
 				switch (matches[2] || 'd') {
-					case 'd' : case 'D' :
+					case 'd':
 						day += parseInt(matches[1], 10); break;
-					case 'w' : case 'W' :
+					case 'w':
 						day += parseInt(matches[1], 10) * 7; break;
-					case 'm' : case 'M' :
+					case 'm':
 						month += parseInt(matches[1], 10);
 						day = Math.min(day, getDaysInMonth(year, month));
 						break;
-					case 'y': case 'Y' :
+					case 'y':
 						year += parseInt(matches[1], 10);
 						day = Math.min(day, getDaysInMonth(year, month));
 						break;
 				}
-				matches = pattern.exec(offset);
+				matches = pattern.exec(offset.toLowerCase());
 			}
 			return new Date(year, month, day);
 		};
@@ -1363,17 +1385,18 @@ $.extend(Datepick.prototype, {
 		var clear = !(date);
 		var origMonth = inst.selectedMonth;
 		var origYear = inst.selectedYear;
-		date = this._determineDate(date, new Date());
+		date = this._restrictMinMax(inst, this._determineDate(date, new Date()));
 		inst.selectedDay = inst.currentDay = date.getDate();
 		inst.drawMonth = inst.selectedMonth = inst.currentMonth = date.getMonth();
 		inst.drawYear = inst.selectedYear = inst.currentYear = date.getFullYear();
 		if (this._get(inst, 'rangeSelect')) {
 			if (endDate) {
-				endDate = this._determineDate(endDate, null);
+				endDate = this._restrictMinMax(inst, this._determineDate(endDate, null));
 				inst.endDay = endDate.getDate();
 				inst.endMonth = endDate.getMonth();
 				inst.endYear = endDate.getFullYear();
-			} else {
+			}
+			else {
 				inst.endDay = inst.currentDay;
 				inst.endMonth = inst.currentMonth;
 				inst.endYear = inst.currentYear;
@@ -1415,11 +1438,11 @@ $.extend(Datepick.prototype, {
 		var isRTL = this._get(inst, 'isRTL');
 		// build the date picker HTML
 		var clear = (this._get(inst, 'mandatory') ? '' :
-			'<div class="datepick-clear"><a onclick="jQuery.datepick._clearDate(\'#' + inst.id + '\');"' +
+			'<div class="datepick-clear"><a href="javascript:void(0)" onclick="jQuery.datepick._clearDate(\'#' + inst.id + '\');"' +
 			this._addStatus(showStatus, inst.id, this._get(inst, 'clearStatus'), initStatus) + '>' +
 			this._get(inst, 'clearText') + '</a></div>');
 		var controls = '<div class="datepick-control">' + (isRTL ? '' : clear) +
-			'<div class="datepick-close"><a onclick="jQuery.datepick._hideDatepick();"' +
+			'<div class="datepick-close"><a href="javascript:void(0)" onclick="jQuery.datepick._hideDatepick();"' +
 			this._addStatus(showStatus, inst.id, this._get(inst, 'closeStatus'), initStatus) + '>' +
 			this._get(inst, 'closeText') + '</a></div>' + (isRTL ? clear : '')  + '</div>';
 		var prompt = this._get(inst, 'prompt');
@@ -1466,9 +1489,9 @@ $.extend(Datepick.prototype, {
 			this._daylightSavingAdjust(new Date(drawYear, drawMonth - stepBigMonths, 1)),
 			this._getFormatConfig(inst)));
 		var prev = '<div class="datepick-prev">' + (this._canAdjustMonth(inst, -1, drawYear, drawMonth) ?
-			(showBigPrevNext ? '<a onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', -' + stepBigMonths + ', \'M\');"' +
+			(showBigPrevNext ? '<a href="javascript:void(0)" onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', -' + stepBigMonths + ', \'M\');"' +
 			this._addStatus(showStatus, inst.id, this._get(inst, 'prevBigStatus'), initStatus) + '>' + prevBigText + '</a>' : '') +
-			'<a onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', -' + stepMonths + ', \'M\');"' +
+			'<a href="javascript:void(0)" onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', -' + stepMonths + ', \'M\');"' +
 			this._addStatus(showStatus, inst.id, this._get(inst, 'prevStatus'), initStatus) + '>' + prevText + '</a>' :
 			(hideIfNoPrevNext ? '&#xa0;' : (showBigPrevNext ? '<label>' + prevBigText + '</label>' : '') +
 			'<label>' + prevText + '</label>')) + '</div>';
@@ -1481,9 +1504,9 @@ $.extend(Datepick.prototype, {
 			this._daylightSavingAdjust(new Date(drawYear, drawMonth + stepBigMonths, 1)),
 			this._getFormatConfig(inst)));
 		var next = '<div class="datepick-next">' + (this._canAdjustMonth(inst, +1, drawYear, drawMonth) ?
-			'<a onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', +' + stepMonths + ', \'M\');"' +
+			'<a href="javascript:void(0)" onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', +' + stepMonths + ', \'M\');"' +
 			this._addStatus(showStatus, inst.id, this._get(inst, 'nextStatus'), initStatus) + '>' + nextText + '</a>' +
-			(showBigPrevNext ? '<a onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', +' + stepBigMonths + ', \'M\');"' +
+			(showBigPrevNext ? '<a href="javascript:void(0)" onclick="jQuery.datepick._adjustDate(\'#' + inst.id + '\', +' + stepBigMonths + ', \'M\');"' +
 			this._addStatus(showStatus, inst.id, this._get(inst, 'nextBigStatus'), initStatus) + '>' + nextBigText + '</a>' : '') :
 			(hideIfNoPrevNext ? '&#xa0;' : '<label>' + nextText + '</label>' +
 			(showBigPrevNext ? '<label>' + nextBigText + '</label>' : ''))) + '</div>';
@@ -1494,11 +1517,11 @@ $.extend(Datepick.prototype, {
 		var html = (closeAtTop && !inst.inline ? controls : '') +
 			'<div class="datepick-links">' + (isRTL ? next : prev) +
 			(this._isInRange(inst, gotoDate) ? '<div class="datepick-current">' +
-			'<a onclick="jQuery.datepick._gotoToday(\'#' + inst.id + '\');"' +
+			'<a href="javascript:void(0)" onclick="jQuery.datepick._gotoToday(\'#' + inst.id + '\');"' +
 			this._addStatus(showStatus, inst.id, this._get(inst, 'currentStatus'), initStatus) + '>' +
 			currentText + '</a></div>' : '') + (isRTL ? prev : next) + '</div>' +
 			(prompt ? '<div class="' + this._promptClass + '"><span>' + prompt + '</span></div>' : '');
-		var firstDay = parseInt(this._get(inst, 'firstDay'));
+		var firstDay = parseInt(this._get(inst, 'firstDay'), 10);
 		firstDay = (isNaN(firstDay) ? 0 : firstDay);
 		var changeFirstDay = this._get(inst, 'changeFirstDay');
 		var dayNames = this._get(inst, 'dayNames');
@@ -1530,11 +1553,11 @@ $.extend(Datepick.prototype, {
 					this._get(inst, 'weekHeader') + '</th>' : '');
 				for (var dow = 0; dow < 7; dow++) { // days of the week
 					var day = (dow + firstDay) % 7;
-					var dayStatus = (status.indexOf('DD') > -1 ? status.replace(/DD/, dayNames[day]) :
-						status.replace(/D/, dayNamesShort[day]));
-					html += '<th' + ((dow + firstDay + 6) % 7 >= 5 ? ' class="datepick-week-end-cell"' : '') + '>' +
+					var dayStatus = (!showStatus || !changeFirstDay ? '' :
+						status.replace(/DD/, dayNames[day]).replace(/D/, dayNamesShort[day]));
+					html += '<th' + ((dow + firstDay + 6) % 7 < 5 ? '' : ' class="datepick-week-end-cell"') + '>' +
 						(!changeFirstDay ? '<span' + this._addStatus(showStatus, inst.id, dayNames[day], initStatus) :
-						'<a onclick="jQuery.datepick._changeFirstDay(\'#' + inst.id + '\', ' + day + ');"' +
+						'<a href="javascript:void(0)" onclick="jQuery.datepick._changeFirstDay(\'#' + inst.id + '\', ' + day + ');"' +
 						this._addStatus(showStatus, inst.id, dayStatus, initStatus)) + ' title="' + dayNames[day] + '">' +
 						dayNamesMin[day] + (changeFirstDay ? '</a>' : '</span>') + '</th>';
 				}
@@ -1600,7 +1623,7 @@ $.extend(Datepick.prototype, {
 			'" class="datepick-status">' + initStatus + '</div>' : '') +
 			(!closeAtTop && !inst.inline ? controls : '') +
 			'<div style="clear: both;"></div>' +
-			($.browser.msie && parseInt($.browser.version,10) < 7 && !inst.inline ?
+			($.browser.msie && parseInt($.browser.version, 10) < 7 && !inst.inline ?
 			'<iframe src="javascript:false;" class="' + this._coverClass + '"></iframe>' : '');
 		inst._keyEvent = false;
 		return html;
@@ -1673,6 +1696,7 @@ $.extend(Datepick.prototype, {
 			}
 			html += '</select>';
 		}
+		html += this._get(inst, 'yearSuffix');
 		if (showMonthAfterYear)
 			html += (secondary || !changeMonth || !changeYear ? '&#xa0;' : '') + monthHtml;
 		html += '</div>'; // Close datepicker_header
@@ -1701,17 +1725,25 @@ $.extend(Datepick.prototype, {
 		var month = inst.drawMonth + (period == 'M' ? offset : 0);
 		var day = Math.min(inst.selectedDay, this._getDaysInMonth(year, month)) +
 			(period == 'D' ? offset : 0);
-		var date = this._daylightSavingAdjust(new Date(year, month, day));
-		// ensure it is within the bounds set
-		var minDate = this._getMinMaxDate(inst, 'min', true);
-		var maxDate = this._getMinMaxDate(inst, 'max');
-		date = (minDate && date < minDate ? minDate : date);
-		date = (maxDate && date > maxDate ? maxDate : date);
+		var date = this._restrictMinMax(inst,
+			this._daylightSavingAdjust(new Date(year, month, day)));
 		inst.selectedDay = date.getDate();
 		inst.drawMonth = inst.selectedMonth = date.getMonth();
 		inst.drawYear = inst.selectedYear = date.getFullYear();
 		if (period == 'M' || period == 'Y')
 			this._notifyChange(inst);
+	},
+
+	/* Ensure a date is within any min/max bounds.
+	   @param  inst  (object) the instance settings for this datepicker
+	   @param  date  (Date) the date to check
+	   @return  (Date) the restricted date */
+	_restrictMinMax: function(inst, date) {
+		var minDate = this._getMinMaxDate(inst, 'min', true);
+		var maxDate = this._getMinMaxDate(inst, 'max');
+		date = (minDate && date < minDate ? minDate : date);
+		date = (maxDate && date > maxDate ? maxDate : date);
+		return date;
 	},
 
 	/* Notify change of month/year.
@@ -1720,7 +1752,9 @@ $.extend(Datepick.prototype, {
 		var onChange = this._get(inst, 'onChangeMonthYear');
 		if (onChange)
 			onChange.apply((inst.input ? inst.input[0] : null),
-				[inst.selectedYear, inst.selectedMonth + 1, inst]);
+				[inst.selectedYear, inst.selectedMonth + 1,
+				this._daylightSavingAdjust(
+				new Date(inst.selectedYear, inst.selectedMonth, 1)), inst]);
 	},
 
 	/* Determine the number of months to show.
@@ -1728,7 +1762,8 @@ $.extend(Datepick.prototype, {
 	   @return  (number[2]) the number of rows and columns to display */
 	_getNumberOfMonths: function(inst) {
 		var numMonths = this._get(inst, 'numberOfMonths');
-		return (numMonths == null ? [1, 1] : (typeof numMonths == 'number' ? [1, numMonths] : numMonths));
+		return (numMonths == null ? [1, 1] :
+			(typeof numMonths == 'number' ? [1, numMonths] : numMonths));
 	},
 
 	/* Determine the current minimum/maximum date.
@@ -1792,10 +1827,7 @@ $.extend(Datepick.prototype, {
 	   @param  inst  (object) the instance settings for this datepicker
 	   @return  (object) the settings subset */
 	_getFormatConfig: function(inst) {
-		var shortYearCutoff = this._get(inst, 'shortYearCutoff');
-		shortYearCutoff = (typeof shortYearCutoff != 'string' ? shortYearCutoff :
-			new Date().getFullYear() % 100 + parseInt(shortYearCutoff, 10));
-		return {shortYearCutoff: shortYearCutoff,
+		return {shortYearCutoff: this._get(inst, 'shortYearCutoff'),
 			dayNamesShort: this._get(inst, 'dayNamesShort'), dayNames: this._get(inst, 'dayNames'),
 			monthNamesShort: this._get(inst, 'monthNamesShort'), monthNames: this._get(inst, 'monthNames')};
 	},
@@ -1844,7 +1876,11 @@ function isArray(a) {
    @return  (jQuery) jQuery object */
 $.fn.datepick = function(options){
 	var otherArgs = Array.prototype.slice.call(arguments, 1);
-	if (typeof options == 'string' && (options == 'isDisabled' || options == 'getDate'))
+	if (typeof options == 'string' && (options == 'isDisabled' ||
+			options == 'getDate' || options == 'settings'))
+		return $.datepick['_' + options + 'Datepick'].
+			apply($.datepick, [this[0]].concat(otherArgs));
+	if (options == 'option' && arguments.length == 2 && typeof arguments[1] == 'string')
 		return $.datepick['_' + options + 'Datepick'].
 			apply($.datepick, [this[0]].concat(otherArgs));
 	return this.each(function() {
@@ -1856,8 +1892,6 @@ $.fn.datepick = function(options){
 };
 
 $.datepick = new Datepick(); // singleton instance
-$.datepick.uuid = new Date().getTime();
-$.datepick.version = '3.5.1';
 
 $(function() {
 	$(document).mousedown($.datepick._checkExternalClick).
