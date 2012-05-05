@@ -10,7 +10,7 @@
 		dayNamesShort: ['Søn','Man','Tir','Ons','Tor','Fre','Lør'],
 		dayNames: ['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'],
 		dayNamesMin: ['Sø','Ma','Ti','On','To','Fr','Lø'],
-		dateFormat: 'yyyy-mm-dd', firstDay: 0,
+		dateFormat: 'dd.mm.yyyy', firstDay: 0,
 		renderer: $.datepick.defaultRenderer,
 		prevText: '&laquo;Forrige',  prevStatus: '',
 		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',

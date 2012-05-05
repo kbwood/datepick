@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Date picker for jQuery v4.0.4.
+   Date picker for jQuery v4.0.5.
    Written by Keith Wood (kbwood{at}iinet.com.au) February 2010.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -1119,6 +1119,14 @@ $.extend(Datepicker.prototype, {
 		target = $(target.target || target);
 		var inst = $.data(target[0], $.datepick.dataName);
 		if (inst) {
+			if (inst.inline || $.datepick.curInst == inst) {
+				var onChange = inst.get('onChangeMonthYear');
+				if (onChange && (!inst.prevDate ||
+						inst.prevDate.getFullYear() != inst.drawDate.getFullYear() ||
+						inst.prevDate.getMonth() != inst.drawDate.getMonth())) {
+					onChange.apply(target[0], [inst.drawDate.getFullYear(), inst.drawDate.getMonth() + 1]);
+				}
+			}
 			if (inst.inline) {
 				target.html(this._generateContent(target[0], inst));
 			}
@@ -1135,14 +1143,6 @@ $.extend(Datepicker.prototype, {
 				}
 				inst.div.html(this._generateContent(target[0], inst));
 				target.focus();
-			}
-			if (inst.inline || $.datepick.curInst == inst) {
-				var onChange = inst.get('onChangeMonthYear');
-				if (onChange && (!inst.prevDate ||
-						inst.prevDate.getFullYear() != inst.drawDate.getFullYear() ||
-						inst.prevDate.getMonth() != inst.drawDate.getMonth())) {
-					onChange.apply(target[0], [inst.drawDate.getFullYear(), inst.drawDate.getMonth() + 1]);
-				}
 			}
 		}
 	},
