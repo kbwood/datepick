@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker Validation extension for jQuery 3.5.2.
+   Datepicker Validation extension for jQuery 3.6.0.
    Requires Jörn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
    Written by Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -12,6 +12,15 @@
 if ($.fn.validate) {
 
 	$.datepick._selectDate2 = $.datepick._selectDate;
+	
+	$.extend($.datepick.regional[''], {
+		validateDate: 'Please enter a valid date',
+		validateDateMin: 'Please enter a date on or after {0}',
+		validateDateMax: 'Please enter a date on or before {0}',
+		validateDateMinMax: 'Please enter a date between {0} and {1}'
+	});
+	
+	$.extend($.datepick._defaults, $.datepick.regional['']);
 
 	$.extend($.datepick, {
 
@@ -22,7 +31,7 @@ if ($.fn.validate) {
 			this._selectDate2(id, dateStr);
 			var inst = this._getInst($(id)[0]);
 			if (!inst.inline && $.fn.validate)
-				$(id).parents('form').each(function() { $(this).valid(); });
+				$(id).parents('form').validate().element(id);
 		},
 
 		/* Correct error placement for validation errors - after any trigger.
@@ -57,9 +66,12 @@ if ($.fn.validate) {
 	function validateEach(value, element, test) {
 		var inst = $.datepick._getInst(element);
 		var rangeSelect = $.datepick._get(inst, 'rangeSelect');
-		var dates = (rangeSelect ?
-			value.split($.datepick._get(inst, 'rangeSeparator')) : [value]);
-		var ok = (rangeSelect && dates.length == 2) || (!rangeSelect && dates.length == 1);
+		var multiSelect = $.datepick._get(inst, 'multiSelect');
+		var dates = (rangeSelect ? value.split($.datepick._get(inst, 'rangeSeparator')) :
+			multiSelect ? value.split($.datepick._get(inst, 'multiSeparator')) : [value]);
+		var ok = (rangeSelect && dates.length == 2) ||
+			(multiSelect && dates.length <= multiSelect) ||
+			(!rangeSelect && !multiSelect && dates.length == 1);
 		if (ok) {
 			try {
 				var dateFormat = $.datepick._get(inst, 'dateFormat');
@@ -83,7 +95,9 @@ if ($.fn.validate) {
 	$.validator.addMethod('dpDate', function(value, element) {
 			return this.optional(element) ||
 				validateEach(value, element, function(date) { return true; });
-		}, 'Please enter a valid date');
+		}, function(params) {
+			return $.datepick._defaults.validateDate;
+		});
 
 	/* Validate format and against a minimum date. */
 	$.validator.addMethod('dpMinDate', function(value, element, params) {
@@ -94,7 +108,7 @@ if ($.fn.validate) {
 					return (!date || !params[0] || date >= params[0]);
 				});
 		}, function(params) {
-			return $.datepick.errorFormat('Please enter a date on or after {0}', params);
+			return $.datepick.errorFormat($.datepick._defaults.validateDateMin, params);
 		});
 
 	/* Validate format and against a maximum date. */
@@ -106,7 +120,7 @@ if ($.fn.validate) {
 					return (!date || !params[0] || date <= params[0]);
 				});
 		}, function(params) {
-			return $.datepick.errorFormat('Please enter a date on or before {0}', params);
+			return $.datepick.errorFormat($.datepick._defaults.validateDateMax, params);
 		});
 
 	/* Validate format and against minimum/maximum dates. */
@@ -120,7 +134,7 @@ if ($.fn.validate) {
 						(!params[1] || date <= params[1])));
 				});
 		}, function(params) {
-			return $.datepick.errorFormat('Please enter a date between {0} and {1}', params);
+			return $.datepick.errorFormat($.datepick._defaults.validateDateMinMax, params);
 		});
 }
 

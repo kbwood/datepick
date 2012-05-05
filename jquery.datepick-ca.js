@@ -19,7 +19,7 @@
 		dayNamesShort: ['Dug','Dln','Dmt','Dmc','Djs','Dvn','Dsb'],
 		dayNamesMin: ['Dg','Dl','Dt','Dc','Dj','Dv','Ds'],
 		dayStatus: 'DD', dateStatus: 'D, M d',
-		dateFormat: 'mm/dd/yy', firstDay: 0,
+		dateFormat: 'dd/mm/yy', firstDay: 1,
 		initStatus: '', isRTL: false,
 		showMonthAfterYear: false, yearSuffix: ''};
 	$.datepick.setDefaults($.datepick.regional['ca']);
