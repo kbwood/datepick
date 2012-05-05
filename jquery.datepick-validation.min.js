@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker Validation extension for jQuery 3.7.1.
+   Datepicker Validation extension for jQuery 3.7.2.
    Requires Jörn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
    Written by Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 

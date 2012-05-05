@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker for jQuery 3.7.1.
+   Datepicker for jQuery 3.7.2.
    Written by Marc Grabanski (m@marcgrabanski.com) and
               Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -306,8 +306,11 @@ $.extend(Datepick.prototype, {
 			return;
 		divSpan.addClass(this.markerClassName);
 		$.data(target, PROP_NAME, inst);
+		inst.cursorDate = this._getDefaultDate(inst);
 		inst.drawMonth = inst.cursorDate.getMonth();
 		inst.drawYear = inst.cursorDate.getFullYear();
+		if (this._get(inst, 'showDefault'))
+			inst.dates = [this._getDefaultDate(inst)];
 		$('body').append(inst.dpDiv);
 		this._updateDatepick(inst);
 		// Fix width for dynamic number of date pickers
@@ -1605,16 +1608,19 @@ $.extend(Datepick.prototype, {
 		date = (!date ? [] : (isArray(date) ? date : [date]));
 		if (endDate)
 			date.push(endDate);
-		var clear = (date.length == 0);
 		var origMonth = inst.cursorDate.getMonth();
 		var origYear = inst.cursorDate.getFullYear();
-		inst.dates = [this._restrictMinMax(inst, this._determineDate(inst, date[0], new Date()))];
-		inst.cursorDate = new Date(inst.dates[0].getTime());
+		inst.dates = (date.length == 0 ? [] :
+			[this._restrictMinMax(inst, this._determineDate(inst, date[0], new Date()))]);
+		inst.cursorDate = (date.length == 0 ? new Date() :
+			new Date(inst.dates[0].getTime()));
 		inst.drawMonth = inst.cursorDate.getMonth();
 		inst.drawYear = inst.cursorDate.getFullYear();
-		if (this._get(inst, 'rangeSelect'))
-			inst.dates[1] = (date.length < 1 ? inst.dates[0] :
-				this._restrictMinMax(inst, this._determineDate(inst, date[1], null)));
+		if (this._get(inst, 'rangeSelect')) {
+			if (date.length > 0)
+				inst.dates[1] = (date.length < 1 ? inst.dates[0] :
+					this._restrictMinMax(inst, this._determineDate(inst, date[1], null)));
+		}
 		else if (this._get(inst, 'multiSelect'))
 			for (var i = 1; i < date.length; i++)
 				inst.dates[i] = this._restrictMinMax(inst, this._determineDate(inst, date[i], null));
@@ -1629,7 +1635,8 @@ $.extend(Datepick.prototype, {
 	   @return  (Date or Date[2] or Date[]) the current date or dates
 	            (for a range or multiples) */
 	_getDate: function(inst) {
-		var startDate = (inst.input && inst.input.val() == '' ? null : inst.dates[0]);
+		var startDate = (!inst.inline && inst.input && inst.input.val() == '' ?
+			null : (inst.dates.length ? inst.dates[0] : null));
 		if (this._get(inst, 'rangeSelect'))
 			return (startDate ? [inst.dates[0], inst.dates[1] || inst.dates[0]] : [null, null]);
 		else if (this._get(inst, 'multiSelect'))
