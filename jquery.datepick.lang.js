@@ -1,7 +1,4 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Datepicker localisations for jQuery 4.0.0. */
-
-﻿/* http://keith-wood.name/datepick.html
    Afrikaans localisation for jQuery Datepicker.
    Written by Renier Pretorius. */
 (function($) {
@@ -379,6 +376,35 @@
 	$.datepick.setDefaults($.datepick.regional['eo']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
+   Spanish/Argentina localisation for jQuery Datepicker.
+   Written by Esteban Acosta Villafane (esteban.acosta@globant.com) of Globant (http://www.globant.com). */
+(function($) {
+	$.datepick.regional['es-AR'] = {
+		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+		'Jul','Ago','Sep','Oct','Nov','Dic'],
+		dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+		dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+		dateFormat: 'dd/mm/yyyy', firstDay: 0,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&#x3c;Ant', prevStatus: '',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',
+		nextText: 'Sig&#x3e;', nextStatus: '',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: '',
+		currentText: 'Hoy', currentStatus: '',
+		todayText: 'Hoy', todayStatus: '',
+		clearText: 'Limpiar', clearStatus: '',
+		closeText: 'Cerrar', closeStatus: '',
+		yearStatus: '', monthStatus: '',
+		weekText: 'Sm', weekStatus: '',
+		dayStatus: 'D, M d', defaultStatus: '',
+		isRTL: false
+	};
+	$.datepick.setDefaults($.datepick.regional['es-AR']);
+})(jQuery);
+﻿/* http://keith-wood.name/datepick.html
    Spanish localisation for jQuery Datepicker.
    Traducido por Vester (xvester@gmail.com). */
 (function($) {
@@ -638,6 +664,35 @@
 		isRTL: false
 	};
 	$.datepick.setDefaults($.datepick.regional['gl']);
+})(jQuery);
+﻿/* http://keith-wood.name/datepick.html
+   Gujarati (ગુજરાતી) localisation for jQuery Datepicker.
+   Naymesh Mistry (naymesh@yahoo.com). */
+(function($) {
+	$.datepick.regional['gu'] = {
+		monthNames: ['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન',
+		'જુલાઈ','ઑગસ્ટ','સપ્ટેમ્બર','ઑક્ટોબર','નવેમ્બર','ડિસેમ્બર'],
+		monthNamesShort: ['જાન્યુ','ફેબ્રુ','માર્ચ','એપ્રિલ','મે','જૂન',
+		'જુલાઈ','ઑગસ્ટ','સપ્ટે','ઑક્ટો','નવે','ડિસે'],
+		dayNames: ['રવિવાર','સોમવાર','મંગળવાર','બુધવાર','ગુરુવાર','શુક્રવાર','શનિવાર'],
+		dayNamesShort: ['રવિ','સોમ','મંગળ','બુધ','ગુરુ','શુક્ર','શનિ'],
+		dayNamesMin: ['ર','સો','મં','બુ','ગુ','શુ','શ'],
+		dateFormat: 'dd-M-yyyy', firstDay: 1,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&#x3c;પાછળ', prevStatus: 'પાછલો મહિનો બતાવો',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: 'પાછળ',
+		nextText: 'આગળ&#x3e;', nextStatus: 'આગલો મહિનો બતાવો',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: 'આગળ',
+		currentText: 'આજે', currentStatus: 'આજનો દિવસ બતાવો',
+		todayText: 'આજે', todayStatus: 'આજનો દિવસ',
+		clearText: 'ભૂંસો', clearStatus: 'હાલ પસંદ કરેલી તારીખ ભૂંસો',
+		closeText: 'બંધ કરો', closeStatus: 'તારીખ પસંદ કર્યા વગર બંધ કરો',
+		yearStatus: 'જુદુ વર્ષ બતાવો', monthStatus: 'જુદો મહિનો બતાવો',
+		weekText: 'અઠવાડિયું', weekStatus: 'અઠવાડિયું',
+		dayStatus: 'અઠવાડિયાનો પહેલો દિવસ પસંદ કરો', defaultStatus: 'તારીખ પસંદ કરો',		
+		isRTL: false
+	};
+	$.datepick.setDefaults($.datepick.regional['gu']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Hebrew localisation for jQuery Datepicker.
@@ -1485,7 +1540,37 @@
 	};
 	$.datepick.setDefaults($.datepick.regional['uk']);
 })(jQuery);
-/* http://keith-wood.name/datepick.html
+﻿/* http://keith-wood.name/datepick.html
+   Urdu localisation for jQuery Datepicker.
+   Mansoor Munib -- mansoormunib@gmail.com <http://www.mansoor.co.nr/mansoor.html>
+   Thanks to Habib Ahmed, ObaidUllah Anwar. */
+(function($) {
+	$.datepick.regional['ur'] = {
+		monthNames: ['جنوری','فروری','مارچ','اپریل','مئی','جون',
+		'جولائی','اگست','ستمبر','اکتوبر','نومبر','دسمبر'],
+		monthNamesShort: ['1','2','3','4','5','6',
+		'7','8','9','10','11','12'],
+		dayNames: ['اتوار','پير','منگل','بدھ','جمعرات','جمعہ','ہفتہ'],
+		dayNamesShort: ['اتوار','پير','منگل','بدھ','جمعرات','جمعہ','ہفتہ'],
+		dayNamesMin: ['اتوار','پير','منگل','بدھ','جمعرات','جمعہ','ہفتہ'],
+		dateFormat: 'dd/mm/yyyy', firstDay: 0,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&#x3c;گذشتہ', prevStatus: 'ماه گذشتہ',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: 'برس گذشتہ',
+		nextText: 'آئندہ&#x3e;', nextStatus: 'ماه آئندہ',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: 'برس آئندہ',
+		currentText: 'رواں', currentStatus: 'ماه رواں',
+		todayText: 'آج', todayStatus: 'آج',
+		clearText: 'حذف تاريخ', clearStatus: 'کریں حذف تاریخ',
+		closeText: 'کریں بند', closeStatus: 'کیلئے کرنے بند',
+		yearStatus: 'برس تبدیلی', monthStatus: 'ماه تبدیلی',
+		weekText: 'ہفتہ', weekStatus: 'ہفتہ',
+		dayStatus: 'انتخاب D, M d', defaultStatus: 'کریں منتخب تاريخ',
+		isRTL: true
+	};
+	$.datepick.setDefaults($.datepick.regional['ur']);
+})(jQuery);
+﻿/* http://keith-wood.name/datepick.html
    Vietnamese localisation for jQuery Datepicker.
    Translated by Le Thanh Huy (lthanhhuy@cit.ctu.edu.vn). */
 (function($) {

@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Date picker for jQuery v4.0.0.
+   Date picker for jQuery v4.0.1.
    Written by Keith Wood (kbwood{at}iinet.com.au) February 2010.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -1569,7 +1569,7 @@ $.extend(Datepicker.prototype, {
 	retrieveDate: function(target, elem) {
 		var inst = $.data(target, this.dataName);
 		return (!inst ? null : this._normaliseDate(
-			new Date(parseInt(elem.className.replace(/^.*dp(\d+).*$/, '$1'), 10))));
+			new Date(parseInt(elem.className.replace(/^.*dp(-?\d+).*$/, '$1'), 10))));
 	},
 
 	/* Select a date for this datepicker.
@@ -1670,6 +1670,13 @@ $.extend(Datepicker.prototype, {
 				renderer.commandLinkClass);
 		}
 		picker = $(picker);
+		if (monthsToShow[1] > 1) {
+			var count = 0;
+			$(renderer.monthSelector, picker).each(function() {
+				var nth = ++count % monthsToShow[1];
+				$(this).addClass(nth == 1 ? 'first' : (nth == 0 ? 'last' : ''));
+			});
+		}
 		// Add datepicker behaviour
 		var self = this;
 		picker.find(renderer.daySelector + ' a').hover(
@@ -1733,7 +1740,11 @@ $.extend(Datepicker.prototype, {
 		}
 		// Resize
 		$('body').append(picker);
-		picker.width(monthsToShow[1] * picker.find(renderer.monthSelector).outerWidth());
+		var width = 0;
+		picker.find(renderer.monthSelector).each(function() {
+			width += $(this).outerWidth();
+		});
+		picker.width(width / monthsToShow[0]);
 		// Pre-show customisation
 		var onShow = inst.get('onShow');
 		if (onShow) {
@@ -1816,7 +1827,7 @@ $.extend(Datepicker.prototype, {
 					dateInfo.content || drawDate.getDate() : '&nbsp;') +
 					(selectable ? '</a>' : '</span>'));
 				$.datepick.add(drawDate, 1, 'd');
-				ts += this._msPerDay;
+				ts = drawDate.getTime();
 			}
 			weeks += this._prepare(renderer.week, inst).replace(/\{days\}/g, days).
 				replace(/\{weekOfYear\}/g, weekOfYear);
