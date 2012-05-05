@@ -14,7 +14,7 @@
 		monthNamesShort: ['Sau','Vas','Kov','Bal','Geg','Bir',
 		'Lie','Rugp','Rugs','Spa','Lap','Gru'],
 		monthStatus: '', yearStatus: '',
-		weekHeader: '', weekStatus: '',
+		weekHeader: 'Wk', weekStatus: '',
 		dayNames: ['sekmadienis','pirmadienis','antradienis','trečiadienis','ketvirtadienis','penktadienis','šeštadienis'],
 		dayNamesShort: ['sek','pir','ant','tre','ket','pen','šeš'],
 		dayNamesMin: ['Se','Pr','An','Tr','Ke','Pe','Še'],

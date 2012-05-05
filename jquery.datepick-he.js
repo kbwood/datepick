@@ -14,7 +14,7 @@
 		monthNamesShort: ['1','2','3','4','5','6',
 		'7','8','9','10','11','12'],
 		monthStatus: '', yearStatus: '',
-		weekHeader: 'Sm', weekStatus: '',
+		weekHeader: 'Wk', weekStatus: '',
 		dayNames: ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'],
 		dayNamesShort: ['א\'','ב\'','ג\'','ד\'','ה\'','ו\'','שבת'],
 		dayNamesMin: ['א\'','ב\'','ג\'','ד\'','ה\'','ו\'','שבת'],

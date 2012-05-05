@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker for jQuery 3.7.0.
+   Datepicker for jQuery 3.7.1.
    Written by Marc Grabanski (m@marcgrabanski.com) and
               Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -70,6 +70,7 @@ function Datepick() {
 		alignment: 'bottom', // Alignment of popup - with nominated corner of input:
 			// 'top' or 'bottom' aligns depending on language direction,
 			// 'topLeft', 'topRight', 'bottomLeft', 'bottomRight'
+		autoSize: false, // True to size the input for the date format, false to leave as is
 		defaultDate: null, // Used when field is blank: actual date,
 			// +/-number for offset from today, null for today
 		showDefault: false, // True to populate field with the default date
@@ -212,7 +213,7 @@ $.extend(Datepick.prototype, {
 	   @param  target  (jQuery) the target input field or division or span
 	   @param  inline  (boolean) true if this datepicker appears inline */
 	_newInst: function(target, inline) {
-		var id = target[0].id.replace(/([:\[\]\.])/g, '\\\\$1'); // Escape jQuery meta chars
+		var id = target[0].id.replace(/([:\[\]\.\$])/g, '\\\\$1'); // Escape jQuery meta chars
 		return {id: id, input: target, // Associated target
 			cursorDate: this._daylightSavingAdjust(new Date()), // Current position
 			drawMonth: 0, drawYear: 0, // Month being drawn
@@ -265,7 +266,35 @@ $.extend(Datepick.prototype, {
 			inst.dates = [this._getDefaultDate(inst)];
 			this._showDate(inst);
 		}
+		this._autoSize(inst);
 		$.data(target, PROP_NAME, inst);
+	},
+
+	/* Apply the maximum length for the date format.
+	   @param  inst  (object) the instance settings for this datepicker */
+	_autoSize: function(inst) {
+		if (this._get(inst, 'autoSize') && !inst.inline) {
+			var date = new Date(2009, 12 - 1, 20); // Ensure double digits
+			var dateFormat = this._get(inst, 'dateFormat');
+			if (dateFormat.match(/[DM]/)) {
+				var findMax = function(names) {
+					var max = 0;
+					var maxI = 0;
+					for (var i = 0; i < names.length; i++) {
+						if (names[i].length > max) {
+							max = names[i].length;
+							maxI = i;
+						}
+					}
+					return maxI;
+				};
+				date.setMonth(findMax(this._get(inst, (dateFormat.match(/MM/) ?
+					'monthNames' : 'monthNamesShort'))));
+				date.setDate(findMax(this._get(inst, (dateFormat.match(/DD/) ?
+					'dayNames' : 'dayNamesShort'))) + 20 - date.getDay());
+			}
+			inst.input.attr('size', this._formatDate(inst, date).length);
+		}
 	},
 
 	/* Attach an inline date picker to a div.
@@ -455,6 +484,7 @@ $.extend(Datepick.prototype, {
 			}
 			var dates = this._getDateDatepick(target);
 			extendRemove(inst.settings, settings);
+			this._autoSize(inst);
 			extendRemove(inst, {dates: []});
 			var blank = (!dates || isArray(dates));
 			if (isArray(dates))
@@ -1515,7 +1545,8 @@ $.extend(Datepick.prototype, {
 			catch (e) {
 				// Ignore
 			}
-			var date = new Date();
+			var date = (offset.toLowerCase().match(/^c/) ?
+				$.datepick._getDate(inst) : null) || new Date();
 			var year = date.getFullYear();
 			var month = date.getMonth();
 			var day = date.getDate();
@@ -1577,8 +1608,7 @@ $.extend(Datepick.prototype, {
 		var clear = (date.length == 0);
 		var origMonth = inst.cursorDate.getMonth();
 		var origYear = inst.cursorDate.getFullYear();
-		inst.dates = [];
-		inst.dates[0] = this._restrictMinMax(inst, this._determineDate(inst, date[0], new Date()));
+		inst.dates = [this._restrictMinMax(inst, this._determineDate(inst, date[0], new Date()))];
 		inst.cursorDate = new Date(inst.dates[0].getTime());
 		inst.drawMonth = inst.cursorDate.getMonth();
 		inst.drawYear = inst.cursorDate.getFullYear();
@@ -1847,7 +1877,7 @@ $.extend(Datepick.prototype, {
 	_generateMonthYearHeader: function(inst, drawMonth, drawYear, minDate, maxDate,
 			cursorDate, secondary, useTR, showStatus, initStatus, monthNames) {
 		var minDraw = this._daylightSavingAdjust(new Date(drawYear, drawMonth, 1));
-		minDate = (minDate < minDraw ? minDate : minDraw);
+		minDate = (minDate && minDraw < minDate ? minDraw : minDate);
 		var changeMonth = this._get(inst, 'changeMonth');
 		var changeYear = this._get(inst, 'changeYear');
 		var showMonthAfterYear = this._get(inst, 'showMonthAfterYear');

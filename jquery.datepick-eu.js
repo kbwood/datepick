@@ -14,7 +14,7 @@
 		monthNamesShort: ['Urt','Ots','Mar','Api','Mai','Eka',
 		'Uzt','Abu','Ira','Urr','Aza','Abe'],
 		monthStatus: '', yearStatus: '',
-		weekHeader: '??', weekStatus: '',
+		weekHeader: 'Wk', weekStatus: '',
 		dayNames: ['Igandea','Astelehena','Asteartea','Asteazkena','Osteguna','Ostirala','Larunbata'],
 		dayNamesShort: ['Iga','Ast','Ast','Ast','Ost','Ost','Lar'],
 		dayNamesMin: ['Ig','As','As','As','Os','Os','La'],
