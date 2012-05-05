@@ -4,8 +4,8 @@
 	$.datepick.regional['sr-SR'] = {
 		clearText: 'Obriši', clearStatus: 'Obriši trenutni datum',
 		closeText: 'Zatvori', closeStatus: 'Zatvori kalendar',
-		prevText: '&#x3c;', prevStatus: 'Prikaži predhodni mesec',
-		prevBigText: '&#x3c;&#x3c;', prevBigStatus: 'Prikaži predhodnu godinu',
+		prevText: '&#x3c;', prevStatus: 'Prikaži prethodni mesec',
+		prevBigText: '&#x3c;&#x3c;', prevBigStatus: 'Prikaži prethodnu godinu',
 		nextText: '&#x3e;', nextStatus: 'Prikaži sledeći mesec',
 		nextBigText: '&#x3e;&#x3e;', nextBigStatus: 'Prikaži sledeću godinu',
 		currentText: 'Danas', currentStatus: 'Tekući mesec',

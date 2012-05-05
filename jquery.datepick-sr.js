@@ -4,9 +4,9 @@
 	$.datepick.regional['sr'] = {
 		clearText: 'Обриши', clearStatus: 'Обриши тренутни датум',
 		closeText: 'Затвори', closeStatus: 'Затвори календар',
-		prevText: '&#x3c;', prevStatus: 'Прикажи предходни месец',
-		prevBigText: '&#x3c;&#x3c;', prevBigStatus: 'Прикажи предходну годину',
-		nextText: '&#x3e;', nextStatus: 'Прикажи слецећи месец',
+		prevText: '&#x3c;', prevStatus: 'Прикажи претходни месец',
+		prevBigText: '&#x3c;&#x3c;', prevBigStatus: 'Прикажи претходну годину',
+		nextText: '&#x3e;', nextStatus: 'Прикажи следећи месец',
 		nextBigText: '&#x3e;&#x3e;', nextBigStatus: 'Прикажи следећу годину',
 		currentText: 'Данас', currentStatus: 'Текући месец',
 		monthNames: ['Јануар','Фебруар','Март','Април','Мај','Јун',
