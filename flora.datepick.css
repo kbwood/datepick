@@ -1,4 +1,4 @@
-/* Flora style sheet for jQuery date picker v3.7.3. */
+/* Flora style sheet for jQuery date picker v3.7.4. */
 #datepick-div, .datepick-inline {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 14px;
@@ -15,7 +15,7 @@
 .datepick-inline {
 	float: left;
 	display: block;
-	border: 0;
+	border: 1px solid #FF9900;
 }
 .datepick-rtl {
 	direction: rtl;
@@ -116,6 +116,7 @@ img.datepick-trigger {
 .datepick a {
 	display: block;
 	width: 100%;
+	color: #000;
 }
 .datepick-title-row {
 	background: #B1DB87;
@@ -158,7 +159,7 @@ img.datepick-trigger {
 .datepick-today {
 	background: #B1DB87;
 }
-.datepick-current-day {
+.datepick-current-day, .datepick-current-day a {
 	background: #83C948;
 	color: #fff;
 }

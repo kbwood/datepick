@@ -1,4 +1,4 @@
-/* Smoothness style sheet for jQuery date picker v3.7.3. */
+/* Smoothness style sheet for jQuery date picker v3.7.4. */
 #datepick-div, .datepick-inline {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 14px;
@@ -16,7 +16,7 @@
 .datepick-inline {
 	float: left;
 	display: block;
-	border: 0;
+	border: 1px solid #aaa;
 }
 .datepick-rtl {
 	direction: rtl;
@@ -114,6 +114,7 @@ img.datepick-trigger {
 .datepick a {
 	display: block;
 	width: 100%;
+	color: #222;
 }
 .datepick-title-row th {
 	text-align: center;

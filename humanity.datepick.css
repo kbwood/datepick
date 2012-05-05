@@ -1,4 +1,4 @@
-/* Humanity style sheet for jQuery date picker v3.7.3. */
+/* Humanity style sheet for jQuery date picker v3.7.4. */
 #datepick-div, .datepick-inline {
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 14px;
@@ -16,7 +16,7 @@
 .datepick-inline {
 	float: left;
 	display: block;
-	border: 0;
+	border: 1px solid #e0cfc2;
 }
 .datepick-rtl {
 	direction: rtl;
@@ -107,6 +107,7 @@ img.datepick-trigger {
 }
 .datepick a {
 	display: block;
+	color: #1e1b1c;
 }
 .datepick-title-row th {
 	text-align: center;

@@ -1,5 +1,5 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker for jQuery 3.7.3.
+   Datepicker for jQuery 3.7.4.
    Written by Marc Grabanski (m@marcgrabanski.com) and
               Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -394,7 +394,8 @@ $.extend(Datepick.prototype, {
 		var useTR = this._get(inst, 'useThemeRoller') ? 1 : 0;
 		if (inst.inline)
 			$target.children('.' + this._disableClass[useTR]).remove().end().
-				find('select').attr('disabled', '');
+				find('select').attr('disabled', '').end().
+				find('a').attr('href', 'javascript:void(0)');
 		else {
 			target.disabled = false;
 			inst.siblings.filter('button.' + this._triggerClass[useTR]).
@@ -425,10 +426,11 @@ $.extend(Datepick.prototype, {
 				}
 			});
 			$target.prepend('<div class="' + this._disableClass[useTR] + '" style="' +
-				'width: ' + inline.width() + 'px; height: ' + inline.height() +
+				'width: ' + inline.outerWidth() + 'px; height: ' + inline.outerHeight() +
 				'px; left: ' + (offset.left - relOffset.left) +
 				'px; top: ' + (offset.top - relOffset.top) + 'px;"></div>').
-				find('select').attr('disabled', 'disabled');
+				find('select').attr('disabled', 'disabled').end().
+				find('a').removeAttr('href');
 		}
 		else {
 			target.disabled = true;
@@ -1110,9 +1112,7 @@ $.extend(Datepick.prototype, {
 		else
 			inst.dates = [date];
 		this._updateInput(id, true);
-		if (inst.stayOpen)
-			this._updateDatepick(inst);
-		else if ((rangeSelect || multiSelect) && inst.inline)
+		if (inst.stayOpen || inst.inline)
 			this._updateDatepick(inst);
 		return false;
 	},
@@ -1861,7 +1861,8 @@ $.extend(Datepick.prototype, {
 							' onclick="jQuery.datepick._selectDay(this,\'#' + // Select
 							inst.id + '\',' + printDate.getTime() + ')"') + '>' +
 							(empty ? '&#xa0;' : // Not showing other months
-							(unselectable ? printDate.getDate() : '<a>' + printDate.getDate() + '</a>')) + '</td>';
+							(unselectable ? printDate.getDate() : '<a href="javascript:void(0)">' +
+							printDate.getDate() + '</a>')) + '</td>';
 						printDate.setDate(printDate.getDate() + 1);
 						printDate = this._daylightSavingAdjust(printDate);
 					}
