@@ -1,17 +1,17 @@
-/* http://keith-wood.name/datepick.html
-   Datepicker Validation extension for jQuery 3.7.5.
-   Requires J�rn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
+﻿/* http://keith-wood.name/datepick.html
+   Datepicker Validation extension for jQuery 4.0.0.
+   Requires Jörn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
    Written by Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
-   Please attribute the authors if you use it. */
+   Please attribute the author if you use it. */
 
 (function($) { // Hide the namespace
 
 /* Add validation methods if validation plugin available. */
 if ($.fn.validate) {
 
-	$.datepick._selectDate2 = $.datepick._selectDate;
+	$.datepick.selectDateOrig = $.datepick.selectDate;
 	
 	$.extend($.datepick.regional[''], {
 		validateDate: 'Please enter a valid date',
@@ -25,21 +25,26 @@ if ($.fn.validate) {
 	$.extend($.datepick, {
 
 		/* Trigger a validation after updating the input field with the selected date.
-		   @param  id       (string) the ID of the target field
-		   @param  dateStr  (string) the chosen date */
-		_selectDate: function(id, dateStr) {
-			this._selectDate2(id, dateStr);
-			var inst = this._getInst($(id)[0]);
-			if (!inst.inline && $.fn.validate)
-				$(id).parents('form').validate().element(id);
+		   @param  target  (element) the control to examine
+		   @param  elem    (element) the selected datepicker element */
+		selectDate: function(target, elem) {
+			this.selectDateOrig(target, elem);
+			var inst = $.data(target, $.datepick.dataName);
+			if (!inst.inline && $.fn.validate) {
+				var validation = $(target).parents('form').validate();
+				if (validation) {
+					validation.element('#' + target.id);
+				}
+			}
 		},
 
 		/* Correct error placement for validation errors - after any trigger.
 		   @param  error    (jQuery) the error message
 		   @param  element  (jQuery) the field in error */
 		errorPlacement: function(error, element) {
-			var trigger = element.next('.' + $.datepick._triggerClass);
-			error.insertAfter(trigger.length > 0 ? trigger : element);
+			var inst = $.data(element[0], $.datepick.dataName);
+			error[inst.get('isRTL') ? 'insertBefore' : 'insertAfter'](
+				inst.trigger.length > 0 ? inst.trigger : element);
 		},
 
 		/* Format a validation error message involving dates.
@@ -47,12 +52,12 @@ if ($.fn.validate) {
 		   @param  params  (Date[]) the dates
 		   @return  (string) the formatted message */
 		errorFormat: function(source, params) {
-			var format = ($.datepick._curInst ?
-				$.datepick._get($.datepick._curInst, 'dateFormat') :
+			var format = ($.datepick.curInst ?
+				$.datepick.curInst.get('dateFormat') :
 				$.datepick._defaults.dateFormat);
-			$.each(params, function(i, v) {
-				source = source.replace(new RegExp('\\{' + i + '\\}', 'g'),
-					$.datepick.formatDate(format, v) || 'nothing');
+			$.each(params, function(index, value) {
+				source = source.replace(new RegExp('\\{' + index + '\\}', 'g'),
+					$.datepick.formatDate(format, value) || 'nothing');
 			});
 			return source;
 		}
@@ -64,21 +69,22 @@ if ($.fn.validate) {
 	   @param  test     (function) the validation to apply
 	   @return  (boolean) true if OK, false if failed validation */
 	function validateEach(value, element, test) {
-		var inst = $.datepick._getInst(element);
-		var rangeSelect = $.datepick._get(inst, 'rangeSelect');
-		var multiSelect = $.datepick._get(inst, 'multiSelect');
-		var dates = (rangeSelect ? value.split($.datepick._get(inst, 'rangeSeparator')) :
-			multiSelect ? value.split($.datepick._get(inst, 'multiSeparator')) : [value]);
-		var ok = (rangeSelect && dates.length == 2) ||
-			(multiSelect && dates.length <= multiSelect) ||
-			(!rangeSelect && !multiSelect && dates.length == 1);
+		var inst = $.data(element, $.datepick.dataName);
+		var rangeSelect = inst.get('rangeSelect');
+		var multiSelect = inst.get('multiSelect');
+		var dates = (multiSelect ? value.split(inst.get('multiSeparator')) :
+			(rangeSelect ? value.split(inst.get('rangeSeparator')) : [value]));
+		var ok = (multiSelect && dates.length <= multiSelect) ||
+			(!multiSelect && rangeSelect && dates.length == 2) ||
+			(!multiSelect && !rangeSelect && dates.length == 1);
 		if (ok) {
 			try {
-				var dateFormat = $.datepick._get(inst, 'dateFormat');
-				var config = $.datepick._getFormatConfig(inst);
+				var dateFormat = inst.get('dateFormat');
+				var onDate = inst.get('onDate');
 				$.each(dates, function(i, v) {
-					dates[i] = $.datepick.parseDate(dateFormat, v, config);
-					ok = ok && test(dates[i]);
+					dates[i] = $.datepick.parseDate(dateFormat, v);
+					var dateInfo = (onDate ? onDate.apply(element, [dates[i], true]) : {});
+					ok = ok && test(dates[i]) && dateInfo.selectable != false;
 				});
 			}
 			catch (e) {
@@ -101,11 +107,11 @@ if ($.fn.validate) {
 
 	/* Validate format and against a minimum date. */
 	$.validator.addMethod('dpMinDate', function(value, element, params) {
-			var inst = $.datepick._getInst(element);
-			params[0] = $.datepick._determineDate(inst, $.datepick._get(inst, 'minDate'), null);
+			var inst = $.data(element, $.datepick.dataName);
+			params[0] = inst.get('minDate');
 			return this.optional(element) ||
 				validateEach(value, element, function(date) {
-					return (!date || !params[0] || date >= params[0]);
+					return (!date || !params[0] || date.getTime() >= params[0].getTime());
 				});
 		}, function(params) {
 			return $.datepick.errorFormat($.datepick._defaults.validateDateMin, params);
@@ -113,11 +119,11 @@ if ($.fn.validate) {
 
 	/* Validate format and against a maximum date. */
 	$.validator.addMethod('dpMaxDate', function(value, element, params) {
-			var inst = $.datepick._getInst(element);
-			params[0] = $.datepick._determineDate(inst, $.datepick._get(inst, 'maxDate'), null);
+			var inst = $.data(element, $.datepick.dataName);
+			params[0] = inst.get('maxDate');
 			return this.optional(element) ||
 				validateEach(value, element, function(date) {
-					return (!date || !params[0] || date <= params[0]);
+					return (!date || !params[0] || date.getTime() <= params[0].getTime());
 				});
 		}, function(params) {
 			return $.datepick.errorFormat($.datepick._defaults.validateDateMax, params);
@@ -125,13 +131,13 @@ if ($.fn.validate) {
 
 	/* Validate format and against minimum/maximum dates. */
 	$.validator.addMethod('dpMinMaxDate', function(value, element, params) {
-			var inst = $.datepick._getInst(element);
-			params[0] = $.datepick._determineDate(inst, $.datepick._get(inst, 'minDate'), null);
-			params[1] = $.datepick._determineDate(inst, $.datepick._get(inst, 'maxDate'), null);
+			var inst = $.data(element, $.datepick.dataName);
+			params[0] = inst.get('minDate');
+			params[1] = inst.get('maxDate');
 			return this.optional(element) ||
 				validateEach(value, element, function(date) {
-					return (!date || ((!params[0] || date >= params[0]) &&
-						(!params[1] || date <= params[1])));
+					return (!date || ((!params[0] || date.getTime() >= params[0].getTime()) &&
+						(!params[1] || date.getTime() <= params[1].getTime())));
 				});
 		}, function(params) {
 			return $.datepick.errorFormat($.datepick._defaults.validateDateMinMax, params);

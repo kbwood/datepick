@@ -1,26 +1,29 @@
-﻿/* Euskarako oinarria 'jQuery date picker' jquery-ko extentsioarentzat */
-/* Karrikas-ek itzulia (karrikas@karrikas.com) */
+﻿/* http://keith-wood.name/datepick.html
+   Basque localisation for jQuery Datepicker.
+   Karrikas-ek itzulia (karrikas@karrikas.com) */
 (function($){
 	$.datepick.regional['eu'] = {
-		clearText: 'X', clearStatus: '',
-		closeText: 'Egina', closeStatus: '',
-		prevText: '&#x3c;Aur', prevStatus: '',
-		prevBigText: '&#x3c;&#x3c;', prevBigStatus: '',
-		nextText: 'Hur&#x3e;', nextStatus: '',
-		nextBigText: '&#x3e;&#x3e;', nextBigStatus: '',
-		currentText: 'Gaur', currentStatus: '',
 		monthNames: ['Urtarrila','Otsaila','Martxoa','Apirila','Maiatza','Ekaina',
 		'Uztaila','Abuztua','Iraila','Urria','Azaroa','Abendua'],
 		monthNamesShort: ['Urt','Ots','Mar','Api','Mai','Eka',
 		'Uzt','Abu','Ira','Urr','Aza','Abe'],
-		monthStatus: '', yearStatus: '',
-		weekHeader: 'Wk', weekStatus: '',
 		dayNames: ['Igandea','Astelehena','Asteartea','Asteazkena','Osteguna','Ostirala','Larunbata'],
 		dayNamesShort: ['Iga','Ast','Ast','Ast','Ost','Ost','Lar'],
 		dayNamesMin: ['Ig','As','As','As','Os','Os','La'],
-		dayStatus: '', dateStatus: 'DD d MM',
-		dateFormat: 'yy/mm/dd', firstDay: 1,
-		initStatus: '', isRTL: false,
-		showMonthAfterYear: false, yearSuffix: ''};
+		dateFormat: 'yyyy/mm/dd', firstDay: 1,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&#x3c;Aur', prevStatus: '',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',
+		nextText: 'Hur&#x3e;', nextStatus: '',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: '',
+		currentText: 'Gaur', currentStatus: '',
+		todayText: 'Gaur', todayStatus: '',
+		clearText: 'X', clearStatus: '',
+		closeText: 'Egina', closeStatus: '',
+		yearStatus: '', monthStatus: '',
+		weekText: 'Wk', weekStatus: '',
+		dayStatus: 'DD d MM', defaultStatus: '',
+		isRTL: false
+	};
 	$.datepick.setDefaults($.datepick.regional['eu']);
 })(jQuery);

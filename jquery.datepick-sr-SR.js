@@ -1,25 +1,29 @@
-﻿/* Serbian i18n for the jQuery UI date picker plugin. */
-/* Written by Dejan Dimić. */
+﻿/* http://keith-wood.name/datepick.html
+   Serbian localisation for jQuery Datepicker.
+   Written by Dejan Dimić. */
 (function($){
 	$.datepick.regional['sr-SR'] = {
-		clearText: 'Obriši', clearStatus: 'Obriši trenutni datum',
-		closeText: 'Zatvori', closeStatus: 'Zatvori kalendar',
-		prevText: '&#x3c;', prevStatus: 'Prikaži prethodni mesec',
-		prevBigText: '&#x3c;&#x3c;', prevBigStatus: 'Prikaži prethodnu godinu',
-		nextText: '&#x3e;', nextStatus: 'Prikaži sledeći mesec',
-		nextBigText: '&#x3e;&#x3e;', nextBigStatus: 'Prikaži sledeću godinu',
-		currentText: 'Danas', currentStatus: 'Tekući mesec',
 		monthNames: ['Januar','Februar','Mart','April','Maj','Jun',
 		'Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'],
-		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Avg','Sep','Okt','Nov','Dec'],
-		monthStatus: 'Prikaži mesece', yearStatus: 'Prikaži godine',
-		weekHeader: 'Sed', weekStatus: 'Sedmica',
+		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
+		'Jul','Avg','Sep','Okt','Nov','Dec'],
 		dayNames: ['Nedelja','Ponedeljak','Utorak','Sreda','Četvrtak','Petak','Subota'],
 		dayNamesShort: ['Ned','Pon','Uto','Sre','Čet','Pet','Sub'],
 		dayNamesMin: ['Ne','Po','Ut','Sr','Če','Pe','Su'],
-		dayStatus: 'Odaberi DD za prvi dan sedmice', dateStatus: '\'Datum\' D, M d',
-		dateFormat: 'dd/mm/yy', firstDay: 1,
-		initStatus: 'Odaberi datum', isRTL: false,
-		showMonthAfterYear: false, yearSuffix: ''};
+		dateFormat: 'dd/mm/yyyy', firstDay: 1,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&#x3c;', prevStatus: 'Prikaži prethodni mesec',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: 'Prikaži prethodnu godinu',
+		nextText: '&#x3e;', nextStatus: 'Prikaži sledeći mesec',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: 'Prikaži sledeću godinu',
+		currentText: 'Danas', currentStatus: 'Tekući mesec',
+		todayText: 'Danas', todayStatus: 'Tekući mesec',
+		clearText: 'Obriši', clearStatus: 'Obriši trenutni datum',
+		closeText: 'Zatvori', closeStatus: 'Zatvori kalendar',
+		yearStatus: 'Prikaži godine', monthStatus: 'Prikaži mesece',
+		weekText: 'Sed', weekStatus: 'Sedmica',
+		dayStatus: '\'Datum\' D, M d', defaultStatus: 'Odaberi datum',
+		isRTL: false
+	};
 	$.datepick.setDefaults($.datepick.regional['sr-SR']);
 })(jQuery);

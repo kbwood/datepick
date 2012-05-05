@@ -1,4 +1,4 @@
-/* ThemeRoller Vader override style sheet for jQuery date picker v3.7.0. */
+/* ThemeRoller Vader override style sheet for jQuery date picker v4.0.0. */
 @import "ui.datepick.css";
 
 .ui-widget-header a,
@@ -9,6 +9,7 @@
 	background-color: #dddddd; /* Set (.ui-state-hover) colours from theme here */
 	color: #000000;
 }
+.ui-widget-header select,
 .ui-widget-header option {
 	background-color: #888888; /* Set (.ui-widget-header) background colour from theme here */
 }

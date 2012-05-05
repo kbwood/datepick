@@ -1,26 +1,29 @@
-﻿/* Inicialización en español para la extensión 'UI date picker' para jQuery. */
-/* Traducido por Vester (xvester@gmail.com). */
+﻿/* http://keith-wood.name/datepick.html
+   Spanish localisation for jQuery Datepicker.
+   Traducido por Vester (xvester@gmail.com). */
 (function($) {
 	$.datepick.regional['es'] = {
-		clearText: 'Limpiar', clearStatus: '',
-		closeText: 'Cerrar', closeStatus: '',
-		prevText: '&#x3c;Ant', prevStatus: '',
-		prevBigText: '&#x3c;&#x3c;', prevBigStatus: '',
-		nextText: 'Sig&#x3e;', nextStatus: '',
-		nextBigText: '&#x3e;&#x3e;', nextBigStatus: '',
-		currentText: 'Hoy', currentStatus: '',
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
 		'Jul','Ago','Sep','Oct','Nov','Dic'],
-		monthStatus: '', yearStatus: '',
-		weekHeader: 'Sm', weekStatus: '',
 		dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
 		dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
 		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-		dayStatus: 'DD', dateStatus: 'D, M d',
-		dateFormat: 'dd/mm/yy', firstDay: 1,
-		initStatus: '', isRTL: false,
-		showMonthAfterYear: false, yearSuffix: ''};
+		dateFormat: 'dd/mm/yyyy', firstDay: 1,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&#x3c;Ant', prevStatus: '',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',
+		nextText: 'Sig&#x3e;', nextStatus: '',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: '',
+		currentText: 'Hoy', currentStatus: '',
+		todayText: 'Hoy', todayStatus: '',
+		clearText: 'Limpiar', clearStatus: '',
+		closeText: 'Cerrar', closeStatus: '',
+		yearStatus: '', monthStatus: '',
+		weekText: 'Sm', weekStatus: '',
+		dayStatus: 'D, M d', defaultStatus: '',
+		isRTL: false
+	};
 	$.datepick.setDefaults($.datepick.regional['es']);
 })(jQuery);

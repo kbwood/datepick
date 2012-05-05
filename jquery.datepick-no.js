@@ -1,26 +1,29 @@
-/* Norwegian initialisation for the jQuery UI date picker plugin. */
-/* Written by Naimdjon Takhirov (naimdjon@gmail.com). */
+/* http://keith-wood.name/datepick.html
+   Norwegian localisation for jQuery Datepicker.
+   Written by Naimdjon Takhirov (naimdjon@gmail.com). */
 (function($) {
 	$.datepick.regional['no'] = {
-		clearText: 'Tøm', clearStatus: '',
-		closeText: 'Lukk', closeStatus: '',
-		prevText: '&laquo;Forrige',  prevStatus: '',
-		prevBigText: '&#x3c;&#x3c;', prevBigStatus: '',
-		nextText: 'Neste&raquo;', nextStatus: '',
-		nextBigText: '&#x3e;&#x3e;', nextBigStatus: '',
-		currentText: 'I dag', currentStatus: '',
 		monthNames: ['Januar','Februar','Mars','April','Mai','Juni',
 		'Juli','August','September','Oktober','November','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mai','Jun',
 		'Jul','Aug','Sep','Okt','Nov','Des'],
-		monthStatus: '', yearStatus: '',
-		weekHeader: 'Uke', weekStatus: '',
 		dayNamesShort: ['Søn','Man','Tir','Ons','Tor','Fre','Lør'],
 		dayNames: ['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'],
 		dayNamesMin: ['Sø','Ma','Ti','On','To','Fr','Lø'],
-		dayStatus: 'DD', dateStatus: 'D, M d',
-		dateFormat: 'yy-mm-dd', firstDay: 0,
-		initStatus: '', isRTL: false,
-		showMonthAfterYear: false, yearSuffix: ''};
+		dateFormat: 'yyyy-mm-dd', firstDay: 0,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&laquo;Forrige',  prevStatus: '',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',
+		nextText: 'Neste&raquo;', nextStatus: '',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: '',
+		currentText: 'I dag', currentStatus: '',
+		todayText: 'I dag', todayStatus: '',
+		clearText: 'Tøm', clearStatus: '',
+		closeText: 'Lukk', closeStatus: '',
+		yearStatus: '', monthStatus: '',
+		weekText: 'Uke', weekStatus: '',
+		dayStatus: 'D, M d', defaultStatus: '',
+		isRTL: false
+	};
 	$.datepick.setDefaults($.datepick.regional['no']);
 })(jQuery);

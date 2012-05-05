@@ -1,26 +1,29 @@
-﻿/* Brazilian initialisation for the jQuery UI date picker plugin. */
-/* Written by Leonildo Costa Silva (leocsilva@gmail.com). */
+﻿/* http://keith-wood.name/datepick.html
+   Brazilian Portuguese localisation for jQuery Datepicker.
+   Written by Leonildo Costa Silva (leocsilva@gmail.com). */
 (function($) {
 	$.datepick.regional['pt-BR'] = {
-		clearText: 'Limpar', clearStatus: '',
-		closeText: 'Fechar', closeStatus: '',
-		prevText: '&#x3c;Anterior', prevStatus: '',
-		prevBigText: '&#x3c;&#x3c;', prevBigStatus: '',
-		nextText: 'Pr&oacute;ximo&#x3e;', nextStatus: '',
-		nextBigText: '&#x3e;&#x3e;', nextBigStatus: '',
-		currentText: 'Hoje', currentStatus: '',
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
 		'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
 		'Jul','Ago','Set','Out','Nov','Dez'],
-		monthStatus: '', yearStatus: '',
-		weekHeader: 'Sm', weekStatus: '',
-		dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sabado'],
-		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
-		dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
-		dayStatus: 'DD', dateStatus: 'D, M d',
-		dateFormat: 'dd/mm/yy', firstDay: 0,
-		initStatus: '', isRTL: false,
-		showMonthAfterYear: false, yearSuffix: ''};
+		dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
+		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+		dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+		dateFormat: 'dd/mm/yyyy', firstDay: 0,
+		renderer: $.datepick.defaultRenderer,
+		prevText: '&#x3c;Anterior', prevStatus: '',
+		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',
+		nextText: 'Pr&oacute;ximo&#x3e;', nextStatus: '',
+		nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: '',
+		currentText: 'Hoje', currentStatus: '',
+		todayText: 'Hoje', todayStatus: '',
+		clearText: 'Limpar', clearStatus: '',
+		closeText: 'Fechar', closeStatus: '',
+		yearStatus: '', monthStatus: '',
+		weekText: 'Sm', weekStatus: '',
+		dayStatus: 'D, M d', defaultStatus: '',
+		isRTL: false
+	};
 	$.datepick.setDefaults($.datepick.regional['pt-BR']);
 })(jQuery);
