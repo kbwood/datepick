@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Datepicker localisations for jQuery 4.0.2. */
+   Datepicker localisations for jQuery 4.0.3. */
 /* http://keith-wood.name/datepick.html
    Afrikaans localisation for jQuery Datepicker.
    Written by Renier Pretorius. */
@@ -1461,7 +1461,7 @@
 (function($) {
 	$.datepick.regional['th'] = {
 		monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
-		'กรกฏาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
+		'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
 		monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.',
 		'ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
 		dayNames: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],

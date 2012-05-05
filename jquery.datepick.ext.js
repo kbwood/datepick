@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Datepicker extensions for jQuery v4.0.2.
+   Datepicker extensions for jQuery v4.0.3.
    Written by Keith Wood (kbwood{at}iinet.com.au) August 2009.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -72,7 +72,8 @@ $.extend($.datepick, {
 	changeFirstDay: function(picker, inst) {
 		var target = $(this);
 		picker.find('th span').each(function() {
-			if (this.parentNode.className.match(/.*datepick-week.*/)) {
+			var parent = $(this).parent();
+			if (parent.is('.datepick-week') || parent.is('.ui-state-hover')) {
 				return;
 			}
 			$('<a href="javascript:void(0)" class="' + this.className +
@@ -128,7 +129,7 @@ $.extend($.datepick, {
 	   @param  inst    (object) the current instance settings */
 	showStatus: function(picker, inst) {
 		var renderer = inst.get('renderer');
-		var isTR = (renderer.selectedClass == 'ui-state-active');
+		var isTR = (renderer.selectedClass == themeRollerRenderer.selectedClass);
 		var defaultStatus = inst.get('defaultStatus') || '&nbsp;';
 		var status = $('<div class="' + (!isTR ? 'datepick-status' :
 			'ui-datepicker-status ui-widget-header ui-helper-clearfix ui-corner-all') + '">' +
@@ -149,7 +150,7 @@ $.extend($.datepick, {
 	monthNavigation: function(picker, inst) {
 		var target = $(this);
 		var renderer = inst.get('renderer');
-		var isTR = (renderer.selectedClass == 'ui-state-active');
+		var isTR = (renderer.selectedClass == themeRollerRenderer.selectedClass);
 		var minDate = inst.curMinDate();
 		var maxDate = inst.get('maxDate');
 		var monthNames = inst.get('monthNames');
@@ -191,13 +192,13 @@ $.extend($.datepick, {
 	},
 
 	/* Select an entire week when clicking on a week number.
-	   Use in conjunction with weekOfYearRenderer.
+	   Use in conjunction with weekOfYearRenderer or themeRollerWeekOfYearRenderer.
 	   Usage: onShow: $.datepick.selectWeek.
 	   @param  picker  (jQuery) the completed datepicker division
 	   @param  inst    (object) the current instance settings */
 	selectWeek: function(picker, inst) {
 		var target = $(this);
-		picker.find('td.datepick-week span').each(function() {
+		picker.find('td.datepick-week span,td.ui-state-hover span').each(function() {
 			$('<a href="javascript:void(0)" class="' +
 					this.className + '" title="Select the entire week">' +
 					$(this).text() + '</a>').
@@ -217,19 +218,20 @@ $.extend($.datepick, {
 	},
 
 	/* Select an entire month when clicking on the week header.
-	   Use in conjunction with weekOfYearRenderer.
+	   Use in conjunction with weekOfYearRenderer or themeRollerWeekOfYearRenderer.
 	   Usage: onShow: $.datepick.selectMonth.
 	   @param  picker  (jQuery) the completed datepicker division
 	   @param  inst    (object) the current instance settings */
 	selectMonth: function(picker, inst) {
 		var target = $(this);
-		picker.find('th.datepick-week').each(function() {
+		picker.find('th.datepick-week span,th.ui-state-hover span').each(function() {
 			$('<a href="javascript:void(0)" title="Select the entire month">' +
 					$(this).text() + '</a>').
 				click(function() {
 					var date = target.datepick('retrieveDate', $(this).parents('table').
-						find('td:not(.datepick-week) *:not(.datepick-other-month)')[0]);
-					var dates = [date.day(1)];
+						find('td:not(.datepick-week):not(.ui-state-hover) ' +
+							'*:not(.datepick-other-month):not(.ui-datepicker-other-month)')[0]);
+					var dates = [date];
 					var dim = $.datepick.daysInMonth(date);
 					for (var i = 1; i < dim; i++) {
 						dates.push(date = $.datepick.add($.datepick.newDate(date), 1, 'd'));
@@ -239,7 +241,7 @@ $.extend($.datepick, {
 					}
 					target.datepick('setDate', dates).datepick('hide');
 				}).
-				appendTo(this);
+				replaceAll(this);
 		});
 	},
 

@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Datepicker Validation extension for jQuery 4.0.2.
+   Datepicker Validation extension for jQuery 4.0.3.
    Requires Jörn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
    Written by Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
@@ -71,9 +71,8 @@ if ($.fn.validate) {
 	/* Apply a validation test to each date provided.
 	   @param  value    (string) the current field value
 	   @param  element  (element) the field control
-	   @param  test     (function) the validation to apply
 	   @return  (boolean) true if OK, false if failed validation */
-	function validateEach(value, element, test) {
+	function validateEach(value, element) {
 		var inst = $.data(element, $.datepick.dataName);
 		var rangeSelect = inst.get('rangeSelect');
 		var multiSelect = inst.get('multiSelect');
@@ -85,11 +84,10 @@ if ($.fn.validate) {
 		if (ok) {
 			try {
 				var dateFormat = inst.get('dateFormat');
-				var onDate = inst.get('onDate');
+				var dp = $(element);
 				$.each(dates, function(i, v) {
 					dates[i] = $.datepick.parseDate(dateFormat, v);
-					var dateInfo = (onDate ? onDate.apply(element, [dates[i], true]) : {});
-					ok = ok && test(dates[i]) && dateInfo.selectable != false;
+					ok = ok && (!dates[i] || dp.datepick('isSelectable', dates[i]));
 				});
 			}
 			catch (e) {
@@ -104,8 +102,7 @@ if ($.fn.validate) {
 
 	/* Validate basic date format. */
 	$.validator.addMethod('dpDate', function(value, element) {
-			return this.optional(element) ||
-				validateEach(value, element, function(date) { return true; });
+			return this.optional(element) || validateEach(value, element);
 		}, function(params) {
 			return $.datepick._defaults.validateDate;
 		});
@@ -114,10 +111,7 @@ if ($.fn.validate) {
 	$.validator.addMethod('dpMinDate', function(value, element, params) {
 			var inst = $.data(element, $.datepick.dataName);
 			params[0] = inst.get('minDate');
-			return this.optional(element) ||
-				validateEach(value, element, function(date) {
-					return (!date || !params[0] || date.getTime() >= params[0].getTime());
-				});
+			return this.optional(element) || validateEach(value, element);
 		}, function(params) {
 			return $.datepick.errorFormat($.datepick._defaults.validateDateMin, params);
 		});
@@ -126,10 +120,7 @@ if ($.fn.validate) {
 	$.validator.addMethod('dpMaxDate', function(value, element, params) {
 			var inst = $.data(element, $.datepick.dataName);
 			params[0] = inst.get('maxDate');
-			return this.optional(element) ||
-				validateEach(value, element, function(date) {
-					return (!date || !params[0] || date.getTime() <= params[0].getTime());
-				});
+			return this.optional(element) || validateEach(value, element);
 		}, function(params) {
 			return $.datepick.errorFormat($.datepick._defaults.validateDateMax, params);
 		});
@@ -139,11 +130,7 @@ if ($.fn.validate) {
 			var inst = $.data(element, $.datepick.dataName);
 			params[0] = inst.get('minDate');
 			params[1] = inst.get('maxDate');
-			return this.optional(element) ||
-				validateEach(value, element, function(date) {
-					return (!date || ((!params[0] || date.getTime() >= params[0].getTime()) &&
-						(!params[1] || date.getTime() <= params[1].getTime())));
-				});
+			return this.optional(element) || validateEach(value, element);
 		}, function(params) {
 			return $.datepick.errorFormat($.datepick._defaults.validateDateMinMax, params);
 		});

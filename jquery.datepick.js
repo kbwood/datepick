@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Date picker for jQuery v4.0.2.
+   Date picker for jQuery v4.0.3.
    Written by Keith Wood (kbwood{at}iinet.com.au) February 2010.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -27,12 +27,13 @@ function Datepicker() {
 		monthsOffset: 0, // How many months to offset the primary month by
 		monthsToStep: 1, // How many months to move when prev/next clicked
 		monthsToJump: 12, // How many months to move when large prev/next clicked
+		useMouseWheel: true, // True to use mousewheel if available, false to never use it
 		changeMonth: true, // True to change month/year via drop-down, false for navigation only
 		yearRange: 'c-10:c+10', // Range of years to show in drop-down: 'any' for direct text entry
 			// or 'start:end', where start/end are '+-nn' for relative to today
 			// or 'c+-nn' for relative to the currently selected date
 			// or 'nnnn' for an absolute year
-		shortYearCutoff: '+10', // Cutoff for two-digit year in the curretn century
+		shortYearCutoff: '+10', // Cutoff for two-digit year in the current century
 		showOtherMonths: false, // True to show dates from other months, false to not show them
 		selectOtherMonths: false, // True to allow selection of dates from other months too
 		defaultDate: null, // Date to show if no other selected
@@ -799,6 +800,9 @@ $.extend(Datepicker.prototype, {
 		inst.settings = $.extend({}, settings || {}, inlineSettings || {});
 		if (inst.inline) {
 			this._update(target[0]);
+			if ($.fn.mousewheel) {
+				target.mousewheel(this._doMouseWheel);
+			}
 		}
 		else {
 			this._attachments(target, inst);
@@ -877,6 +881,10 @@ $.extend(Datepicker.prototype, {
 					}
 				}));
 		this._autoSize(target, inst);
+		var dates = this._extractDates(inst, target.val());
+		if (dates) {
+			this.setDate(target[0], dates, null, true);
+		}
 		if (inst.get('selectDefaultDate') && inst.get('defaultDate') &&
 				inst.selectedDates.length == 0) {
 			this.setDate(target[0], $.datepick.newDate(inst.get('defaultDate') || $.datepick.today()));
@@ -922,7 +930,10 @@ $.extend(Datepicker.prototype, {
 			inst.trigger.remove();
 		}
 		target.removeClass(this.markerClass).empty().unbind('.' + this.dataName);
-		if (inst.get('autoSize') && !inst.inline) {
+		if (inst.inline && $.fn.mousewheel) {
+			target.unmousewheel();
+		}
+		if (!inst.inline && inst.get('autoSize')) {
 			target.removeAttr('size');
 		}
 		$.removeData(target[0], this.dataName);
@@ -1118,6 +1129,9 @@ $.extend(Datepicker.prototype, {
 							left: target.offset().left,
 							top: target.offset().top + target.outerHeight()}).
 						appendTo($(inst.get('popupContainer') || 'body'));
+					if ($.fn.mousewheel) {
+						inst.div.mousewheel(this._doMouseWheel);
+					}
 				}
 				inst.div.html(this._generateContent(target[0], inst));
 				target.focus();
@@ -1414,6 +1428,25 @@ $.extend(Datepicker.prototype, {
 		return true;
 	},
 
+	/* Increment/decrement month/year on mouse wheel activity.
+	   @param  event  (event) the mouse wheel event
+	   @param  delta  (number) the amount of change */
+	_doMouseWheel: function(event, delta) {
+		var target = ($.datepick.curInst && $.datepick.curInst.target[0]) ||
+			$(event.target).closest('.' + $.datepick.markerClass)[0];
+		if ($.datepick.isDisabled(target)) {
+			return;
+		}
+		var inst = $.data(target, $.datepick.dataName);
+		if (inst.get('useMouseWheel')) {
+			delta = ($.browser.opera ? -delta : delta);
+			delta = (delta < 0 ? -1 : +1);
+			$.datepick.changeMonth(target,
+				-inst.get(event.ctrlKey ? 'monthsToJump' : 'monthsToStep') * delta);
+		}
+		event.preventDefault();
+	},
+
 	/* Clear an input and close a popup datepicker.
 	   @param  target  (element) the control to use */
 	clear: function(target) {
@@ -1498,6 +1531,36 @@ $.extend(Datepicker.prototype, {
 				this._updateInput(target, keyUp);
 			}
 		}
+	},
+
+	/* Determine whether a date is selectable for this datepicker.
+	   @param  target  (element) the control to check
+	   @param  date    (Date or string or number) the date to check
+	   @return  (boolean) true if selectable, false if not */
+	isSelectable: function(target, date) {
+		var inst = $.data(target, this.dataName);
+		if (!inst) {
+			return false;
+		}
+		date = $.datepick.determineDate(date, inst.selectedDates[0] || this.today(), null,
+			inst.get('dateFormat'), inst.getConfig());
+		return this._isSelectable(target, date, inst.get('onDate'),
+			inst.get('minDate'), inst.get('maxDate'));
+	},
+
+	/* Internally determine whether a date is selectable for this datepicker.
+	   @param  target   (element) the control to check
+	   @param  date     (Date) the date to check
+	   @param  onDate   (function or boolean) any onDate callback or callback.selectable
+	   @param  mindate  (Date) the minimum allowed date
+	   @param  maxdate  (Date) the maximum allowed date
+	   @return  (boolean) true if selectable, false if not */
+	_isSelectable: function(target, date, onDate, minDate, maxDate) {
+		var dateInfo = (typeof onDate == 'boolean' ? {selectable: onDate} :
+			(!onDate ? {} : onDate.apply(target, [date, true])));
+		return (dateInfo.selectable != false) &&
+			(!minDate || date.getTime() >= minDate.getTime()) &&
+			(!maxDate || date.getTime() <= maxDate.getTime());
 	},
 
 	/* Perform a named action for a datepicker.
@@ -1807,10 +1870,8 @@ $.extend(Datepicker.prototype, {
 				}
 				var dateInfo = (!onDate ? {} :
 					onDate.apply(target, [drawDate, drawDate.getMonth() + 1 == month]));
-				var selectable = (dateInfo.selectable != false) &&
-					(selectOtherMonths || drawDate.getMonth() + 1 == month) &&
-					(!minDate || drawDate.getTime() >= minDate.getTime()) &&
-					(!maxDate || drawDate.getTime() <= maxDate.getTime());
+				var selectable = (selectOtherMonths || drawDate.getMonth() + 1 == month) &&
+					this._isSelectable(target, drawDate, dateInfo.selectable, minDate, maxDate);
 				days += this._prepare(renderer.day, inst).replace(/\{day\}/g,
 					(selectable ? '<a href="javascript:void(0)"' : '<span') +
 					' class="dp' + ts + ' ' + (dateInfo.dateClass || '') +
@@ -1912,14 +1973,26 @@ $.extend(Datepicker.prototype, {
 				((yearRange[1].match('[+-].*') ? todayYear : 0) + parseInt(yearRange[1], 10)));
 			selector = '<select class="' + this._monthYearClass +
 				'" title="' + inst.get('yearStatus') + '">';
-			var min = $.datepick.add($.datepick.newDate(start + 1, 1, 1), -1, 'd');
-			min = (minDate && minDate.getTime() > min.getTime() ? minDate : min).getFullYear();
-			var max = $.datepick.newDate(end, 1, 1);
-			max = (maxDate && maxDate.getTime() < max.getTime() ? maxDate : max).getFullYear();
-			for (var y = min; y <= max; y++) {
+			start = $.datepick.add($.datepick.newDate(start + 1, 1, 1), -1, 'd');
+			end = $.datepick.newDate(end, 1, 1);
+			var addYear = function(y) {
 				if (y != 0) {
 					selector += '<option value="' + month + '/' + y + '"' +
 						(year == y ? ' selected="selected"' : '') + '>' + y + '</option>';
+				}
+			};
+			if (start.getTime() < end.getTime()) {
+				start = (minDate && minDate.getTime() > start.getTime() ? minDate : start).getFullYear();
+				end = (maxDate && maxDate.getTime() < end.getTime() ? maxDate : end).getFullYear();
+				for (var y = start; y <= end; y++) {
+					addYear(y);
+				}
+			}
+			else {
+				start = (maxDate && maxDate.getTime() < start.getTime() ? maxDate : start).getFullYear();
+				end = (minDate && minDate.getTime() > end.getTime() ? minDate : end).getFullYear();
+				for (var y = start; y >= end; y--) {
+					addYear(y);
 				}
 			}
 			selector += '</select>';
@@ -1978,7 +2051,7 @@ function extendRemove(target, props) {
    @return  (jQuery) for chaining further calls */
 $.fn.datepick = function(options) {
 	var otherArgs = Array.prototype.slice.call(arguments, 1);
-	if ($.inArray(options, ['getDate', 'isDisabled', 'options', 'retrieveDate']) > -1) {
+	if ($.inArray(options, ['getDate', 'isDisabled', 'isSelectable', 'options', 'retrieveDate']) > -1) {
 		return $.datepick[options].apply($.datepick, [this[0]].concat(otherArgs));
 	}
 	return this.each(function() {
