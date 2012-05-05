@@ -1,5 +1,5 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Date picker for jQuery v4.0.5.
+   Date picker for jQuery v4.0.6.
    Written by Keith Wood (kbwood{at}iinet.com.au) February 2010.
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
@@ -24,7 +24,8 @@ function Datepicker() {
 		firstDay: 0, // First day of the week, 0 = Sunday, 1 = Monday, ...
 		calculateWeek: this.iso8601Week, // Calculate week of the year from a date, null for ISO8601
 		monthsToShow: 1, // How many months to show, cols or [rows, cols]
-		monthsOffset: 0, // How many months to offset the primary month by
+		monthsOffset: 0, // How many months to offset the primary month by;
+			// may be a function that takes the date and returns the offset
 		monthsToStep: 1, // How many months to move when prev/next clicked
 		monthsToJump: 12, // How many months to move when large prev/next clicked
 		useMouseWheel: true, // True to use mousewheel if available, false to never use it
@@ -125,12 +126,12 @@ $.extend(Datepicker.prototype, {
 			enabled: function(inst) {
 				var minDate = inst.curMinDate();
 				return (!minDate || $.datepick.add($.datepick.day(
-					$.datepick.add($.datepick.newDate(inst.drawDate),
-					1 - inst.get('monthsToStep') - inst.get('monthsOffset'), 'm'), 1), -1, 'd').
+					$.datepick._applyMonthsOffset($.datepick.add($.datepick.newDate(inst.drawDate),
+					1 - inst.get('monthsToStep'), 'm'), inst), 1), -1, 'd').
 					getTime() >= minDate.getTime()); },
 			date: function(inst) {
-				return $.datepick.day($.datepick.add($.datepick.newDate(inst.drawDate),
-					-inst.get('monthsToStep') - inst.get('monthsOffset'), 'm'), 1); },
+				return $.datepick.day($.datepick._applyMonthsOffset($.datepick.add(
+					$.datepick.newDate(inst.drawDate), -inst.get('monthsToStep'), 'm'), inst), 1); },
 			action: function(inst) {
 				$.datepick.changeMonth(this, -inst.get('monthsToStep')); }
 		},
@@ -139,12 +140,12 @@ $.extend(Datepicker.prototype, {
 			enabled: function(inst) {
 				var minDate = inst.curMinDate();
 				return (!minDate || $.datepick.add($.datepick.day(
-					$.datepick.add($.datepick.newDate(inst.drawDate),
-					1 - inst.get('monthsToJump') - inst.get('monthsOffset'), 'm'), 1), -1, 'd').
+					$.datepick._applyMonthsOffset($.datepick.add($.datepick.newDate(inst.drawDate),
+					1 - inst.get('monthsToJump'), 'm'), inst), 1), -1, 'd').
 					getTime() >= minDate.getTime()); },
 			date: function(inst) {
-				return $.datepick.day($.datepick.add($.datepick.newDate(inst.drawDate),
-					-inst.get('monthsToJump') - inst.get('monthsOffset'), 'm'), 1); },
+				return $.datepick.day($.datepick._applyMonthsOffset($.datepick.add(
+					$.datepick.newDate(inst.drawDate), -inst.get('monthsToJump'), 'm'), inst), 1); },
 			action: function(inst) {
 				$.datepick.changeMonth(this, -inst.get('monthsToJump')); }
 		},
@@ -152,12 +153,12 @@ $.extend(Datepicker.prototype, {
 			keystroke: {keyCode: 34}, // Page down
 			enabled: function(inst) {
 				var maxDate = inst.get('maxDate');
-				return (!maxDate || $.datepick.day($.datepick.add($.datepick.newDate(inst.drawDate),
-					inst.get('monthsToStep') - inst.get('monthsOffset'), 'm'), 1).
+				return (!maxDate || $.datepick.day($.datepick._applyMonthsOffset($.datepick.add(
+					$.datepick.newDate(inst.drawDate), inst.get('monthsToStep'), 'm'), inst), 1).
 					getTime() <= maxDate.getTime()); },
 			date: function(inst) {
-				return $.datepick.day($.datepick.add($.datepick.newDate(inst.drawDate),
-					inst.get('monthsToStep') - inst.get('monthsOffset'), 'm'), 1); },
+				return $.datepick.day($.datepick._applyMonthsOffset($.datepick.add(
+					$.datepick.newDate(inst.drawDate), inst.get('monthsToStep'), 'm'), inst), 1); },
 			action: function(inst) {
 				$.datepick.changeMonth(this, inst.get('monthsToStep')); }
 		},
@@ -165,12 +166,12 @@ $.extend(Datepicker.prototype, {
 			keystroke: {keyCode: 34, ctrlKey: true}, // Ctrl + Page down
 			enabled: function(inst) {
 				var maxDate = inst.get('maxDate');
-				return (!maxDate || $.datepick.day($.datepick.add($.datepick.newDate(inst.drawDate),
-					inst.get('monthsToJump') - inst.get('monthsOffset'), 'm'), 1).
+				return (!maxDate || $.datepick.day($.datepick._applyMonthsOffset($.datepick.add(
+					$.datepick.newDate(inst.drawDate), inst.get('monthsToJump'), 'm'), inst), 1).
 					getTime() <= maxDate.getTime()); },
 			date: function(inst) {
-				return $.datepick.day($.datepick.add($.datepick.newDate(inst.drawDate),
-					inst.get('monthsToJump') - inst.get('monthsOffset'), 'm'), 1); },
+				return $.datepick.day($.datepick._applyMonthsOffset($.datepick.add(
+					$.datepick.newDate(inst.drawDate), inst.get('monthsToJump'), 'm'), inst), 1); },
 			action: function(inst) {
 				$.datepick.changeMonth(this, inst.get('monthsToJump')); }
 		},
@@ -492,8 +493,8 @@ $.extend(Datepicker.prototype, {
 		};
 		// Extract a number from the string value
 		var getNumber = function(match, step) {
-			doubled(match, step);
-			var size = [2, 3, 4, 11, 20]['oy@!'.indexOf(match) + 1];
+			var isDoubled = doubled(match, step);
+			var size = [2, 3, isDoubled ? 4 : 2, 11, 20]['oy@!'.indexOf(match) + 1];
 			var digits = new RegExp('^-?\\d{1,' + size + '}');
 			var num = value.substring(iValue).match(digits);
 			if (!num) {
@@ -643,7 +644,7 @@ $.extend(Datepicker.prototype, {
 		dateSpec = (dateSpec == null ? defaultDate :
 			(typeof dateSpec == 'string' ? offsetString(dateSpec) : (typeof dateSpec == 'number' ?
 			(isNaN(dateSpec) || dateSpec == Infinity || dateSpec == -Infinity ? defaultDate :
-			$.datepick.add($.datepick.today(), dateSpec, 'd')) : $.datepick._normaliseDate(dateSpec))));
+			$.datepick.add($.datepick.today(), dateSpec, 'd')) : $.datepick.newDate(dateSpec))));
 		return dateSpec;
 	},
 
@@ -759,6 +760,18 @@ $.extend(Datepicker.prototype, {
 		return date;
 	},
 
+	/* Apply the months offset value to a date.
+	   @param  date  (Date) the original date
+	   @param  inst  (object) the current instance settings
+	   @return  (Date) the updated date */
+	_applyMonthsOffset: function(date, inst) {
+		var monthsOffset = inst.get('monthsOffset');
+		if ($.isFunction(monthsOffset)) {
+			monthsOffset = monthsOffset.apply(inst.target[0], [date]);
+		}
+		return $.datepick.add(date, -monthsOffset, 'm');
+	},
+
 	/* Attach the datepicker functionality to an input field.
 	   @param  target    (element) the control to affect
 	   @param  settings  (object) the custom options for this instance */
@@ -793,6 +806,9 @@ $.extend(Datepicker.prototype, {
 		var inlineSettings = ($.fn.metadata ? target.metadata() : {});
 		inst.settings = $.extend({}, settings || {}, inlineSettings || {});
 		if (inst.inline) {
+			inst.drawDate = $.datepick._checkMinMax($.datepick.newDate(inst.selectedDates[0] ||
+				inst.get('defaultDate') || $.datepick.today()), inst);
+			inst.prevDate = $.datepick.newDate(inst.drawDate);
 			this._update(target[0]);
 			if ($.fn.mousewheel) {
 				target.mousewheel(this._doMouseWheel);
@@ -1045,11 +1061,13 @@ $.extend(Datepicker.prototype, {
 			showSpeed = (showSpeed == 'normal' && $.ui && $.ui.version >= '1.8' ?
 				'_default' : showSpeed);
 			var postProcess = function() {
-				var borders = $.datepick._getBorders(inst.div);
-				inst.div.find('.' + $.datepick._coverClass). // IE6- only
-					css({left: -borders[0], top: -borders[1],
+				var cover = inst.div.find('.' + $.datepick._coverClass);
+				if (cover.length) {
+					var borders = $.datepick._getBorders(inst.div);
+					cover.css({left: -borders[0], top: -borders[1], // IE6- only
 						width: inst.div.outerWidth() + borders[0],
 						height: inst.div.outerHeight() + borders[1]});
+				}
 			};
 			if ($.effects && $.effects[showAnim]) {
 				var data = inst.div.data(); // Update old effects data
@@ -1694,8 +1712,7 @@ $.extend(Datepicker.prototype, {
 		monthsToShow = ($.isArray(monthsToShow) ? monthsToShow : [1, monthsToShow]);
 		inst.drawDate = this._checkMinMax(
 			inst.drawDate || inst.get('defaultDate') || $.datepick.today(), inst);
-		var drawDate = $.datepick.add(
-			$.datepick.newDate(inst.drawDate), -inst.get('monthsOffset'), 'm');
+		var drawDate = $.datepick._applyMonthsOffset($.datepick.newDate(inst.drawDate), inst);
 		// Generate months
 		var monthRows = '';
 		for (var row = 0; row < monthsToShow[0]; row++) {

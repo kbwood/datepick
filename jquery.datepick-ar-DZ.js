@@ -1,12 +1,10 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Arabic localisation for jQuery Datepicker.
-   Khaled Al Horani -- koko.dw@gmail.com
-   خالد الحوراني -- koko.dw@gmail.com
-   NOTE: monthNames are the original months names and they are the Arabic names, not the new months name فبراير - يناير and there isn't any Arabic roots for these months */
+   Algerian (and Tunisian) Arabic localisation for jQuery Datepicker.
+   Mohamed Cherif BOUCHELAGHEM -- cherifbouchelaghem@yahoo.fr */
 (function($) {
-	$.datepick.regional['ar'] = {
-		monthNames: ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'آذار', 'حزيران',
-		'تموز', 'آب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'],
+	$.datepick.regional['ar-DZ'] = {
+		monthNames: ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان',
+		'جويلية', 'أوت', 'سبتمبر','أكتوبر', 'نوفمبر', 'ديسمبر'],
 		monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
 		dayNames: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
 		dayNamesShort: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
@@ -26,5 +24,5 @@
 		dayStatus: 'اختر D, M d', defaultStatus: 'اختر يوم',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ar']);
+	$.datepick.setDefaults($.datepick.regional['ar-DZ']);
 })(jQuery);
