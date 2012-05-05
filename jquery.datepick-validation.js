@@ -1,12 +1,12 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker Validation extension for jQuery 3.6.0.
+   Datepicker Validation extension for jQuery 3.6.1.
    Requires Jörn Zaefferer's Validation plugin (http://plugins.jquery.com/project/validate).
    Written by Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
    Please attribute the authors if you use it. */
 
-(function($) { // hide the namespace
+(function($) { // Hide the namespace
 
 /* Add validation methods if validation plugin available. */
 if ($.fn.validate) {

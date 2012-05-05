@@ -1,12 +1,12 @@
 /* http://keith-wood.name/datepick.html
-   Datepicker for jQuery 3.6.0.
+   Datepicker for jQuery 3.6.1.
    Written by Marc Grabanski (m@marcgrabanski.com) and
               Keith Wood (kbwood{at}iinet.com.au).
    Dual licensed under the GPL (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt) and 
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
    Please attribute the authors if you use it. */
 
-(function($) { // hide the namespace
+(function($) { // Hide the namespace
 
 var PROP_NAME = 'datepick';
 
@@ -879,9 +879,12 @@ $.extend(Datepick.prototype, {
 		var target = $(id);
 		var inst = this._getInst(target[0]);
 		inst._selectingMonthYear = false;
+		var value = parseInt(select.options[select.selectedIndex].value, 10);
 		inst['selected' + (period == 'M' ? 'Month' : 'Year')] =
-		inst['draw' + (period == 'M' ? 'Month' : 'Year')] =
-			parseInt(select.options[select.selectedIndex].value, 10);
+		inst['draw' + (period == 'M' ? 'Month' : 'Year')] = value;
+		inst.cursorDate.setDate(Math.min(inst.cursorDate.getDate(),
+			$.datepick._getDaysInMonth(inst.drawYear, inst.drawMonth)));
+		inst.cursorDate['set' + (period == 'M' ? 'Month' : 'FullYear')](value);
 		this._notifyChange(inst);
 		this._adjustDate(target);
 	},
@@ -940,7 +943,7 @@ $.extend(Datepick.prototype, {
 			$(td).addClass(this._currentClass);
 		}
 		inst.cursorDate = this._daylightSavingAdjust(new Date(timestamp));
-		var date = new Date(inst.cursorDate.getTime())
+		var date = new Date(inst.cursorDate.getTime());
 		if (rangeSelect && !inst.stayOpen)
 			inst.dates[1] = date;
 		else if (multiSelect) {
@@ -1463,8 +1466,8 @@ $.extend(Datepick.prototype, {
 		inst.drawMonth = inst.cursorDate.getMonth();
 		inst.drawYear = inst.cursorDate.getFullYear();
 		if (this._get(inst, 'rangeSelect'))
-			inst.dates[1] = (!endDate ? inst.dates[0] :
-				this._restrictMinMax(inst, this._determineDate(endDate, null)));
+			inst.dates[1] = (date.length < 1 ? inst.dates[0] :
+				this._restrictMinMax(inst, this._determineDate(date[1], null)));
 		else if (this._get(inst, 'multiSelect'))
 			for (var i = 1; i < date.length; i++)
 				inst.dates[i] = this._restrictMinMax(inst, this._determineDate(date[i], null));
@@ -1707,7 +1710,8 @@ $.extend(Datepick.prototype, {
 	   @return  (string) the HTML for the month and year */
 	_generateMonthYearHeader: function(inst, drawMonth, drawYear, minDate, maxDate,
 			cursorDate, secondary, showStatus, initStatus, monthNames) {
-		minDate = this._getRangeMin(inst) || minDate;
+		var minDraw = this._daylightSavingAdjust(new Date(drawYear, drawMonth, 1));
+		minDate = (minDate < minDraw ? minDate : minDraw);
 		var changeMonth = this._get(inst, 'changeMonth');
 		var changeYear = this._get(inst, 'changeYear');
 		var showMonthAfterYear = this._get(inst, 'showMonthAfterYear');

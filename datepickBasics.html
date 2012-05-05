@@ -4,8 +4,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>jQuery Datepicker</title>
-<script type="text/javascript" src="jquery-1.3.1.js"></script>
-<script type="text/javascript" src="jquery.datepick.js"></script>
+<style type="text/css">
+@import "css/jquery.datepick.css";
+</style>
+<script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="js/jquery.datepick.js"></script>
 <script type="text/javascript">
 $(function() {
 	$('#popupDatepicker').datepick();
@@ -16,7 +19,6 @@ function showDate(date) {
 	alert('The date chosen is ' + date);
 }
 </script>
-<style type="text/css">@import "jquery.datepick.css";</style>
 </head>
 <body>
 <h1>jQuery Datepicker</h1>
