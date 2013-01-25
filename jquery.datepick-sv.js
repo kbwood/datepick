@@ -1,6 +1,6 @@
 ﻿/* http://keith-wood.name/datepick.html
    Swedish localisation for jQuery Datepicker.
-   Written by Anders Ekdahl ( anders@nomadiz.se). */
+   Written by Anders Ekdahl (anders@nomadiz.se). */
 (function($) {
     $.datepick.regional['sv'] = {
         monthNames: ['Januari','Februari','Mars','April','Maj','Juni',
@@ -22,7 +22,7 @@
 		closeText: 'Stäng', closeStatus: '',
 		yearStatus: '', monthStatus: '',
 		weekText: 'Ve', weekStatus: '',
-		dayStatus: 'D, M d', defauktStatus: '',
+		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
     $.datepick.setDefaults($.datepick.regional['sv']);
