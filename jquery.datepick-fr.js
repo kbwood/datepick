@@ -2,7 +2,7 @@
    French localisation for jQuery Datepicker.
    Stéphane Nahmani (sholby@sholby.net). */
 (function($) {
-	$.datepick.regional['fr'] = {
+	$.datepick.regionalOptions['fr'] = {
 		monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
 		'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
 		monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: '\'Choisir\' le DD d MM', defaultStatus: 'Choisir la date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['fr']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fr']);
 })(jQuery);

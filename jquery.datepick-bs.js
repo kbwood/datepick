@@ -2,7 +2,7 @@
    Bosnian localisation for jQuery Datepicker.
    Written by Kenan Konjo. */
 (function($) {
-	$.datepick.regional['bs'] = {
+	$.datepick.regionalOptions['bs'] = {
 		monthNames: ['Januar','Februar','Mart','April','Maj','Juni',
 		'Juli','August','Septembar','Oktobar','Novembar','Decembar'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['bs']);
+	$.datepick.setDefaults($.datepick.regionalOptions['bs']);
 })(jQuery);

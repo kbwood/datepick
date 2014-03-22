@@ -2,7 +2,7 @@
    Portuguese Portuguese localisation for jQuery Datepicker.
    Written by Telmo Martinho (telmomartinho@gmail.com). */
 (function($) {
-	$.datepick.regional['pt'] = {
+	$.datepick.regionalOptions['pt'] = {
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
 		'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD, d \'de\' M \'de\' yyyy', defaultStatus: 'Selecione um dia',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['pt']);
+	$.datepick.setDefaults($.datepick.regionalOptions['pt']);
 })(jQuery);

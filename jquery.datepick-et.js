@@ -2,7 +2,7 @@
    Estonian localisation for jQuery Datepicker.
    Written by Mart Sõmermaa (mrts.pydev at gmail com). */ 
 (function($) {
-	$.datepick.regional['et'] = {
+	$.datepick.regionalOptions['et'] = {
 		monthNames: ['Jaanuar','Veebruar','Märts','Aprill','Mai','Juuni', 
 			'Juuli','August','September','Oktoober','November','Detsember'],
 		monthNamesShort: ['Jaan', 'Veebr', 'Märts', 'Apr', 'Mai', 'Juuni',
@@ -25,5 +25,5 @@
 		dayStatus: '', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['et']);
+	$.datepick.setDefaults($.datepick.regionalOptions['et']);
 })(jQuery);

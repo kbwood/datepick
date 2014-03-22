@@ -2,7 +2,7 @@
    Persian (Farsi) localisation for jQuery Datepicker.
    Javad Mowlanezhad -- jmowla@gmail.com */
 (function($) {
-	$.datepick.regional['fa'] = {
+	$.datepick.regionalOptions['fa'] = {
 		monthNames: ['فروردين','ارديبهشت','خرداد','تير','مرداد','شهريور',
 		'مهر','آبان','آذر','دي','بهمن','اسفند'],
 		monthNamesShort: ['1','2','3','4','5','6',
@@ -25,5 +25,5 @@
 		dayStatus: 'انتخاب D, M d', defaultStatus: 'انتخاب تاريخ',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['fa']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fa']);
 })(jQuery);

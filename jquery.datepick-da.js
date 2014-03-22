@@ -2,7 +2,7 @@
    Danish localisation for jQuery Datepicker.
    Written by Jan Christensen ( deletestuff@gmail.com). */
 (function($) {
-    $.datepick.regional['da'] = {
+    $.datepick.regionalOptions['da'] = {
         monthNames: ['Januar','Februar','Marts','April','Maj','Juni',
         'Juli','August','September','Oktober','November','December'],
         monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Vælg D, M d', defaultStatus: 'Vælg en dato',
 		isRTL: false
 	};
-    $.datepick.setDefaults($.datepick.regional['da']);
+    $.datepick.setDefaults($.datepick.regionalOptions['da']);
 })(jQuery);

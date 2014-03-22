@@ -2,7 +2,7 @@
    Turkish localisation for jQuery Datepicker.
    Written by Izzet Emre Erkan (kara@karalamalar.net). */
 (function($) {
-	$.datepick.regional['tr'] = {
+	$.datepick.regionalOptions['tr'] = {
 		monthNames: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran',
 		'Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
 		monthNamesShort: ['Oca','Şub','Mar','Nis','May','Haz',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d seçiniz', defaultStatus: 'Bir tarih seçiniz',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['tr']);
+	$.datepick.setDefaults($.datepick.regionalOptions['tr']);
 })(jQuery);

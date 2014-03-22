@@ -2,7 +2,7 @@
    Spanish/Argentina localisation for jQuery Datepicker.
    Written by Esteban Acosta Villafane (esteban.acosta@globant.com) of Globant (http://www.globant.com). */
 (function($) {
-	$.datepick.regional['es-AR'] = {
+	$.datepick.regionalOptions['es-AR'] = {
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['es-AR']);
+	$.datepick.setDefaults($.datepick.regionalOptions['es-AR']);
 })(jQuery);

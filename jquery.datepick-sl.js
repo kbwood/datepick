@@ -3,7 +3,7 @@
    Written by Jaka Jancar (jaka@kubje.org). */
 /* c = &#x10D;, s = &#x161; z = &#x17E; C = &#x10C; S = &#x160; Z = &#x17D; */
 (function($) {
-	$.datepick.regional['sl'] = {
+	$.datepick.regionalOptions['sl'] = {
 		monthNames: ['Januar','Februar','Marec','April','Maj','Junij',
 		'Julij','Avgust','September','Oktober','November','December'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -26,5 +26,5 @@
 		dayStatus: 'Izberi DD, d MM yy', defaultStatus: 'Izbira datuma',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sl']);
 })(jQuery);

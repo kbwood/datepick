@@ -2,7 +2,7 @@
    English/New Zealand localisation for jQuery Datepicker.
    Based on en-GB. */
 (function($) {
-	$.datepick.regional['en-NZ'] = {
+	$.datepick.regionalOptions['en-NZ'] = {
 		monthNames: ['January','February','March','April','May','June',
 		'July','August','September','October','November','December'],
 		monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Select DD, M d', defaultStatus: 'Select a date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['en-NZ']);
+	$.datepick.setDefaults($.datepick.regionalOptions['en-NZ']);
 })(jQuery);

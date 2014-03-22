@@ -2,7 +2,7 @@
    Khmer initialisation for jQuery Datepicker.
    Written by Sovichet Tep (sovichet.tep@gmail.com). */
 (function($){
-	$.datepick.regional['km'] = {
+	$.datepick.regionalOptions['km'] = {
 		monthNames: ['ខែ​មករា','ខែ​កុម្ភៈ','ខែ​មិនា','ខែ​មេសា','ខែ​ឧសភា','ខែ​មិថុនា',
 		'ខែ​កក្កដា','ខែ​សីហា','ខែ​កញ្ញា','ខែ​តុលា','ខែ​វិច្ឆិកា','ខែ​ធ្នូ'],
 		monthNamesShort: ['មក', 'កុ', 'មិនា', 'មេ', 'ឧស', 'មិថុ',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['km']);
+	$.datepick.setDefaults($.datepick.regionalOptions['km']);
 });

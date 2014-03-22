@@ -2,7 +2,7 @@
    Slovak localisation for jQuery Datepicker.
    Written by Vojtech Rinik (vojto@hmm.sk). */
 (function($) {
-	$.datepick.regional['sk'] = {
+	$.datepick.regionalOptions['sk'] = {
 		monthNames: ['Január','Február','Marec','Apríl','Máj','Jún',
 		'Júl','August','September','Október','November','December'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Máj','Jún',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sk']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sk']);
 })(jQuery);

@@ -2,7 +2,7 @@
    Korean localisation for jQuery Datepicker.
    Written by DaeKwon Kang (ncrash.dk@gmail.com), Edited by Genie. */
 (function($) {
-	$.datepick.regional['ko'] = {
+	$.datepick.regionalOptions['ko'] = {
 		monthNames: ['1월','2월','3월','4월','5월','6월',
 		'7월','8월','9월','10월','11월','12월'],
 		monthNamesShort: ['1월','2월','3월','4월','5월','6월',
@@ -27,5 +27,5 @@
 		dayStatus: 'M d일 (D)', defaultStatus: '날짜를 선택하세요',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ko']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ko']);
 })(jQuery);

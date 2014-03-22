@@ -2,7 +2,7 @@
    Japanese localisation for jQuery Datepicker.
    Written by Kentaro SATO (kentaro@ranvis.com). */
 (function($) {
-	$.datepick.regional['ja'] = {
+	$.datepick.regionalOptions['ja'] = {
 		monthNames: ['1月','2月','3月','4月','5月','6月',
 		'7月','8月','9月','10月','11月','12月'],
 		monthNamesShort: ['1月','2月','3月','4月','5月','6月',
@@ -27,5 +27,5 @@
 		dayStatus: 'Md日(D)', defaultStatus: '日付を選択します',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ja']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ja']);
 })(jQuery);

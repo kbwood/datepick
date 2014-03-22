@@ -2,7 +2,7 @@
    Romanian localisation for jQuery Datepicker.
    Written by Edmond L. (ll_edmond@walla.com) and Ionut G. Stan (ionut.g.stan@gmail.com). */
 (function($) {
-	$.datepick.regional['ro'] = {
+	$.datepick.regionalOptions['ro'] = {
 		monthNames: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie',
 		'Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
 		monthNamesShort: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Selectează D, M d', defaultStatus: 'Selectează o data',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ro']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ro']);
 })(jQuery);

@@ -2,7 +2,7 @@
    Spanish/Perú localisation for jQuery Datepicker.
    Written by Fischer Tirado (fishdev@globant.com) of ASIX (http://www.asixonline.com). */
 (function($) {
-	$.datepick.regional['es-PE'] = {
+	$.datepick.regionalOptions['es-PE'] = {
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD d, MM yyyy', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['es-PE']);
+	$.datepick.setDefaults($.datepick.regionalOptions['es-PE']);
 })(jQuery);

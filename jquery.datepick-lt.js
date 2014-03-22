@@ -2,7 +2,7 @@
    Lithuanian localisation for jQuery Datepicker.
    Written by Arturas Paleicikas <arturas@avalon.lt> */
 (function($) {
-	$.datepick.regional['lt'] = {
+	$.datepick.regionalOptions['lt'] = {
 		monthNames: ['Sausis','Vasaris','Kovas','Balandis','Gegužė','Birželis',
 		'Liepa','Rugpjūtis','Rugsėjis','Spalis','Lapkritis','Gruodis'],
 		monthNamesShort: ['Sau','Vas','Kov','Bal','Geg','Bir',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['lt']);
+	$.datepick.setDefaults($.datepick.regionalOptions['lt']);
 })(jQuery);

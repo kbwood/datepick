@@ -2,7 +2,7 @@
    Norwegian localisation for jQuery Datepicker.
    Written by Naimdjon Takhirov (naimdjon@gmail.com). */
 (function($) {
-	$.datepick.regional['no'] = {
+	$.datepick.regionalOptions['no'] = {
 		monthNames: ['Januar','Februar','Mars','April','Mai','Juni',
 		'Juli','August','September','Oktober','November','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mai','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['no']);
+	$.datepick.setDefaults($.datepick.regionalOptions['no']);
 })(jQuery);

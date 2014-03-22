@@ -2,7 +2,7 @@
    Serbian localisation for jQuery Datepicker.
    Written by Dejan Dimić. */
 (function($){
-	$.datepick.regional['sr-SR'] = {
+	$.datepick.regionalOptions['sr-SR'] = {
 		monthNames: ['Januar','Februar','Mart','April','Maj','Jun',
 		'Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: '\'Datum\' D, M d', defaultStatus: 'Odaberi datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sr-SR']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sr-SR']);
 })(jQuery);

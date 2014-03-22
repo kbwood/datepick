@@ -2,7 +2,7 @@
    Romansh localisation for jQuery Datepicker.
    Yvonne Gienal (yvonne.gienal@educa.ch). */
 (function($) {
-	$.datepick.regional['rm'] = {
+	$.datepick.regionalOptions['rm'] = {
 		monthNames: ['Schaner','Favrer','Mars','Avrigl','Matg','Zercladur',
 		'Fanadur','Avust','Settember','October','November','December'],
 		monthNamesShort: ['Scha','Fev','Mar','Avr','Matg','Zer',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['rm']);
+	$.datepick.setDefaults($.datepick.regionalOptions['rm']);
 })(jQuery);

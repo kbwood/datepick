@@ -2,7 +2,7 @@
    German localisation for jQuery Datepicker.
    Written by Milian Wolff (mail@milianw.de). */
 (function($) {
-	$.datepick.regional['de'] = {
+	$.datepick.regionalOptions['de'] = {
 		monthNames: ['Januar','Februar','März','April','Mai','Juni',
 		'Juli','August','September','Oktober','November','Dezember'],
 		monthNamesShort: ['Jan','Feb','Mär','Apr','Mai','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Wähle D, M d', defaultStatus: 'Wähle ein Datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['de']);
+	$.datepick.setDefaults($.datepick.regionalOptions['de']);
 })(jQuery);

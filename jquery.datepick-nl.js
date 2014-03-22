@@ -2,7 +2,7 @@
    Dutch localisation for jQuery Datepicker.
    Written by Mathias Bynens <http://mathiasbynens.be/> */
 (function($) {
-	$.datepick.regional['nl'] = {
+	$.datepick.regionalOptions['nl'] = {
 		monthNames: ['januari', 'februari', 'maart', 'april', 'mei', 'juni',
 		'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
 		monthNamesShort: ['jan', 'feb', 'maa', 'apr', 'mei', 'jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'dd-mm-yyyy', defaultStatus: 'Kies een datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['nl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['nl']);
 })(jQuery);

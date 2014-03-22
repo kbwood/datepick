@@ -2,7 +2,7 @@
    Spanish localisation for jQuery Datepicker.
    Traducido por Vester (xvester@gmail.com). */
 (function($) {
-	$.datepick.regional['es'] = {
+	$.datepick.regionalOptions['es'] = {
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['es']);
+	$.datepick.setDefaults($.datepick.regionalOptions['es']);
 })(jQuery);

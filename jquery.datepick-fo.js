@@ -2,7 +2,7 @@
    Faroese localisation for jQuery Datepicker.
    Written by Sverri Mohr Olsen, sverrimo@gmail.com */
 (function($) {
-	$.datepick.regional['fo'] = {
+	$.datepick.regionalOptions['fo'] = {
 		monthNames: ['Januar','Februar','Mars','Apríl','Mei','Juni',
 		'Juli','August','September','Oktober','November','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mei','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Vel DD, M d, yyyy', defaultStatus: 'Vel ein dato',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['fo']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fo']);
 })(jQuery);

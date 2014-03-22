@@ -2,7 +2,7 @@
    Hungarian localisation for jQuery Datepicker.
    Written by Istvan Karaszi (jquery@spam.raszi.hu). */
 (function($) {
-	$.datepick.regional['hu'] = {
+	$.datepick.regionalOptions['hu'] = {
 		monthNames: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június',
 		'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
 		monthNamesShort: ['Jan', 'Feb', 'Már', 'Ápr', 'Máj', 'Jún',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hu']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hu']);
 })(jQuery);

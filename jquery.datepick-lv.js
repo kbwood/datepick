@@ -2,7 +2,7 @@
    Latvian localisation for jQuery Datepicker.
    Written by Arturas Paleicikas <arturas.paleicikas@metasite.net> */
 (function($) {
-	$.datepick.regional['lv'] = {
+	$.datepick.regionalOptions['lv'] = {
 		monthNames: ['Janvāris','Februāris','Marts','Aprīlis','Maijs','Jūnijs',
 		'Jūlijs','Augusts','Septembris','Oktobris','Novembris','Decembris'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mai','Jūn',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['lv']);
+	$.datepick.setDefaults($.datepick.regionalOptions['lv']);
 })(jQuery);

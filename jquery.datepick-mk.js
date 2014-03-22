@@ -4,7 +4,7 @@
    email: hajan [at] live [dot] com
    url: http://weblogs.asp.net/hajan | http://codeasp.net/blogs/hajan | http://mkdot.net/blogs/hajan */
 (function($) {
-	$.datepick.regional['mk'] = {
+	$.datepick.regionalOptions['mk'] = {
 		monthNames: ['Јануари','Февруари','Март','Април','Мај','Јуни',
 		'Јули','Август','Септември','Октомври','Ноември','Декември'],
 		monthNamesShort: ['Јан', 'Фев', 'Мар', 'Апр', 'Мај', 'Јун',
@@ -27,5 +27,5 @@
 		dayStatus: 'Избери DD, M d', defaultStatus: 'Избери датум',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['mk']);
+	$.datepick.setDefaults($.datepick.regionalOptions['mk']);
 })(jQuery);

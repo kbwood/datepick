@@ -2,7 +2,7 @@
    Czech localisation for jQuery Datepicker.
    Written by Tomas Muller (tomas@tomas-muller.net). */
 (function($) {
-	$.datepick.regional['cs'] = {
+	$.datepick.regionalOptions['cs'] = {
 		monthNames: ['leden','únor','březen','duben','květen','červen',
 		'červenec','srpen','září','říjen','listopad','prosinec'],
 		monthNamesShort: ['led','úno','bře','dub','kvě','čer',
@@ -25,5 +25,5 @@
 		dayStatus: '\'Vyber\' DD, M d', defaultStatus: 'Vyberte datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['cs']);
+	$.datepick.setDefaults($.datepick.regionalOptions['cs']);
 })(jQuery);

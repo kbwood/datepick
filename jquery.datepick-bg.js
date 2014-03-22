@@ -2,7 +2,7 @@
    Bulgarian localisation for jQuery Datepicker.
    Written by Stoyan Kyosev (http://svest.org). */
 (function($) {
-	$.datepick.regional['bg'] = {
+	$.datepick.regionalOptions['bg'] = {
 		monthNames: ['Януари','Февруари','Март','Април','Май','Юни',
 		'Юли','Август','Септември','Октомври','Ноември','Декември'],
 		monthNamesShort: ['Яну','Фев','Мар','Апр','Май','Юни',
@@ -25,5 +25,5 @@
 		dayStatus: 'Избери D, M d', defaultStatus: 'Избери дата',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['bg']);
+	$.datepick.setDefaults($.datepick.regionalOptions['bg']);
 })(jQuery);

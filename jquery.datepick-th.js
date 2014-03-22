@@ -2,7 +2,7 @@
    Thai localisation for jQuery Datepicker.
    Written by pipo (pipo@sixhead.com). */
 (function($) {
-	$.datepick.regional['th'] = {
+	$.datepick.regionalOptions['th'] = {
 		monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
 		'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
 		monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['th']);
+	$.datepick.setDefaults($.datepick.regionalOptions['th']);
 })(jQuery);

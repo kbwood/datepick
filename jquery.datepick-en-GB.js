@@ -2,7 +2,7 @@
    English UK localisation for jQuery Datepicker.
    Written by Stuart. */
 (function($) {
-	$.datepick.regional['en-GB'] = {
+	$.datepick.regionalOptions['en-GB'] = {
 		monthNames: ['January','February','March','April','May','June',
 		'July','August','September','October','November','December'],
 		monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Select DD, M d', defaultStatus: 'Select a date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['en-GB']);
+	$.datepick.setDefaults($.datepick.regionalOptions['en-GB']);
 })(jQuery);

@@ -2,7 +2,7 @@
    Malaysian localisation for jQuery Datepicker.
    Written by Mohd Nawawi Mohamad Jamili (nawawi@ronggeng.net). */
 (function($) {
-	$.datepick.regional['ms'] = {
+	$.datepick.regionalOptions['ms'] = {
 		monthNames: ['Januari','Februari','Mac','April','Mei','Jun',
 		'Julai','Ogos','September','Oktober','November','Disember'],
 		monthNamesShort: ['Jan','Feb','Mac','Apr','Mei','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD, d MM', defaultStatus: 'Sila pilih tarikh',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ms']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ms']);
 })(jQuery);

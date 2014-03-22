@@ -2,7 +2,7 @@
    Vietnamese localisation for jQuery Datepicker.
    Translated by Le Thanh Huy (lthanhhuy@cit.ctu.edu.vn). */
 (function($) {
-	$.datepick.regional['vi'] = {
+	$.datepick.regionalOptions['vi'] = {
 		monthNames: ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu',
 		'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'],
 		monthNamesShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
@@ -25,5 +25,5 @@
 		dayStatus: 'Đang chọn DD, \'ngày\' d M', defaultStatus: 'Chọn ngày',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['vi']);
+	$.datepick.setDefaults($.datepick.regionalOptions['vi']);
 })(jQuery);

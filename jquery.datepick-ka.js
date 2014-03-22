@@ -2,7 +2,7 @@
    Georgian localisation for jQuery Datepicker.
    Andrei Gorbushkin. */
 (function($) {
-	$.datepick.regional['ka'] = {
+	$.datepick.regionalOptions['ka'] = {
 		monthNames: ['იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი',
 		'ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'],
 		monthNamesShort: ['იან', 'თებ', 'მარ', 'აპრ', 'მაისი', 'ივნ',
@@ -25,5 +25,5 @@
 		dayStatus: 'აირჩიეთ DD, M d', defaultStatus: 'აიღჩიეთ თარიღი',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ka']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ka']);
 })(jQuery);

@@ -2,7 +2,7 @@
    Brazilian Portuguese localisation for jQuery Datepicker.
    Written by Leonildo Costa Silva (leocsilva@gmail.com). */
 (function($) {
-	$.datepick.regional['pt-BR'] = {
+	$.datepick.regionalOptions['pt-BR'] = {
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
 		'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD, d \'de\' M \'de\' yyyy', defaultStatus: 'Selecione um dia',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['pt-BR']);
+	$.datepick.setDefaults($.datepick.regionalOptions['pt-BR']);
 })(jQuery);

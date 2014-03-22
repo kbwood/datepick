@@ -2,7 +2,7 @@
    Ukrainian localisation for jQuery Datepicker.
    Written by Maxim Drogobitskiy (maxdao@gmail.com). */
 (function($) {
-	$.datepick.regional['uk'] = {
+	$.datepick.regionalOptions['uk'] = {
 		monthNames: ['Січень','Лютий','Березень','Квітень','Травень','Червень',
 		'Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'],
 		monthNamesShort: ['Січ','Лют','Бер','Кві','Тра','Чер',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['uk']);
+	$.datepick.setDefaults($.datepick.regionalOptions['uk']);
 })(jQuery);

@@ -2,7 +2,7 @@
    Croatian localisation for jQuery Datepicker.
    Written by Vjekoslav Nesek. */
 (function($) {
-	$.datepick.regional['hr'] = {
+	$.datepick.regionalOptions['hr'] = {
 		monthNames: ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj',
 		'Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'],
 		monthNamesShort: ['Sij','Velj','Ožu','Tra','Svi','Lip',
@@ -25,5 +25,5 @@
 		dayStatus: '\'Datum\' D, M d', defaultStatus: 'Odaberi datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hr']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hr']);
 })(jQuery);

@@ -2,7 +2,7 @@
    Catalan localisation for jQuery Datepicker.
    Writers: (joan.leon@gmail.com). */
 (function($) {
-	$.datepick.regional['ca'] = {
+	$.datepick.regionalOptions['ca'] = {
 		monthNames: ['Gener','Febrer','Mar&ccedil;','Abril','Maig','Juny',
 		'Juliol','Agost','Setembre','Octubre','Novembre','Desembre'],
 		monthNamesShort: ['Gen','Feb','Mar','Abr','Mai','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ca']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ca']);
 })(jQuery);

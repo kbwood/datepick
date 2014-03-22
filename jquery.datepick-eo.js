@@ -2,7 +2,7 @@
    Esperanto localisation for jQuery Datepicker.
    Written by Olivier M. (olivierweb@ifrance.com). */
 (function($) {
-	$.datepick.regional['eo'] = {
+	$.datepick.regionalOptions['eo'] = {
 		monthNames: ['Januaro','Februaro','Marto','Aprilo','Majo','Junio',
 		'Julio','Aŭgusto','Septembro','Oktobro','Novembro','Decembro'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Elekti DD, MM d', defaultStatus: 'Elekti la daton',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['eo']);
+	$.datepick.setDefaults($.datepick.regionalOptions['eo']);
 })(jQuery);

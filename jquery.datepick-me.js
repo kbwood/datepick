@@ -2,7 +2,7 @@
    Montenegrin localisation for jQuery Datepicker.
    By Miloš Milošević - fleka d.o.o. */
 (function($) {
-	$.datepick.regional['me'] = {
+	$.datepick.regionalOptions['me'] = {
 		monthNames: ['Јануар','Фебруар','Март','Април','Мај','Јун',
 		'Јул','Август','Септембар','Октобар','Новембар','Децембар'],
 		monthNamesShort: ['Јан', 'Феб', 'Мар', 'Апр', 'Мај', 'Јун',
@@ -25,5 +25,5 @@
 		dayStatus: '\'Датум\' DD d MM', defaultStatus: 'Одабери датум',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['me']);
+	$.datepick.setDefaults($.datepick.regionalOptions['me']);
 })(jQuery);

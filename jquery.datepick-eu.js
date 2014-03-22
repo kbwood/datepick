@@ -2,7 +2,7 @@
    Basque localisation for jQuery Datepicker.
    Karrikas-ek itzulia (karrikas@karrikas.com) */
 (function($){
-	$.datepick.regional['eu'] = {
+	$.datepick.regionalOptions['eu'] = {
 		monthNames: ['Urtarrila','Otsaila','Martxoa','Apirila','Maiatza','Ekaina',
 		'Uztaila','Abuztua','Iraila','Urria','Azaroa','Abendua'],
 		monthNamesShort: ['Urt','Ots','Mar','Api','Mai','Eka',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['eu']);
+	$.datepick.setDefaults($.datepick.regionalOptions['eu']);
 })(jQuery);

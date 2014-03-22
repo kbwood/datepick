@@ -2,7 +2,7 @@
    Amharic (አማርኛ) localisation for jQuery datepicker.
    Leyu Sisay. */
 (function($) {
-	$.datepick.regional['am'] = {
+	$.datepick.regionalOptions['am'] = {
 		monthNames: ['ጃንዋሪ','ፈብርዋሪ','ማርች','አፕሪል','ሜይ','ጁን',
 		'ጁላይ','ኦገስት','ሴፕቴምበር','ኦክቶበር','ኖቬምበር','ዲሴምበር'],
 		monthNamesShort: ['ጃንዋ', 'ፈብር', 'ማርች', 'አፕሪ', 'ሜይ', 'ጁን',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD, M d, yyyy ምረጥ', defaultStatus: 'ቀን ምረጥ',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['am']);
+	$.datepick.setDefaults($.datepick.regionalOptions['am']);
 })(jQuery);

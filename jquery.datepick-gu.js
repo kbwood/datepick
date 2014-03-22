@@ -2,7 +2,7 @@
    Gujarati (ગુજરાતી) localisation for jQuery Datepicker.
    Naymesh Mistry (naymesh@yahoo.com). */
 (function($) {
-	$.datepick.regional['gu'] = {
+	$.datepick.regionalOptions['gu'] = {
 		monthNames: ['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન',
 		'જુલાઈ','ઑગસ્ટ','સપ્ટેમ્બર','ઑક્ટોબર','નવેમ્બર','ડિસેમ્બર'],
 		monthNamesShort: ['જાન્યુ','ફેબ્રુ','માર્ચ','એપ્રિલ','મે','જૂન',
@@ -25,5 +25,5 @@
 		dayStatus: 'અઠવાડિયાનો પહેલો દિવસ પસંદ કરો', defaultStatus: 'તારીખ પસંદ કરો',		
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['gu']);
+	$.datepick.setDefaults($.datepick.regionalOptions['gu']);
 })(jQuery);

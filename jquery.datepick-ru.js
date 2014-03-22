@@ -2,7 +2,7 @@
    Russian localisation for jQuery Datepicker.
    Written by Andrew Stromnov (stromnov@gmail.com). */
 (function($) {
-	$.datepick.regional['ru'] = {
+	$.datepick.regionalOptions['ru'] = {
 		monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
 		'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
 		monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ru']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ru']);
 })(jQuery);

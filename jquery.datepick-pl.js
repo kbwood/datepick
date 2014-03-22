@@ -2,7 +2,7 @@
    Polish localisation for jQuery Datepicker.
    Written by Jacek Wysocki (jacek.wysocki@gmail.com). */
 (function($) {
-	$.datepick.regional['pl'] = {
+	$.datepick.regionalOptions['pl'] = {
 		monthNames: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec',
 		'Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],
 		monthNamesShort: ['Sty','Lu','Mar','Kw','Maj','Cze',
@@ -25,5 +25,5 @@
 		dayStatus: '\'Wybierz\' D, M d', defaultStatus: 'Wybierz datę',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['pl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['pl']);
 })(jQuery);

@@ -1,4 +1,4 @@
-/* Default styling for jQuery Datepicker v4.1.0. */
+/* Default styling for jQuery Datepicker v5.0.0. */
 .datepick {
 	background-color: #fff;
 	color: #000;
@@ -131,6 +131,8 @@ button.datepick-cmd {
 }
 .datepick-month-header select, .datepick-month-header input {
 	height: 1.4em;
+	margin: 0em;
+	padding: 0em;
 	border: none;
 	font-size: 100%;
 }

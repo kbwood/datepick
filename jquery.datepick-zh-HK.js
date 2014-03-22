@@ -2,7 +2,7 @@
    Hong Kong Chinese localisation for jQuery Datepicker.
    Written by SCCY (samuelcychan@gmail.com). */
 (function($) {
-	$.datepick.regional['zh-HK'] = {
+	$.datepick.regionalOptions['zh-HK'] = {
 		monthNames: ['一月','二月','三月','四月','五月','六月',
 		'七月','八月','九月','十月','十一月','十二月'],
 		monthNamesShort: ['一','二','三','四','五','六',
@@ -27,5 +27,5 @@
 		dayStatus: '選擇 m月 d日, DD', defaultStatus: '請選擇日期',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['zh-HK']);
+	$.datepick.setDefaults($.datepick.regionalOptions['zh-HK']);
 })(jQuery);

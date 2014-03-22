@@ -2,7 +2,7 @@
    Icelandic localisation for jQuery Datepicker.
    Written by Haukur H. Thorsson (haukur@eskill.is). */
 (function($) {
-	$.datepick.regional['is'] = {
+	$.datepick.regionalOptions['is'] = {
 		monthNames: ['Jan&uacute;ar','Febr&uacute;ar','Mars','Apr&iacute;l','Ma&iacute','J&uacute;n&iacute;',
 		'J&uacute;l&iacute;','&Aacute;g&uacute;st','September','Okt&oacute;ber','N&oacute;vember','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Ma&iacute;','J&uacute;n',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['is']);
+	$.datepick.setDefaults($.datepick.regionalOptions['is']);
 })(jQuery);

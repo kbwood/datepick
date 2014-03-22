@@ -2,7 +2,7 @@
    Greek localisation for jQuery Datepicker.
    Written by Alex Cicovic (http://www.alexcicovic.com) */
 (function($) {
-	$.datepick.regional['el'] = {
+	$.datepick.regionalOptions['el'] = {
 		monthNames: ['Ιανουάριος','Φεβρουάριος','Μάρτιος','Απρίλιος','Μάιος','Ιούνιος',
 		'Ιούλιος','Αύγουστος','Σεπτέμβριος','Οκτώβριος','Νοέμβριος','Δεκέμβριος'],
 		monthNamesShort: ['Ιαν','Φεβ','Μαρ','Απρ','Μαι','Ιουν',
@@ -25,5 +25,5 @@
 		dayStatus: 'Επιλογή DD d MM', defaultStatus: 'Επιλέξτε μια ημερομηνία',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['el']);
+	$.datepick.setDefaults($.datepick.regionalOptions['el']);
 })(jQuery);

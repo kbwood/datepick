@@ -2,7 +2,7 @@
    Hindi INDIA localisation for jQuery Datepicker.
    Written by Pawan Kumar Singh. */
 (function($) {
-	$.datepick.regional['hi-IN'] = {
+	$.datepick.regionalOptions['hi-IN'] = {
 		monthNames: ['जनवरी',' फरवरी', 'मार्च', 'अप्रैल', 'मई', 'जून','जुलाई', 'अगस्त', 'सितम्बर', 'अक्टूबर', 'नवम्बर', 'दिसम्बर'],
 		monthNamesShort: ['जन', 'फर', 'मार्च','अप्रै', 'मई', 'जून','जुलाई', 'अग', 'सित', 'अक्टू', 'नव', 'दिस'],
 		dayNames: ['रविवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार'],
@@ -23,5 +23,5 @@
 		dayStatus: 'चुने DD, M d', defaultStatus: 'एक तिथि का चयन करें',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hi-IN']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hi-IN']);
 })(jQuery);

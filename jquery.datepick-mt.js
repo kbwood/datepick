@@ -2,7 +2,7 @@
    Maltese localisation for jQuery Datepicker.
    Written by Chritian Sciberras (uuf6429@gmail.com). */
 (function($) {
-	$.datepick.regional['mt'] = {
+	$.datepick.regionalOptions['mt'] = {
 		monthNames: ['Jannar','Frar','Marzu','April','Mejju','Ġunju',
 		'Lulju','Awissu','Settembru','Ottubru','Novembru','Diċembru'],
 		monthNamesShort: ['Jan', 'Fra', 'Mar', 'Apr', 'Mej', 'Ġun',
@@ -25,5 +25,5 @@
 		dayStatus: 'Għazel DD, M d', defaultStatus: 'Għazel data',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['mt']);
+	$.datepick.setDefaults($.datepick.regionalOptions['mt']);
 })(jQuery);

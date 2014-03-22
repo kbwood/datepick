@@ -2,7 +2,7 @@
    Armenian localisation for jQuery Datepicker.
    Written by Levon Zakaryan (levon.zakaryan@gmail.com)*/
 (function($) {
-	$.datepick.regional['hy'] = {
+	$.datepick.regionalOptions['hy'] = {
 		monthNames: ['Հունվար','Փետրվար','Մարտ','Ապրիլ','Մայիս','Հունիս',
 		'Հուլիս','Օգոստոս','Սեպտեմբեր','Հոկտեմբեր','Նոյեմբեր','Դեկտեմբեր'],
 		monthNamesShort: ['Հունվ','Փետր','Մարտ','Ապր','Մայիս','Հունիս',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hy']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hy']);
 })(jQuery);

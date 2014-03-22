@@ -4,7 +4,7 @@
    خالد الحوراني -- koko.dw@gmail.com
    NOTE: monthNames are the original months names and they are the Arabic names, not the new months name فبراير - يناير and there isn't any Arabic roots for these months */
 (function($) {
-	$.datepick.regional['ar'] = {
+	$.datepick.regionalOptions['ar'] = {
 		monthNames: ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'آذار', 'حزيران',
 		'تموز', 'آب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'],
 		monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -26,5 +26,5 @@
 		dayStatus: 'اختر D, M d', defaultStatus: 'اختر يوم',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ar']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ar']);
 })(jQuery);

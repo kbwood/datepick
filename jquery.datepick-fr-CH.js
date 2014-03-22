@@ -2,7 +2,7 @@
    Swiss French localisation for jQuery Datepicker.
    Written by Martin Voelkle (martin.voelkle@e-tc.ch). */
 (function($) {
-	$.datepick.regional['fr-CH'] = {
+	$.datepick.regionalOptions['fr-CH'] = {
 		monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
 		'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
 		monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
@@ -25,5 +25,5 @@
 		dayStatus: '\'Choisir\' le DD d MM', defaultStatus: 'Choisir la date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['fr-CH']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fr-CH']);
 })(jQuery);

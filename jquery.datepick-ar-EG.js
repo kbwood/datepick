@@ -3,7 +3,7 @@
    Mahmoud Khaled -- mahmoud.khaled@badrit.com
    NOTE: monthNames are the new months names */
 (function($) {
-	$.datepick.regional['ar-EG'] = {
+	$.datepick.regionalOptions['ar-EG'] = {
 		monthNames: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يونية',
 		'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
 		monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -25,5 +25,5 @@
 		dayStatus: 'اختر D, M d', defaultStatus: 'اختر يوم',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ar-EG']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ar-EG']);
 })(jQuery);

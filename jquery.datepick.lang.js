@@ -1,10 +1,10 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Datepicker localisations for jQuery 4.1.0. */
+   Datepicker localisations for jQuery 5.0.0. */
 /* http://keith-wood.name/datepick.html
    Afrikaans localisation for jQuery Datepicker.
    Written by Renier Pretorius and Ruediger Thiede. */
 (function($) {
-	$.datepick.regional['af'] = {
+	$.datepick.regionalOptions['af'] = {
 		monthNames: ['Januarie','Februarie','Maart','April','Mei','Junie',
 		'Julie','Augustus','September','Oktober','November','Desember'],
 		monthNamesShort: ['Jan', 'Feb', 'Mrt', 'Apr', 'Mei', 'Jun',
@@ -27,13 +27,13 @@
 		dayStatus: 'Kies DD, M d', defaultStatus: 'Kies \'n datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['af']);
+	$.datepick.setDefaults($.datepick.regionalOptions['af']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Amharic (አማርኛ) localisation for jQuery datepicker.
    Leyu Sisay. */
 (function($) {
-	$.datepick.regional['am'] = {
+	$.datepick.regionalOptions['am'] = {
 		monthNames: ['ጃንዋሪ','ፈብርዋሪ','ማርች','አፕሪል','ሜይ','ጁን',
 		'ጁላይ','ኦገስት','ሴፕቴምበር','ኦክቶበር','ኖቬምበር','ዲሴምበር'],
 		monthNamesShort: ['ጃንዋ', 'ፈብር', 'ማርች', 'አፕሪ', 'ሜይ', 'ጁን',
@@ -56,13 +56,13 @@
 		dayStatus: 'DD, M d, yyyy ምረጥ', defaultStatus: 'ቀን ምረጥ',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['am']);
+	$.datepick.setDefaults($.datepick.regionalOptions['am']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Algerian (and Tunisian) Arabic localisation for jQuery Datepicker.
    Mohamed Cherif BOUCHELAGHEM -- cherifbouchelaghem@yahoo.fr */
 (function($) {
-	$.datepick.regional['ar-DZ'] = {
+	$.datepick.regionalOptions['ar-DZ'] = {
 		monthNames: ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان',
 		'جويلية', 'أوت', 'سبتمبر','أكتوبر', 'نوفمبر', 'ديسمبر'],
 		monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -84,14 +84,14 @@
 		dayStatus: 'اختر D, M d', defaultStatus: 'اختر يوم',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ar-DZ']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ar-DZ']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Arabic localisation for jQuery Datepicker.
    Mahmoud Khaled -- mahmoud.khaled@badrit.com
    NOTE: monthNames are the new months names */
 (function($) {
-	$.datepick.regional['ar-EG'] = {
+	$.datepick.regionalOptions['ar-EG'] = {
 		monthNames: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يونية',
 		'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
 		monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -113,7 +113,7 @@
 		dayStatus: 'اختر D, M d', defaultStatus: 'اختر يوم',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ar-EG']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ar-EG']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Arabic localisation for jQuery Datepicker.
@@ -121,7 +121,7 @@
    خالد الحوراني -- koko.dw@gmail.com
    NOTE: monthNames are the original months names and they are the Arabic names, not the new months name فبراير - يناير and there isn't any Arabic roots for these months */
 (function($) {
-	$.datepick.regional['ar'] = {
+	$.datepick.regionalOptions['ar'] = {
 		monthNames: ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'آذار', 'حزيران',
 		'تموز', 'آب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'],
 		monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -143,13 +143,13 @@
 		dayStatus: 'اختر D, M d', defaultStatus: 'اختر يوم',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ar']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ar']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Azerbaijani localisation for jQuery Datepicker.
    Written by Jamil Najafov (necefov33@gmail.com). */
 (function($) {
-	$.datepick.regional['az'] = {
+	$.datepick.regionalOptions['az'] = {
 		monthNames: ['Yanvar','Fevral','Mart','Aprel','May','İyun',
 		'İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'],
 		monthNamesShort: ['Yan','Fev','Mar','Apr','May','İyun',
@@ -172,12 +172,12 @@
 		dayStatus: 'D, M d seçin', defaultStatus: 'Bir tarix seçin',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['az']);
+	$.datepick.setDefaults($.datepick.regionalOptions['az']);
 })(jQuery);﻿/* http://keith-wood.name/datepick.html
    Bulgarian localisation for jQuery Datepicker.
    Written by Stoyan Kyosev (http://svest.org). */
 (function($) {
-	$.datepick.regional['bg'] = {
+	$.datepick.regionalOptions['bg'] = {
 		monthNames: ['Януари','Февруари','Март','Април','Май','Юни',
 		'Юли','Август','Септември','Октомври','Ноември','Декември'],
 		monthNamesShort: ['Яну','Фев','Мар','Апр','Май','Юни',
@@ -200,13 +200,13 @@
 		dayStatus: 'Избери D, M d', defaultStatus: 'Избери дата',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['bg']);
+	$.datepick.setDefaults($.datepick.regionalOptions['bg']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Bosnian localisation for jQuery Datepicker.
    Written by Kenan Konjo. */
 (function($) {
-	$.datepick.regional['bs'] = {
+	$.datepick.regionalOptions['bs'] = {
 		monthNames: ['Januar','Februar','Mart','April','Maj','Juni',
 		'Juli','August','Septembar','Oktobar','Novembar','Decembar'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -229,13 +229,13 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['bs']);
+	$.datepick.setDefaults($.datepick.regionalOptions['bs']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Catalan localisation for jQuery Datepicker.
    Writers: (joan.leon@gmail.com). */
 (function($) {
-	$.datepick.regional['ca'] = {
+	$.datepick.regionalOptions['ca'] = {
 		monthNames: ['Gener','Febrer','Mar&ccedil;','Abril','Maig','Juny',
 		'Juliol','Agost','Setembre','Octubre','Novembre','Desembre'],
 		monthNamesShort: ['Gen','Feb','Mar','Abr','Mai','Jun',
@@ -258,13 +258,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ca']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ca']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Czech localisation for jQuery Datepicker.
    Written by Tomas Muller (tomas@tomas-muller.net). */
 (function($) {
-	$.datepick.regional['cs'] = {
+	$.datepick.regionalOptions['cs'] = {
 		monthNames: ['leden','únor','březen','duben','květen','červen',
 		'červenec','srpen','září','říjen','listopad','prosinec'],
 		monthNamesShort: ['led','úno','bře','dub','kvě','čer',
@@ -287,13 +287,13 @@
 		dayStatus: '\'Vyber\' DD, M d', defaultStatus: 'Vyberte datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['cs']);
+	$.datepick.setDefaults($.datepick.regionalOptions['cs']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Danish localisation for jQuery Datepicker.
    Written by Jan Christensen ( deletestuff@gmail.com). */
 (function($) {
-    $.datepick.regional['da'] = {
+    $.datepick.regionalOptions['da'] = {
         monthNames: ['Januar','Februar','Marts','April','Maj','Juni',
         'Juli','August','September','Oktober','November','December'],
         monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -316,13 +316,13 @@
 		dayStatus: 'Vælg D, M d', defaultStatus: 'Vælg en dato',
 		isRTL: false
 	};
-    $.datepick.setDefaults($.datepick.regional['da']);
+    $.datepick.setDefaults($.datepick.regionalOptions['da']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Swiss-German localisation for jQuery Datepicker.
    Written by Douglas Jose & Juerg Meier. */
 (function($) {
-	$.datepick.regional['de-CH'] = {
+	$.datepick.regionalOptions['de-CH'] = {
 		monthNames: ['Januar','Februar','März','April','Mai','Juni',
 		'Juli','August','September','Oktober','November','Dezember'],
 		monthNamesShort: ['Jan','Feb','Mär','Apr','Mai','Jun',
@@ -345,13 +345,13 @@
 		dayStatus: 'Wähle D, M d', defaultStatus: 'Wähle ein Datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['de-CH']);
+	$.datepick.setDefaults($.datepick.regionalOptions['de-CH']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    German localisation for jQuery Datepicker.
    Written by Milian Wolff (mail@milianw.de). */
 (function($) {
-	$.datepick.regional['de'] = {
+	$.datepick.regionalOptions['de'] = {
 		monthNames: ['Januar','Februar','März','April','Mai','Juni',
 		'Juli','August','September','Oktober','November','Dezember'],
 		monthNamesShort: ['Jan','Feb','Mär','Apr','Mai','Jun',
@@ -374,13 +374,13 @@
 		dayStatus: 'Wähle D, M d', defaultStatus: 'Wähle ein Datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['de']);
+	$.datepick.setDefaults($.datepick.regionalOptions['de']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Greek localisation for jQuery Datepicker.
    Written by Alex Cicovic (http://www.alexcicovic.com) */
 (function($) {
-	$.datepick.regional['el'] = {
+	$.datepick.regionalOptions['el'] = {
 		monthNames: ['Ιανουάριος','Φεβρουάριος','Μάρτιος','Απρίλιος','Μάιος','Ιούνιος',
 		'Ιούλιος','Αύγουστος','Σεπτέμβριος','Οκτώβριος','Νοέμβριος','Δεκέμβριος'],
 		monthNamesShort: ['Ιαν','Φεβ','Μαρ','Απρ','Μαι','Ιουν',
@@ -403,13 +403,13 @@
 		dayStatus: 'Επιλογή DD d MM', defaultStatus: 'Επιλέξτε μια ημερομηνία',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['el']);
+	$.datepick.setDefaults($.datepick.regionalOptions['el']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    English/Australia localisation for jQuery Datepicker.
    Based on en-GB. */
 (function($) {
-	$.datepick.regional['en-AU'] = {
+	$.datepick.regionalOptions['en-AU'] = {
 		monthNames: ['January','February','March','April','May','June',
 		'July','August','September','October','November','December'],
 		monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -432,13 +432,13 @@
 		dayStatus: 'Select DD, M d', defaultStatus: 'Select a date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['en-AU']);
+	$.datepick.setDefaults($.datepick.regionalOptions['en-AU']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    English UK localisation for jQuery Datepicker.
    Written by Stuart. */
 (function($) {
-	$.datepick.regional['en-GB'] = {
+	$.datepick.regionalOptions['en-GB'] = {
 		monthNames: ['January','February','March','April','May','June',
 		'July','August','September','October','November','December'],
 		monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -461,13 +461,13 @@
 		dayStatus: 'Select DD, M d', defaultStatus: 'Select a date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['en-GB']);
+	$.datepick.setDefaults($.datepick.regionalOptions['en-GB']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    English/New Zealand localisation for jQuery Datepicker.
    Based on en-GB. */
 (function($) {
-	$.datepick.regional['en-NZ'] = {
+	$.datepick.regionalOptions['en-NZ'] = {
 		monthNames: ['January','February','March','April','May','June',
 		'July','August','September','October','November','December'],
 		monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -490,13 +490,13 @@
 		dayStatus: 'Select DD, M d', defaultStatus: 'Select a date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['en-NZ']);
+	$.datepick.setDefaults($.datepick.regionalOptions['en-NZ']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Esperanto localisation for jQuery Datepicker.
    Written by Olivier M. (olivierweb@ifrance.com). */
 (function($) {
-	$.datepick.regional['eo'] = {
+	$.datepick.regionalOptions['eo'] = {
 		monthNames: ['Januaro','Februaro','Marto','Aprilo','Majo','Junio',
 		'Julio','Aŭgusto','Septembro','Oktobro','Novembro','Decembro'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -519,13 +519,13 @@
 		dayStatus: 'Elekti DD, MM d', defaultStatus: 'Elekti la daton',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['eo']);
+	$.datepick.setDefaults($.datepick.regionalOptions['eo']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Spanish/Argentina localisation for jQuery Datepicker.
    Written by Esteban Acosta Villafane (esteban.acosta@globant.com) of Globant (http://www.globant.com). */
 (function($) {
-	$.datepick.regional['es-AR'] = {
+	$.datepick.regionalOptions['es-AR'] = {
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
@@ -548,13 +548,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['es-AR']);
+	$.datepick.setDefaults($.datepick.regionalOptions['es-AR']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Spanish/Perú localisation for jQuery Datepicker.
    Written by Fischer Tirado (fishdev@globant.com) of ASIX (http://www.asixonline.com). */
 (function($) {
-	$.datepick.regional['es-PE'] = {
+	$.datepick.regionalOptions['es-PE'] = {
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
@@ -577,13 +577,13 @@
 		dayStatus: 'DD d, MM yyyy', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['es-PE']);
+	$.datepick.setDefaults($.datepick.regionalOptions['es-PE']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Spanish localisation for jQuery Datepicker.
    Traducido por Vester (xvester@gmail.com). */
 (function($) {
-	$.datepick.regional['es'] = {
+	$.datepick.regionalOptions['es'] = {
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
@@ -606,13 +606,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['es']);
+	$.datepick.setDefaults($.datepick.regionalOptions['es']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Estonian localisation for jQuery Datepicker.
    Written by Mart Sõmermaa (mrts.pydev at gmail com). */ 
 (function($) {
-	$.datepick.regional['et'] = {
+	$.datepick.regionalOptions['et'] = {
 		monthNames: ['Jaanuar','Veebruar','Märts','Aprill','Mai','Juuni', 
 			'Juuli','August','September','Oktoober','November','Detsember'],
 		monthNamesShort: ['Jaan', 'Veebr', 'Märts', 'Apr', 'Mai', 'Juuni',
@@ -635,13 +635,13 @@
 		dayStatus: '', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['et']);
+	$.datepick.setDefaults($.datepick.regionalOptions['et']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Basque localisation for jQuery Datepicker.
    Karrikas-ek itzulia (karrikas@karrikas.com) */
 (function($){
-	$.datepick.regional['eu'] = {
+	$.datepick.regionalOptions['eu'] = {
 		monthNames: ['Urtarrila','Otsaila','Martxoa','Apirila','Maiatza','Ekaina',
 		'Uztaila','Abuztua','Iraila','Urria','Azaroa','Abendua'],
 		monthNamesShort: ['Urt','Ots','Mar','Api','Mai','Eka',
@@ -664,13 +664,13 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['eu']);
+	$.datepick.setDefaults($.datepick.regionalOptions['eu']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Persian (Farsi) localisation for jQuery Datepicker.
    Javad Mowlanezhad -- jmowla@gmail.com */
 (function($) {
-	$.datepick.regional['fa'] = {
+	$.datepick.regionalOptions['fa'] = {
 		monthNames: ['فروردين','ارديبهشت','خرداد','تير','مرداد','شهريور',
 		'مهر','آبان','آذر','دي','بهمن','اسفند'],
 		monthNamesShort: ['1','2','3','4','5','6',
@@ -693,13 +693,13 @@
 		dayStatus: 'انتخاب D, M d', defaultStatus: 'انتخاب تاريخ',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['fa']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fa']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Finnish localisation for jQuery Datepicker.
-   Written by Harri Kilpiö (harrikilpio@gmail.com). */
+   Written by Harri Kilpi򠨨arrikilpio@gmail.com). */
 (function($) {
-    $.datepick.regional['fi'] = {
+    $.datepick.regionalOptions['fi'] = {
         monthNames: ['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kes&auml;kuu',
         'Hein&auml;kuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'],
         monthNamesShort: ['Tammi','Helmi','Maalis','Huhti','Touko','Kes&auml;',
@@ -722,13 +722,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-    $.datepick.setDefaults($.datepick.regional['fi']);
+    $.datepick.setDefaults($.datepick.regionalOptions['fi']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Faroese localisation for jQuery Datepicker.
    Written by Sverri Mohr Olsen, sverrimo@gmail.com */
 (function($) {
-	$.datepick.regional['fo'] = {
+	$.datepick.regionalOptions['fo'] = {
 		monthNames: ['Januar','Februar','Mars','Apríl','Mei','Juni',
 		'Juli','August','September','Oktober','November','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mei','Jun',
@@ -751,13 +751,13 @@
 		dayStatus: 'Vel DD, M d, yyyy', defaultStatus: 'Vel ein dato',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['fo']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fo']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Swiss French localisation for jQuery Datepicker.
    Written by Martin Voelkle (martin.voelkle@e-tc.ch). */
 (function($) {
-	$.datepick.regional['fr-CH'] = {
+	$.datepick.regionalOptions['fr-CH'] = {
 		monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
 		'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
 		monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
@@ -780,13 +780,13 @@
 		dayStatus: '\'Choisir\' le DD d MM', defaultStatus: 'Choisir la date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['fr-CH']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fr-CH']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    French localisation for jQuery Datepicker.
    Stéphane Nahmani (sholby@sholby.net). */
 (function($) {
-	$.datepick.regional['fr'] = {
+	$.datepick.regionalOptions['fr'] = {
 		monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
 		'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
 		monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
@@ -809,13 +809,13 @@
 		dayStatus: '\'Choisir\' le DD d MM', defaultStatus: 'Choisir la date',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['fr']);
+	$.datepick.setDefaults($.datepick.regionalOptions['fr']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Galician localisation for jQuery Datepicker.
    Traducido por Manuel (McNuel@gmx.net). */
 (function($) {
-	$.datepick.regional['gl'] = {
+	$.datepick.regionalOptions['gl'] = {
 		monthNames: ['Xaneiro','Febreiro','Marzo','Abril','Maio','Xuño',
 		'Xullo','Agosto','Setembro','Outubro','Novembro','Decembro'],
 		monthNamesShort: ['Xan','Feb','Mar','Abr','Mai','Xuñ',
@@ -838,13 +838,13 @@
 		dayStatus: 'D, M d', defaultStatus: 'Selecciona Data',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['gl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['gl']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Gujarati (ગુજરાતી) localisation for jQuery Datepicker.
    Naymesh Mistry (naymesh@yahoo.com). */
 (function($) {
-	$.datepick.regional['gu'] = {
+	$.datepick.regionalOptions['gu'] = {
 		monthNames: ['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન',
 		'જુલાઈ','ઑગસ્ટ','સપ્ટેમ્બર','ઑક્ટોબર','નવેમ્બર','ડિસેમ્બર'],
 		monthNamesShort: ['જાન્યુ','ફેબ્રુ','માર્ચ','એપ્રિલ','મે','જૂન',
@@ -867,13 +867,13 @@
 		dayStatus: 'અઠવાડિયાનો પહેલો દિવસ પસંદ કરો', defaultStatus: 'તારીખ પસંદ કરો',		
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['gu']);
+	$.datepick.setDefaults($.datepick.regionalOptions['gu']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Hebrew localisation for jQuery Datepicker.
    Written by Amir Hardon (ahardon at gmail dot com). */
 (function($) {
-	$.datepick.regional['he'] = {
+	$.datepick.regionalOptions['he'] = {
 		monthNames: ['ינואר','פברואר','מרץ','אפריל','מאי','יוני',
 		'יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'],
 		monthNamesShort: ['1','2','3','4','5','6',
@@ -896,13 +896,13 @@
 		dayStatus: 'DD, M d', defaultStatus: '',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['he']);
+	$.datepick.setDefaults($.datepick.regionalOptions['he']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Hindi INDIA localisation for jQuery Datepicker.
    Written by Pawan Kumar Singh. */
 (function($) {
-	$.datepick.regional['hi-IN'] = {
+	$.datepick.regionalOptions['hi-IN'] = {
 		monthNames: ['जनवरी',' फरवरी', 'मार्च', 'अप्रैल', 'मई', 'जून','जुलाई', 'अगस्त', 'सितम्बर', 'अक्टूबर', 'नवम्बर', 'दिसम्बर'],
 		monthNamesShort: ['जन', 'फर', 'मार्च','अप्रै', 'मई', 'जून','जुलाई', 'अग', 'सित', 'अक्टू', 'नव', 'दिस'],
 		dayNames: ['रविवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार'],
@@ -923,17 +923,15 @@
 		dayStatus: 'चुने DD, M d', defaultStatus: 'एक तिथि का चयन करें',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hi-IN']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hi-IN']);
 })(jQuery);
-/* http://keith-wood.name/datepick.html
+﻿/* http://keith-wood.name/datepick.html
    English Hindi localisation for jQuery Datepicker.
    Written by Tirumal Rao of designphilic.com. */
 (function($) {
-	$.datepick.regional['hi'] = {
-		monthNames: ['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून',
-		'जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],
-		monthNamesShort: ['जन', 'फ़र.', 'मार्च', 'अप्रैल', 'मई', 'जून',
-		'जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],
+	$.datepick.regionalOptions['hi'] = {
+		monthNames: ['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून', 'जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],
+		monthNamesShort: ['जन', 'फ़र.', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],
 		dayNames: ['रविवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'बृहस्पतिवार', 'शुक्रवार', 'शनिवार'],
 		dayNamesShort: ['रवि', 'सोम', 'मंगल', 'बुध', 'बृहस्पत', 'शुक्र', 'शनि'],
 		dayNamesMin: ['रवि', 'सोम', 'मंगल', 'बुध', 'बृहस्पत', 'शुक्र', 'शनि'],
@@ -952,12 +950,12 @@
 		dayStatus: 'चयन DD, M d', defaultStatus: 'एक तिथि का चयन करें',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hi']);
-})(jQuery);/* http://keith-wood.name/datepick.html
+	$.datepick.setDefaults($.datepick.regionalOptions['hi']);
+})(jQuery);﻿/* http://keith-wood.name/datepick.html
    Croatian localisation for jQuery Datepicker.
    Written by Vjekoslav Nesek. */
 (function($) {
-	$.datepick.regional['hr'] = {
+	$.datepick.regionalOptions['hr'] = {
 		monthNames: ['Siječanj','Veljača','Ožujak','Travanj','Svibanj','Lipanj',
 		'Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac'],
 		monthNamesShort: ['Sij','Velj','Ožu','Tra','Svi','Lip',
@@ -980,13 +978,13 @@
 		dayStatus: '\'Datum\' D, M d', defaultStatus: 'Odaberi datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hr']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hr']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Hungarian localisation for jQuery Datepicker.
    Written by Istvan Karaszi (jquery@spam.raszi.hu). */
 (function($) {
-	$.datepick.regional['hu'] = {
+	$.datepick.regionalOptions['hu'] = {
 		monthNames: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június',
 		'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
 		monthNamesShort: ['Jan', 'Feb', 'Már', 'Ápr', 'Máj', 'Jún',
@@ -1009,13 +1007,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hu']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hu']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Armenian localisation for jQuery Datepicker.
    Written by Levon Zakaryan (levon.zakaryan@gmail.com)*/
 (function($) {
-	$.datepick.regional['hy'] = {
+	$.datepick.regionalOptions['hy'] = {
 		monthNames: ['Հունվար','Փետրվար','Մարտ','Ապրիլ','Մայիս','Հունիս',
 		'Հուլիս','Օգոստոս','Սեպտեմբեր','Հոկտեմբեր','Նոյեմբեր','Դեկտեմբեր'],
 		monthNamesShort: ['Հունվ','Փետր','Մարտ','Ապր','Մայիս','Հունիս',
@@ -1038,13 +1036,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['hy']);
+	$.datepick.setDefaults($.datepick.regionalOptions['hy']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Indonesian localisation for jQuery Datepicker.
    Written by Deden Fathurahman (dedenf@gmail.com). */
 (function($) {
-	$.datepick.regional['id'] = {
+	$.datepick.regionalOptions['id'] = {
 		monthNames: ['Januari','Februari','Maret','April','Mei','Juni',
 		'Juli','Agustus','September','Oktober','Nopember','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mei','Jun',
@@ -1067,13 +1065,13 @@
 		dayStatus: 'pilih le DD, MM d', defaultStatus: 'Pilih Tanggal',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['id']);
+	$.datepick.setDefaults($.datepick.regionalOptions['id']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Icelandic localisation for jQuery Datepicker.
    Written by Haukur H. Thorsson (haukur@eskill.is). */
 (function($) {
-	$.datepick.regional['is'] = {
+	$.datepick.regionalOptions['is'] = {
 		monthNames: ['Jan&uacute;ar','Febr&uacute;ar','Mars','Apr&iacute;l','Ma&iacute','J&uacute;n&iacute;',
 		'J&uacute;l&iacute;','&Aacute;g&uacute;st','September','Okt&oacute;ber','N&oacute;vember','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Ma&iacute;','J&uacute;n',
@@ -1096,13 +1094,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['is']);
+	$.datepick.setDefaults($.datepick.regionalOptions['is']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Italian localisation for jQuery Datepicker.
    Written by Apaella (apaella@gmail.com). */
 (function($) {
-	$.datepick.regional['it'] = {
+	$.datepick.regionalOptions['it'] = {
 		monthNames: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
 		'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
 		monthNamesShort: ['Gen','Feb','Mar','Apr','Mag','Giu',
@@ -1125,13 +1123,13 @@
 		dayStatus: '\'Seleziona\' D, M d', defaultStatus: 'Scegliere una data',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['it']);
+	$.datepick.setDefaults($.datepick.regionalOptions['it']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Japanese localisation for jQuery Datepicker.
    Written by Kentaro SATO (kentaro@ranvis.com). */
 (function($) {
-	$.datepick.regional['ja'] = {
+	$.datepick.regionalOptions['ja'] = {
 		monthNames: ['1月','2月','3月','4月','5月','6月',
 		'7月','8月','9月','10月','11月','12月'],
 		monthNamesShort: ['1月','2月','3月','4月','5月','6月',
@@ -1156,13 +1154,13 @@
 		dayStatus: 'Md日(D)', defaultStatus: '日付を選択します',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ja']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ja']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Georgian localisation for jQuery Datepicker.
    Andrei Gorbushkin. */
 (function($) {
-	$.datepick.regional['ka'] = {
+	$.datepick.regionalOptions['ka'] = {
 		monthNames: ['იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი',
 		'ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'],
 		monthNamesShort: ['იან', 'თებ', 'მარ', 'აპრ', 'მაისი', 'ივნ',
@@ -1185,13 +1183,13 @@
 		dayStatus: 'აირჩიეთ DD, M d', defaultStatus: 'აიღჩიეთ თარიღი',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ka']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ka']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Khmer initialisation for jQuery Datepicker.
    Written by Sovichet Tep (sovichet.tep@gmail.com). */
 (function($){
-	$.datepick.regional['km'] = {
+	$.datepick.regionalOptions['km'] = {
 		monthNames: ['ខែ​មករា','ខែ​កុម្ភៈ','ខែ​មិនា','ខែ​មេសា','ខែ​ឧសភា','ខែ​មិថុនា',
 		'ខែ​កក្កដា','ខែ​សីហា','ខែ​កញ្ញា','ខែ​តុលា','ខែ​វិច្ឆិកា','ខែ​ធ្នូ'],
 		monthNamesShort: ['មក', 'កុ', 'មិនា', 'មេ', 'ឧស', 'មិថុ',
@@ -1214,13 +1212,13 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['km']);
+	$.datepick.setDefaults($.datepick.regionalOptions['km']);
 });
 ﻿/* http://keith-wood.name/datepick.html
    Korean localisation for jQuery Datepicker.
    Written by DaeKwon Kang (ncrash.dk@gmail.com), Edited by Genie. */
 (function($) {
-	$.datepick.regional['ko'] = {
+	$.datepick.regionalOptions['ko'] = {
 		monthNames: ['1월','2월','3월','4월','5월','6월',
 		'7월','8월','9월','10월','11월','12월'],
 		monthNamesShort: ['1월','2월','3월','4월','5월','6월',
@@ -1245,13 +1243,13 @@
 		dayStatus: 'M d일 (D)', defaultStatus: '날짜를 선택하세요',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ko']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ko']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Lithuanian localisation for jQuery Datepicker.
    Written by Arturas Paleicikas <arturas@avalon.lt> */
 (function($) {
-	$.datepick.regional['lt'] = {
+	$.datepick.regionalOptions['lt'] = {
 		monthNames: ['Sausis','Vasaris','Kovas','Balandis','Gegužė','Birželis',
 		'Liepa','Rugpjūtis','Rugsėjis','Spalis','Lapkritis','Gruodis'],
 		monthNamesShort: ['Sau','Vas','Kov','Bal','Geg','Bir',
@@ -1274,13 +1272,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['lt']);
+	$.datepick.setDefaults($.datepick.regionalOptions['lt']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Latvian localisation for jQuery Datepicker.
    Written by Arturas Paleicikas <arturas.paleicikas@metasite.net> */
 (function($) {
-	$.datepick.regional['lv'] = {
+	$.datepick.regionalOptions['lv'] = {
 		monthNames: ['Janvāris','Februāris','Marts','Aprīlis','Maijs','Jūnijs',
 		'Jūlijs','Augusts','Septembris','Oktobris','Novembris','Decembris'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mai','Jūn',
@@ -1303,13 +1301,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['lv']);
+	$.datepick.setDefaults($.datepick.regionalOptions['lv']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Montenegrin localisation for jQuery Datepicker.
    By Miloš Milošević - fleka d.o.o. */
 (function($) {
-	$.datepick.regional['me-ME'] = {
+	$.datepick.regionalOptions['me-ME'] = {
 		monthNames: ['Januar','Februar','Mart','April','Maj','Jun',
 		'Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'],
 		monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun',
@@ -1332,13 +1330,13 @@
 		dayStatus: '\'Datum\' DD, M d', defaultStatus: 'Odaberi datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['me-ME']);
+	$.datepick.setDefaults($.datepick.regionalOptions['me-ME']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Montenegrin localisation for jQuery Datepicker.
    By Miloš Milošević - fleka d.o.o. */
 (function($) {
-	$.datepick.regional['me'] = {
+	$.datepick.regionalOptions['me'] = {
 		monthNames: ['Јануар','Фебруар','Март','Април','Мај','Јун',
 		'Јул','Август','Септембар','Октобар','Новембар','Децембар'],
 		monthNamesShort: ['Јан', 'Феб', 'Мар', 'Апр', 'Мај', 'Јун',
@@ -1361,7 +1359,7 @@
 		dayStatus: '\'Датум\' DD d MM', defaultStatus: 'Одабери датум',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['me']);
+	$.datepick.setDefaults($.datepick.regionalOptions['me']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Македонски MK localisation for jQuery Datepicker.
@@ -1369,7 +1367,7 @@
    email: hajan [at] live [dot] com
    url: http://weblogs.asp.net/hajan | http://codeasp.net/blogs/hajan | http://mkdot.net/blogs/hajan */
 (function($) {
-	$.datepick.regional['mk'] = {
+	$.datepick.regionalOptions['mk'] = {
 		monthNames: ['Јануари','Февруари','Март','Април','Мај','Јуни',
 		'Јули','Август','Септември','Октомври','Ноември','Декември'],
 		monthNamesShort: ['Јан', 'Фев', 'Мар', 'Апр', 'Мај', 'Јун',
@@ -1392,12 +1390,12 @@
 		dayStatus: 'Избери DD, M d', defaultStatus: 'Избери датум',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['mk']);
+	$.datepick.setDefaults($.datepick.regionalOptions['mk']);
 })(jQuery);﻿/* http://keith-wood.name/datepick.html
    Malayalam localisation for jQuery Datepicker.
    Saji Nediyanchath (saji89@gmail.com). */
 (function($) {
-	$.datepick.regional['ml'] = {
+	$.datepick.regionalOptions['ml'] = {
 		monthNames: ['ജനുവരി','ഫെബ്രുവരി','മാര്‍ച്ച്','ഏപ്രില്‍','മേയ്','ജൂണ്‍',
 		'ജൂലൈ','ആഗസ്റ്റ്','സെപ്റ്റംബര്‍','ഒക്ടോബര്‍','നവംബര്‍','ഡിസംബര്‍'],
 		monthNamesShort: ['ജനു', 'ഫെബ്', 'മാര്‍', 'ഏപ്രി', 'മേയ്', 'ജൂണ്‍',
@@ -1420,13 +1418,13 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ml']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ml']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Malaysian localisation for jQuery Datepicker.
    Written by Mohd Nawawi Mohamad Jamili (nawawi@ronggeng.net). */
 (function($) {
-	$.datepick.regional['ms'] = {
+	$.datepick.regionalOptions['ms'] = {
 		monthNames: ['Januari','Februari','Mac','April','Mei','Jun',
 		'Julai','Ogos','September','Oktober','November','Disember'],
 		monthNamesShort: ['Jan','Feb','Mac','Apr','Mei','Jun',
@@ -1449,13 +1447,13 @@
 		dayStatus: 'DD, d MM', defaultStatus: 'Sila pilih tarikh',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ms']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ms']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Maltese localisation for jQuery Datepicker.
    Written by Chritian Sciberras (uuf6429@gmail.com). */
 (function($) {
-	$.datepick.regional['mt'] = {
+	$.datepick.regionalOptions['mt'] = {
 		monthNames: ['Jannar','Frar','Marzu','April','Mejju','Ġunju',
 		'Lulju','Awissu','Settembru','Ottubru','Novembru','Diċembru'],
 		monthNamesShort: ['Jan', 'Fra', 'Mar', 'Apr', 'Mej', 'Ġun',
@@ -1478,13 +1476,13 @@
 		dayStatus: 'Għazel DD, M d', defaultStatus: 'Għazel data',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['mt']);
+	$.datepick.setDefaults($.datepick.regionalOptions['mt']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Dutch/Belgium localisation for jQuery Datepicker.
    Written by Mathias Bynens <http://mathiasbynens.be/> */
 (function($) {
-	$.datepick.regional['nl-BE'] = {
+	$.datepick.regionalOptions['nl-BE'] = {
 		monthNames: ['januari', 'februari', 'maart', 'april', 'mei', 'juni',
 		'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
 		monthNamesShort: ['jan', 'feb', 'maa', 'apr', 'mei', 'jun',
@@ -1507,13 +1505,13 @@
 		dayStatus: 'dd/mm/yyyy', defaultStatus: 'Kies een datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['nl-BE']);
+	$.datepick.setDefaults($.datepick.regionalOptions['nl-BE']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Dutch localisation for jQuery Datepicker.
    Written by Mathias Bynens <http://mathiasbynens.be/> */
 (function($) {
-	$.datepick.regional['nl'] = {
+	$.datepick.regionalOptions['nl'] = {
 		monthNames: ['januari', 'februari', 'maart', 'april', 'mei', 'juni',
 		'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
 		monthNamesShort: ['jan', 'feb', 'maa', 'apr', 'mei', 'jun',
@@ -1536,13 +1534,13 @@
 		dayStatus: 'dd-mm-yyyy', defaultStatus: 'Kies een datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['nl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['nl']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Norwegian localisation for jQuery Datepicker.
    Written by Naimdjon Takhirov (naimdjon@gmail.com). */
 (function($) {
-	$.datepick.regional['no'] = {
+	$.datepick.regionalOptions['no'] = {
 		monthNames: ['Januar','Februar','Mars','April','Mai','Juni',
 		'Juli','August','September','Oktober','November','Desember'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Mai','Jun',
@@ -1565,13 +1563,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['no']);
+	$.datepick.setDefaults($.datepick.regionalOptions['no']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Polish localisation for jQuery Datepicker.
    Written by Jacek Wysocki (jacek.wysocki@gmail.com). */
 (function($) {
-	$.datepick.regional['pl'] = {
+	$.datepick.regionalOptions['pl'] = {
 		monthNames: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec',
 		'Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],
 		monthNamesShort: ['Sty','Lu','Mar','Kw','Maj','Cze',
@@ -1594,13 +1592,13 @@
 		dayStatus: '\'Wybierz\' D, M d', defaultStatus: 'Wybierz datę',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['pl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['pl']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Brazilian Portuguese localisation for jQuery Datepicker.
    Written by Leonildo Costa Silva (leocsilva@gmail.com). */
 (function($) {
-	$.datepick.regional['pt-BR'] = {
+	$.datepick.regionalOptions['pt-BR'] = {
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
 		'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
@@ -1623,13 +1621,13 @@
 		dayStatus: 'DD, d \'de\' M \'de\' yyyy', defaultStatus: 'Selecione um dia',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['pt-BR']);
+	$.datepick.setDefaults($.datepick.regionalOptions['pt-BR']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Portuguese Portuguese localisation for jQuery Datepicker.
    Written by Telmo Martinho (telmomartinho@gmail.com). */
 (function($) {
-	$.datepick.regional['pt'] = {
+	$.datepick.regionalOptions['pt'] = {
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
 		'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
@@ -1652,12 +1650,12 @@
 		dayStatus: 'DD, d \'de\' M \'de\' yyyy', defaultStatus: 'Selecione um dia',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['pt']);
+	$.datepick.setDefaults($.datepick.regionalOptions['pt']);
 })(jQuery);﻿/* http://keith-wood.name/datepick.html
    Romansh localisation for jQuery Datepicker.
    Yvonne Gienal (yvonne.gienal@educa.ch). */
 (function($) {
-	$.datepick.regional['rm'] = {
+	$.datepick.regionalOptions['rm'] = {
 		monthNames: ['Schaner','Favrer','Mars','Avrigl','Matg','Zercladur',
 		'Fanadur','Avust','Settember','October','November','December'],
 		monthNamesShort: ['Scha','Fev','Mar','Avr','Matg','Zer',
@@ -1680,13 +1678,13 @@
 		dayStatus: 'DD d MM', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['rm']);
+	$.datepick.setDefaults($.datepick.regionalOptions['rm']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Romanian localisation for jQuery Datepicker.
    Written by Edmond L. (ll_edmond@walla.com) and Ionut G. Stan (ionut.g.stan@gmail.com). */
 (function($) {
-	$.datepick.regional['ro'] = {
+	$.datepick.regionalOptions['ro'] = {
 		monthNames: ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie',
 		'Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'],
 		monthNamesShort: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun',
@@ -1709,13 +1707,13 @@
 		dayStatus: 'Selectează D, M d', defaultStatus: 'Selectează o data',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ro']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ro']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Russian localisation for jQuery Datepicker.
    Written by Andrew Stromnov (stromnov@gmail.com). */
 (function($) {
-	$.datepick.regional['ru'] = {
+	$.datepick.regionalOptions['ru'] = {
 		monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
 		'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
 		monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
@@ -1738,13 +1736,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ru']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ru']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Slovak localisation for jQuery Datepicker.
    Written by Vojtech Rinik (vojto@hmm.sk). */
 (function($) {
-	$.datepick.regional['sk'] = {
+	$.datepick.regionalOptions['sk'] = {
 		monthNames: ['Január','Február','Marec','Apríl','Máj','Jún',
 		'Júl','August','September','Október','November','December'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Máj','Jún',
@@ -1767,14 +1765,14 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sk']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sk']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Slovenian localisation for jQuery Datepicker.
    Written by Jaka Jancar (jaka@kubje.org). */
 /* c = &#x10D;, s = &#x161; z = &#x17E; C = &#x10C; S = &#x160; Z = &#x17D; */
 (function($) {
-	$.datepick.regional['sl'] = {
+	$.datepick.regionalOptions['sl'] = {
 		monthNames: ['Januar','Februar','Marec','April','Maj','Junij',
 		'Julij','Avgust','September','Oktober','November','December'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -1797,13 +1795,13 @@
 		dayStatus: 'Izberi DD, d MM yy', defaultStatus: 'Izbira datuma',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sl']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Albanian localisation for jQuery Datepicker.
    Written by Flakron Bytyqi (flakron@gmail.com). */
 (function($) {
-	$.datepick.regional['sq'] = {
+	$.datepick.regionalOptions['sq'] = {
 		monthNames: ['Janar','Shkurt','Mars','Prill','Maj','Qershor',
 		'Korrik','Gusht','Shtator','Tetor','Nëntor','Dhjetor'],
 		monthNamesShort: ['Jan','Shk','Mar','Pri','Maj','Qer',
@@ -1826,13 +1824,13 @@
 		dayStatus: '\'Zgjedh\' D, M d', defaultStatus: 'Zgjedhe një datë',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sq']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sq']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Serbian localisation for jQuery Datepicker.
    Written by Dejan Dimić. */
 (function($){
-	$.datepick.regional['sr-SR'] = {
+	$.datepick.regionalOptions['sr-SR'] = {
 		monthNames: ['Januar','Februar','Mart','April','Maj','Jun',
 		'Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'],
 		monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -1855,13 +1853,13 @@
 		dayStatus: '\'Datum\' D, M d', defaultStatus: 'Odaberi datum',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sr-SR']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sr-SR']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Serbian localisation for jQuery Datepicker.
    Written by Dejan Dimić. */
 (function($) {
-	$.datepick.regional['sr'] = {
+	$.datepick.regionalOptions['sr'] = {
 		monthNames: ['Јануар','Фебруар','Март','Април','Мај','Јун',
 		'Јул','Август','Септембар','Октобар','Новембар','Децембар'],
 		monthNamesShort: ['Јан','Феб','Мар','Апр','Мај','Јун',
@@ -1884,13 +1882,13 @@
 		dayStatus: '\'Датум\' DD d MM', defaultStatus: 'Одабери датум',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['sr']);
+	$.datepick.setDefaults($.datepick.regionalOptions['sr']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Swedish localisation for jQuery Datepicker.
-   Written by Anders Ekdahl (anders@nomadiz.se). */
+   Written by Anders Ekdahl ( anders@nomadiz.se). */
 (function($) {
-    $.datepick.regional['sv'] = {
+    $.datepick.regionalOptions['sv'] = {
         monthNames: ['Januari','Februari','Mars','April','Maj','Juni',
         'Juli','Augusti','September','Oktober','November','December'],
         monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun',
@@ -1913,13 +1911,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-    $.datepick.setDefaults($.datepick.regional['sv']);
+    $.datepick.setDefaults($.datepick.regionalOptions['sv']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Tamil localisation for jQuery Datepicker.
    Written by S A Sureshkumar (saskumar@live.com). */
 (function($) {
-	$.datepick.regional['ta'] = {
+	$.datepick.regionalOptions['ta'] = {
 		monthNames: ['தை','மாசி','பங்குனி','சித்திரை','வைகாசி','ஆனி',
 		'ஆடி','ஆவணி','புரட்டாசி','ஐப்பசி','கார்த்திகை','மார்கழி'],
 		monthNamesShort: ['தை','மாசி','பங்','சித்','வைகா','ஆனி',
@@ -1942,13 +1940,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['ta']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ta']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Thai localisation for jQuery Datepicker.
    Written by pipo (pipo@sixhead.com). */
 (function($) {
-	$.datepick.regional['th'] = {
+	$.datepick.regionalOptions['th'] = {
 		monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
 		'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
 		monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.',
@@ -1971,13 +1969,13 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['th']);
+	$.datepick.setDefaults($.datepick.regionalOptions['th']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Turkish localisation for jQuery Datepicker.
    Written by Izzet Emre Erkan (kara@karalamalar.net). */
 (function($) {
-	$.datepick.regional['tr'] = {
+	$.datepick.regionalOptions['tr'] = {
 		monthNames: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran',
 		'Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
 		monthNamesShort: ['Oca','Şub','Mar','Nis','May','Haz',
@@ -2000,13 +1998,13 @@
 		dayStatus: 'D, M d seçiniz', defaultStatus: 'Bir tarih seçiniz',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['tr']);
+	$.datepick.setDefaults($.datepick.regionalOptions['tr']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Ukrainian localisation for jQuery Datepicker.
    Written by Maxim Drogobitskiy (maxdao@gmail.com). */
 (function($) {
-	$.datepick.regional['uk'] = {
+	$.datepick.regionalOptions['uk'] = {
 		monthNames: ['Січень','Лютий','Березень','Квітень','Травень','Червень',
 		'Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'],
 		monthNamesShort: ['Січ','Лют','Бер','Кві','Тра','Чер',
@@ -2029,14 +2027,14 @@
 		dayStatus: 'D, M d', defaultStatus: '',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['uk']);
+	$.datepick.setDefaults($.datepick.regionalOptions['uk']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Urdu localisation for jQuery Datepicker.
    Mansoor Munib -- mansoormunib@gmail.com <http://www.mansoor.co.nr/mansoor.html>
    Thanks to Habib Ahmed, ObaidUllah Anwar. */
 (function($) {
-	$.datepick.regional['ur'] = {
+	$.datepick.regionalOptions['ur'] = {
 		monthNames: ['جنوری','فروری','مارچ','اپریل','مئی','جون',
 		'جولائی','اگست','ستمبر','اکتوبر','نومبر','دسمبر'],
 		monthNamesShort: ['1','2','3','4','5','6',
@@ -2059,13 +2057,12 @@
 		dayStatus: 'انتخاب D, M d', defaultStatus: 'کریں منتخب تاريخ',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ur']);
-})(jQuery);
-﻿/* http://keith-wood.name/datepick.html
+	$.datepick.setDefaults($.datepick.regionalOptions['ur']);
+})(jQuery);﻿/* http://keith-wood.name/datepick.html
    Vietnamese localisation for jQuery Datepicker.
    Translated by Le Thanh Huy (lthanhhuy@cit.ctu.edu.vn). */
 (function($) {
-	$.datepick.regional['vi'] = {
+	$.datepick.regionalOptions['vi'] = {
 		monthNames: ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu',
 		'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'],
 		monthNamesShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
@@ -2088,13 +2085,13 @@
 		dayStatus: 'Đang chọn DD, \'ngày\' d M', defaultStatus: 'Chọn ngày',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['vi']);
+	$.datepick.setDefaults($.datepick.regionalOptions['vi']);
 })(jQuery);
 /* http://keith-wood.name/datepick.html
    Simplified Chinese localisation for jQuery Datepicker.
    Written by Cloudream (cloudream@gmail.com). */
 (function($) {
-	$.datepick.regional['zh-CN'] = {
+	$.datepick.regionalOptions['zh-CN'] = {
 		monthNames: ['一月','二月','三月','四月','五月','六月',
 		'七月','八月','九月','十月','十一月','十二月'],
 		monthNamesShort: ['一','二','三','四','五','六',
@@ -2119,13 +2116,13 @@
 		dayStatus: '选择 m月 d日, DD', defaultStatus: '请选择日期',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['zh-CN']);
+	$.datepick.setDefaults($.datepick.regionalOptions['zh-CN']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Hong Kong Chinese localisation for jQuery Datepicker.
    Written by SCCY (samuelcychan@gmail.com). */
 (function($) {
-	$.datepick.regional['zh-HK'] = {
+	$.datepick.regionalOptions['zh-HK'] = {
 		monthNames: ['一月','二月','三月','四月','五月','六月',
 		'七月','八月','九月','十月','十一月','十二月'],
 		monthNamesShort: ['一','二','三','四','五','六',
@@ -2150,13 +2147,13 @@
 		dayStatus: '選擇 m月 d日, DD', defaultStatus: '請選擇日期',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['zh-HK']);
+	$.datepick.setDefaults($.datepick.regionalOptions['zh-HK']);
 })(jQuery);
 ﻿/* http://keith-wood.name/datepick.html
    Traditional Chinese localisation for jQuery Datepicker.
    Written by Ressol (ressol@gmail.com). */
 (function($) {
-	$.datepick.regional['zh-TW'] = {
+	$.datepick.regionalOptions['zh-TW'] = {
 		monthNames: ['一月','二月','三月','四月','五月','六月',
 		'七月','八月','九月','十月','十一月','十二月'],
 		monthNamesShort: ['一','二','三','四','五','六',
@@ -2181,5 +2178,5 @@
 		dayStatus: '選擇 m月 d日, DD', defaultStatus: '請選擇日期',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['zh-TW']);
+	$.datepick.setDefaults($.datepick.regionalOptions['zh-TW']);
 })(jQuery);

@@ -3,7 +3,7 @@
    Mansoor Munib -- mansoormunib@gmail.com <http://www.mansoor.co.nr/mansoor.html>
    Thanks to Habib Ahmed, ObaidUllah Anwar. */
 (function($) {
-	$.datepick.regional['ur'] = {
+	$.datepick.regionalOptions['ur'] = {
 		monthNames: ['جنوری','فروری','مارچ','اپریل','مئی','جون',
 		'جولائی','اگست','ستمبر','اکتوبر','نومبر','دسمبر'],
 		monthNamesShort: ['1','2','3','4','5','6',
@@ -26,5 +26,5 @@
 		dayStatus: 'انتخاب D, M d', defaultStatus: 'کریں منتخب تاريخ',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['ur']);
+	$.datepick.setDefaults($.datepick.regionalOptions['ur']);
 })(jQuery);

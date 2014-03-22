@@ -2,7 +2,7 @@
    Galician localisation for jQuery Datepicker.
    Traducido por Manuel (McNuel@gmx.net). */
 (function($) {
-	$.datepick.regional['gl'] = {
+	$.datepick.regionalOptions['gl'] = {
 		monthNames: ['Xaneiro','Febreiro','Marzo','Abril','Maio','Xuño',
 		'Xullo','Agosto','Setembro','Outubro','Novembro','Decembro'],
 		monthNamesShort: ['Xan','Feb','Mar','Abr','Mai','Xuñ',
@@ -25,5 +25,5 @@
 		dayStatus: 'D, M d', defaultStatus: 'Selecciona Data',
 		isRTL: false
 	};
-	$.datepick.setDefaults($.datepick.regional['gl']);
+	$.datepick.setDefaults($.datepick.regionalOptions['gl']);
 })(jQuery);

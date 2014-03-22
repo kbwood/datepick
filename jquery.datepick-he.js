@@ -2,7 +2,7 @@
    Hebrew localisation for jQuery Datepicker.
    Written by Amir Hardon (ahardon at gmail dot com). */
 (function($) {
-	$.datepick.regional['he'] = {
+	$.datepick.regionalOptions['he'] = {
 		monthNames: ['ינואר','פברואר','מרץ','אפריל','מאי','יוני',
 		'יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'],
 		monthNamesShort: ['1','2','3','4','5','6',
@@ -25,5 +25,5 @@
 		dayStatus: 'DD, M d', defaultStatus: '',
 		isRTL: true
 	};
-	$.datepick.setDefaults($.datepick.regional['he']);
+	$.datepick.setDefaults($.datepick.regionalOptions['he']);
 })(jQuery);
