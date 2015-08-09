@@ -1,7 +1,7 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Date picker for jQuery v5.0.0.
+   Date picker for jQuery v5.0.1.
    Written by Keith Wood (kbwood{at}iinet.com.au) February 2010.
-   Licensed under the MIT (https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt) licence. 
+   Licensed under the MIT (http://keith-wood.name/licence.html) licence. 
    Please attribute the author if you use it. */
 
 (function($) { // Hide scope, no $ conflict
@@ -442,10 +442,12 @@
 			@property [closeText='Close'] {string} Text for the close command.
 			@property [closeStatus='Close the datepicker'] {string} Status text for the close command.
 			@property [yearStatus='Change the year'] {string} Status text for year selection.
+			@property [earlierText='&#160;&#160;▲'] {string} Text for earlier years.
+			@property [laterText='&#160;&#160;▼'] {string} Text for later years.
 			@property [monthStatus='Change the month'] {string} Status text for month selection.
 			@property [weekText='Wk'] {string} Text for week of the year column header.
 			@property [weekStatus='Week of the year'] {string} Status text for week of the year column header.
-			@property [dayStatus='Select DD,&nbsp;M&nbsp;d,&nbsp;yyyy'] {string} Status text for selectable days.
+			@property [dayStatus='Select DD,&#160;M&#160;d,&#160;yyyy'] {string} Status text for selectable days.
 			@property [defaultStatus='Select a date'] {string} Status text shown by default.
 			@property [isRTL=false] {boolean} <code>true</code> if language is right-to-left. */
 		regionalOptions: { // Available regional settings, indexed by language/country code
@@ -476,6 +478,8 @@
 				closeText: 'Close',
 				closeStatus: 'Close the datepicker',
 				yearStatus: 'Change the year',
+				earlierText: '&#160;&#160;▲',
+				laterText: '&#160;&#160;▼',
 				monthStatus: 'Change the month',
 				weekText: 'Wk',
 				weekStatus: 'Week of the year',
@@ -1315,7 +1319,10 @@
 					}
 				}
 				if (inst.inline) {
+					var index = $('a, :input', elem).index($(':focus', elem));
 					elem.html(this._generateContent(elem[0], inst));
+					var focus = elem.find('a, :input');
+					focus.eq(Math.max(Math.min(index, focus.length - 1), 0)).focus();
 				}
 				else if (plugin.curInst === inst) {
 					if (!inst.div) {
@@ -1489,10 +1496,10 @@
 			@param event {KeyEvent} The keystroke.
 			@return {boolean} <code>true</code> if not handled, <code>false</code> if handled. */
 		_keyDown: function(event) {
-			var elem = event.target;
+			var elem = (event.data && event.data.elem) || event.target;
 			var inst = plugin._getInst(elem);
 			var handled = false;
-			if (inst.div) {
+			if (inst.inline || inst.div) {
 				if (event.keyCode === 9) { // Tab - close
 					plugin.hide(elem);
 				}
@@ -1539,7 +1546,7 @@
 			@param event {KeyEvent} The keystroke.
 			@return {boolean} <code>true</code> if allowed, <code>false</code> if not allowed. */
 		_keyPress: function(event) {
-			var inst = plugin._getInst(event.target);
+			var inst = plugin._getInst((event.data && event.data.elem) || event.target);
 			if (!$.isEmptyObject(inst) && inst.options.constrainInput) {
 				var ch = String.fromCharCode(event.keyCode || event.charCode);
 				var allowedChars = plugin._allowedChars(inst);
@@ -1600,7 +1607,7 @@
 			@param event {KeyEvent} The keystroke.
 			@return {boolean} <code>true</code> if allowed, <code>false</code> if not allowed. */
 		_keyUp: function(event) {
-			var elem = event.target;
+			var elem = (event.data && event.data.elem) || event.target;
 			var inst = plugin._getInst(elem);
 			if (!$.isEmptyObject(inst) && !inst.ctrlKey && inst.lastVal !== inst.elem.val()) {
 				try {
@@ -1869,7 +1876,7 @@
 				else {
 					inst.selectedDates = [date];
 				}
-				inst.prevDate = plugin.newDate(date);
+				inst.prevDate = inst.drawDate = plugin.newDate(date);
 				this._updateInput(elem);
 				if (inst.inline || inst.pickingRange || inst.selectedDates.length <
 						(inst.options.multiSelect || (inst.options.rangeSelect ? 2 : 1))) {
@@ -1936,13 +1943,17 @@
 			}
 			// Add datepicker behaviour
 			var self = this;
+			function removeHighlight() {
+				(inst.inline ? $(this).closest('.' + self._getMarker()) : inst.div).
+					find(inst.options.renderer.daySelector + ' a').
+					removeClass(inst.options.renderer.highlightedClass);
+			}
 			picker.find(inst.options.renderer.daySelector + ' a').hover(
-					function() { $(this).addClass(inst.options.renderer.highlightedClass); },
 					function() {
-						(inst.inline ? $(this).closest('.' + self._getMarker()) : inst.div).
-							find(inst.options.renderer.daySelector + ' a').
-							removeClass(inst.options.renderer.highlightedClass);
-					}).
+						removeHighlight.apply(this);
+						$(this).addClass(inst.options.renderer.highlightedClass);
+					},
+					removeHighlight).
 				click(function() {
 					self.selectDate(elem, this);
 				}).end().
@@ -1974,6 +1985,9 @@
 						inst.elem.focus();
 					}
 				});
+			// Add keyboard handling
+			var data = {elem: inst.elem[0]};
+			picker.keydown(data, this._keyDown).keypress(data, this._keyPress).keyup(data, this._keyUp);
 			// Add command behaviour
 			picker.find('.' + inst.options.renderer.commandClass).click(function() {
 					if (!$(this).hasClass(inst.options.renderer.disabledClass)) {
@@ -2071,7 +2085,7 @@
 						(dateInfo.title || plugin.formatDate(
 						inst.options.dayStatus, drawDate, inst.getConfig())) + '"' : '') + '>' +
 						(inst.options.showOtherMonths || (drawDate.getMonth() + 1) === month ?
-						dateInfo.content || drawDate.getDate() : '&nbsp;') +
+						dateInfo.content || drawDate.getDate() : '&#160;') +
 						(selectable ? '</a>' : '</span>'));
 					plugin.add(drawDate, 1, 'd');
 					ts = drawDate.getTime();
@@ -2157,24 +2171,38 @@
 					'" title="' + inst.options.yearStatus + '">';
 				start = plugin.add(plugin.newDate(start + 1, 1, 1), -1, 'd');
 				end = plugin.newDate(end, 1, 1);
-				var addYear = function(y) {
+				var addYear = function(y, yDisplay) {
 					if (y !== 0) {
 						selector += '<option value="' + month + '/' + y + '"' +
-							(year === y ? ' selected="selected"' : '') + '>' + y + '</option>';
+							(year === y ? ' selected="selected"' : '') + '>' + (yDisplay || y) + '</option>';
 					}
 				};
 				if (start.getTime() < end.getTime()) {
 					start = (minDate && minDate.getTime() > start.getTime() ? minDate : start).getFullYear();
 					end = (maxDate && maxDate.getTime() < end.getTime() ? maxDate : end).getFullYear();
+					var earlierLater = Math.floor((end - start) / 2);
+					if (!minDate || minDate.getFullYear() < start) {
+						addYear(start - earlierLater, inst.options.earlierText);
+					}
 					for (var y = start; y <= end; y++) {
 						addYear(y);
+					}
+					if (!maxDate || maxDate.getFullYear() > end) {
+						addYear(end + earlierLater, inst.options.laterText);
 					}
 				}
 				else {
 					start = (maxDate && maxDate.getTime() < start.getTime() ? maxDate : start).getFullYear();
 					end = (minDate && minDate.getTime() > end.getTime() ? minDate : end).getFullYear();
+					var earlierLater = Math.floor((start - end) / 2);
+					if (!maxDate || maxDate.getFullYear() > start) {
+						addYear(start + earlierLater, inst.options.earlierText);
+					}
 					for (var y = start; y >= end; y--) {
 						addYear(y);
+					}
+					if (!minDate || minDate.getFullYear() < end) {
+						addYear(end - earlierLater, inst.options.laterText);
 					}
 				}
 				selector += '</select>';

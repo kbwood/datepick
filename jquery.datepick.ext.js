@@ -1,7 +1,7 @@
 ﻿/* http://keith-wood.name/datepick.html
-   Datepicker extensions for jQuery v5.0.0.
+   Datepicker extensions for jQuery v5.0.1.
    Written by Keith Wood (kbwood{at}iinet.com.au) August 2009.
-   Licensed under the MIT (https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt) licence. 
+   Licensed under the MIT (http://keith-wood.name/licence.html) licence. 
    Please attribute the author if you use it. */
 
 (function($) { // Hide scope, no $ conflict
@@ -128,7 +128,7 @@
 		showStatus: function(picker, inst) {
 			var renderer = inst.get('renderer');
 			var isTR = (renderer.selectedClass === themeRollerRenderer.selectedClass);
-			var defaultStatus = inst.get('defaultStatus') || '&nbsp;';
+			var defaultStatus = inst.get('defaultStatus') || '&#160;';
 			var status = $('<div class="' + (!isTR ? 'datepick-status' :
 				'ui-datepicker-status ui-widget-header ui-helper-clearfix ui-corner-all') + '">' +
 				defaultStatus + '</div>').
