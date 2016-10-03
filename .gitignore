@@ -1,0 +1,5 @@
+doc/fonts
+doc/scripts
+node_modules
+package
+src/bower_components

@@ -11,18 +11,12 @@
 		"ui",
 		"validation"
 	],
-	"version": "5.0.1",
+	"version": "5.1.0",
 	"author": {
 		"name": "Keith Wood",
+		"email": "wood.keith@optusnet.com.au"
 		"url": "http://keith-wood.name/"
 	},
-	"maintainers": [
-		{
-			"name": "Keith Wood",
-			"email": "kbwood@iinet.com.au",
-			"url": "http://keith-wood.name/"
-		}
-	],
 	"licenses": [
 		{
 			"type": "MIT",
@@ -34,6 +28,6 @@
 	"docs": "http://keith-wood.name/datepickRef.html",
 	"download": "http://keith-wood.name/datepick.html",
 	"dependencies": {
-		"jquery": ">=1.7"
+		"jquery": ">=1.12"
 	}
 }

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: Datepick-validation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: Datepick-validation</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Extensions to jQuery Validation for the <a href="module-Datepick.html"><code>Datepick</code></a> plugin.</div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jquery.datepick.validation.js.html">jquery.datepick.validation.js</a>, <a href="jquery.datepick.validation.js.html#line191">line 191</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~dpCompareDate"><span class="type-signature">(inner) </span>dpCompareDate<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Cross-validate date fields.
+			The parameters for this rule should be an array with
+			<ul>
+			<li>[0] being the comparison type: 'eq' ('equal', 'same'), 'ne' ('notEqual', 'notSame'),
+			'lt' ('lessThan', 'before'), 'gt' ('greaterThan', 'after'),
+			'le' ('notGreaterThan', 'notAfter'), 'ge' ('notLessThan', 'notBefore')</li>
+			<li>[1] being 'today' or a date string in the current <a href="module-Datepick.html#~regionalOptions"><code>dateFormat</code></a>
+			or a <code>Date</code> or another field selector/element/jQuery</li>
+			</ul>
+			<p>OR an object with one attribute with a name of the comparison to apply -
+			'eq', 'ne', 'lt', 'gt', 'le', 'ge' or synonyms -
+			and a value of 'today' or a date string or a <code>Date</code> or another field selector/element/jQuery</p>
+			<p>OR a string with 'eq', 'ne', 'lt', 'gt', 'le', 'ge' or synonyms followed by 'today'
+			or a date string in the current <a href="module-Datepick.html#~regionalOptions"><code>dateFormat</code></a>
+			or a jQuery selector</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jquery.datepick.validation.js.html">jquery.datepick.validation.js</a>, <a href="jquery.datepick.validation.js.html#line229">line 229</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>rules: {
+  validBeforePicker: {
+    dpCompareDate: ['before', '#validAfterPicker']
+  },
+  validAfterPicker: {
+    dpCompareDate: {after: '#validBeforePicker'}
+  },
+  validTodayPicker: {
+    dpCompareDate: 'ne today'
+  },
+  validSpecificPicker: {
+    dpCompareDate: 'notBefore 01/01/2012'
+  }
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="~dpDate"><span class="type-signature">(inner) </span>dpDate<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Validate a date field.
+			Apply all the validations applicable from the datepicker,
+			i.e. minimum and maximum allowed dates and individual date selectability.
+			The start and end dates in a date range, and all dates in a multi-select datepicker are va	lidated.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jquery.datepick.validation.js.html">jquery.datepick.validation.js</a>, <a href="jquery.datepick.validation.js.html#line194">line 194</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>rules: {
+  fieldName1: 'dpDate',
+  fieldName2: {
+    required: true,
+    dpDate: true
+  }
+}</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Datepick.html">Datepick</a></li><li><a href="module-Datepick-ext.html">Datepick-ext</a></li><li><a href="module-Datepick-valext.html">Datepick-valext</a></li><li><a href="module-Datepick-validation.html">Datepick-validation</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Mon Oct 03 2016 12:12:56 GMT+1100 (AUS Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
