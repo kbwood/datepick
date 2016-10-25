@@ -27,12 +27,13 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>﻿/*! http://keith-wood.name/datepick.html
-	Date picker for jQuery v5.1.0.
+	Date picker for jQuery v5.1.1.
 	Written by Keith Wood (wood.keith{at}optusnet.com.au) February 2010.
 	Licensed under the MIT (http://keith-wood.name/licence.html) licence. 
 	Please attribute the author if you use it. */
 
 (function($) { // Hide scope, no $ conflict
+	'use strict';
 
 	var pluginName = 'datepick';
 
@@ -149,12 +150,15 @@ $(selector).datepick({minDate: 0, maxDate: '+1m +1w'}) */
 					return (!minDate || plugin.add(plugin.day(
 						plugin._applyMonthsOffset(plugin.add(plugin.newDate(inst.drawDate),
 						1 - inst.options.monthsToStep, 'm'), inst), 1), -1, 'd').
-						getTime() >= minDate.getTime()); },
+						getTime() >= minDate.getTime());
+				},
 				date: function(inst) {
 					return plugin.day(plugin._applyMonthsOffset(plugin.add(
-						plugin.newDate(inst.drawDate), -inst.options.monthsToStep, 'm'), inst), 1); },
+						plugin.newDate(inst.drawDate), -inst.options.monthsToStep, 'm'), inst), 1);
+				},
 				action: function(inst) {
-					plugin.changeMonth(this, -inst.options.monthsToStep); }
+					plugin.changeMonth(this, -inst.options.monthsToStep);
+				}
 			},
 			prevJump: {text: 'prevJumpText', status: 'prevJumpStatus', // Previous year
 				keystroke: {keyCode: 33, ctrlKey: true}, // Ctrl + Page up
@@ -163,12 +167,15 @@ $(selector).datepick({minDate: 0, maxDate: '+1m +1w'}) */
 					return (!minDate || plugin.add(plugin.day(
 						plugin._applyMonthsOffset(plugin.add(plugin.newDate(inst.drawDate),
 						1 - inst.options.monthsToJump, 'm'), inst), 1), -1, 'd').
-						getTime() >= minDate.getTime()); },
+						getTime() >= minDate.getTime());
+				},
 				date: function(inst) {
 					return plugin.day(plugin._applyMonthsOffset(plugin.add(
-						plugin.newDate(inst.drawDate), -inst.options.monthsToJump, 'm'), inst), 1); },
+						plugin.newDate(inst.drawDate), -inst.options.monthsToJump, 'm'), inst), 1);
+				},
 				action: function(inst) {
-					plugin.changeMonth(this, -inst.options.monthsToJump); }
+					plugin.changeMonth(this, -inst.options.monthsToJump);
+				}
 			},
 			next: {text: 'nextText', status: 'nextStatus', // Next month
 				keystroke: {keyCode: 34}, // Page down
@@ -176,12 +183,15 @@ $(selector).datepick({minDate: 0, maxDate: '+1m +1w'}) */
 					var maxDate = inst.get('maxDate');
 					return (!maxDate || plugin.day(plugin._applyMonthsOffset(plugin.add(
 						plugin.newDate(inst.drawDate), inst.options.monthsToStep, 'm'), inst), 1).
-						getTime() &lt;= maxDate.getTime()); },
+						getTime() &lt;= maxDate.getTime());
+				},
 				date: function(inst) {
 					return plugin.day(plugin._applyMonthsOffset(plugin.add(
-						plugin.newDate(inst.drawDate), inst.options.monthsToStep, 'm'), inst), 1); },
+						plugin.newDate(inst.drawDate), inst.options.monthsToStep, 'm'), inst), 1);
+				},
 				action: function(inst) {
-					plugin.changeMonth(this, inst.options.monthsToStep); }
+					plugin.changeMonth(this, inst.options.monthsToStep);
+				}
 			},
 			nextJump: {text: 'nextJumpText', status: 'nextJumpStatus', // Next year
 				keystroke: {keyCode: 34, ctrlKey: true}, // Ctrl + Page down
@@ -189,12 +199,15 @@ $(selector).datepick({minDate: 0, maxDate: '+1m +1w'}) */
 					var maxDate = inst.get('maxDate');
 					return (!maxDate || plugin.day(plugin._applyMonthsOffset(plugin.add(
 						plugin.newDate(inst.drawDate), inst.options.monthsToJump, 'm'), inst), 1).
-						getTime() &lt;= maxDate.getTime()); },
+						getTime() &lt;= maxDate.getTime());
+				},
 				date: function(inst) {
 					return plugin.day(plugin._applyMonthsOffset(plugin.add(
-						plugin.newDate(inst.drawDate), inst.options.monthsToJump, 'm'), inst), 1); },
+						plugin.newDate(inst.drawDate), inst.options.monthsToJump, 'm'), inst), 1);
+				},
 				action: function(inst) {
-					plugin.changeMonth(this, inst.options.monthsToJump); }
+					plugin.changeMonth(this, inst.options.monthsToJump);
+				}
 			},
 			current: {text: 'currentText', status: 'currentStatus', // Current month
 				keystroke: {keyCode: 36, ctrlKey: true}, // Ctrl + Home
@@ -203,12 +216,15 @@ $(selector).datepick({minDate: 0, maxDate: '+1m +1w'}) */
 					var maxDate = inst.get('maxDate');
 					var curDate = inst.selectedDates[0] || plugin.today();
 					return (!minDate || curDate.getTime() >= minDate.getTime()) &amp;&amp;
-						(!maxDate || curDate.getTime() &lt;= maxDate.getTime()); },
+						(!maxDate || curDate.getTime() &lt;= maxDate.getTime());
+				},
 				date: function(inst) {
-					return inst.selectedDates[0] || plugin.today(); },
+					return inst.selectedDates[0] || plugin.today();
+				},
 				action: function(inst) {
 					var curDate = inst.selectedDates[0] || plugin.today();
-					plugin.showMonth(this, curDate.getFullYear(), curDate.getMonth() + 1); }
+					plugin.showMonth(this, curDate.getFullYear(), curDate.getMonth() + 1);
+				}
 			},
 			today: {text: 'todayText', status: 'todayStatus', // Today's month
 				keystroke: {keyCode: 36, ctrlKey: true}, // Ctrl + Home
@@ -216,57 +232,62 @@ $(selector).datepick({minDate: 0, maxDate: '+1m +1w'}) */
 					var minDate = inst.curMinDate();
 					var maxDate = inst.get('maxDate');
 					return (!minDate || plugin.today().getTime() >= minDate.getTime()) &amp;&amp;
-						(!maxDate || plugin.today().getTime() &lt;= maxDate.getTime()); },
-				date: function(inst) { return plugin.today(); },
-				action: function(inst) { plugin.showMonth(this); }
+						(!maxDate || plugin.today().getTime() &lt;= maxDate.getTime());
+				},
+				date: function() { return plugin.today(); },
+				action: function() { plugin.showMonth(this); }
 			},
 			clear: {text: 'clearText', status: 'clearStatus', // Clear the datepicker
 				keystroke: {keyCode: 35, ctrlKey: true}, // Ctrl + End
-				enabled: function(inst) { return true; },
-				date: function(inst) { return null; },
-				action: function(inst) { plugin.clear(this); }
+				enabled: function() { return true; },
+				date: function() { return null; },
+				action: function() { plugin.clear(this); }
 			},
 			close: {text: 'closeText', status: 'closeStatus', // Close the datepicker
 				keystroke: {keyCode: 27}, // Escape
-				enabled: function(inst) { return true; },
-				date: function(inst) { return null; },
-				action: function(inst) { plugin.hide(this); }
+				enabled: function() { return true; },
+				date: function() { return null; },
+				action: function() { plugin.hide(this); }
 			},
 			prevWeek: {text: 'prevWeekText', status: 'prevWeekStatus', // Previous week
 				keystroke: {keyCode: 38, ctrlKey: true}, // Ctrl + Up
 				enabled: function(inst) {
 					var minDate = inst.curMinDate();
 					return (!minDate || plugin.add(plugin.newDate(inst.drawDate), -7, 'd').
-						getTime() >= minDate.getTime()); },
+						getTime() >= minDate.getTime());
+				},
 				date: function(inst) { return plugin.add(plugin.newDate(inst.drawDate), -7, 'd'); },
-				action: function(inst) { plugin.changeDay(this, -7); }
+				action: function() { plugin.changeDay(this, -7); }
 			},
 			prevDay: {text: 'prevDayText', status: 'prevDayStatus', // Previous day
 				keystroke: {keyCode: 37, ctrlKey: true}, // Ctrl + Left
 				enabled: function(inst) {
 					var minDate = inst.curMinDate();
 					return (!minDate || plugin.add(plugin.newDate(inst.drawDate), -1, 'd').
-						getTime() >= minDate.getTime()); },
+						getTime() >= minDate.getTime());
+				},
 				date: function(inst) { return plugin.add(plugin.newDate(inst.drawDate), -1, 'd'); },
-				action: function(inst) { plugin.changeDay(this, -1); }
+				action: function() { plugin.changeDay(this, -1); }
 			},
 			nextDay: {text: 'nextDayText', status: 'nextDayStatus', // Next day
 				keystroke: {keyCode: 39, ctrlKey: true}, // Ctrl + Right
 				enabled: function(inst) {
 					var maxDate = inst.get('maxDate');
 					return (!maxDate || plugin.add(plugin.newDate(inst.drawDate), 1, 'd').
-						getTime() &lt;= maxDate.getTime()); },
+						getTime() &lt;= maxDate.getTime());
+				},
 				date: function(inst) { return plugin.add(plugin.newDate(inst.drawDate), 1, 'd'); },
-				action: function(inst) { plugin.changeDay(this, 1); }
+				action: function() { plugin.changeDay(this, 1); }
 			},
 			nextWeek: {text: 'nextWeekText', status: 'nextWeekStatus', // Next week
 				keystroke: {keyCode: 40, ctrlKey: true}, // Ctrl + Down
 				enabled: function(inst) {
 					var maxDate = inst.get('maxDate');
 					return (!maxDate || plugin.add(plugin.newDate(inst.drawDate), 7, 'd').
-						getTime() &lt;= maxDate.getTime()); },
+						getTime() &lt;= maxDate.getTime());
+				},
 				date: function(inst) { return plugin.add(plugin.newDate(inst.drawDate), 7, 'd'); },
-				action: function(inst) { plugin.changeDay(this, 7); }
+				action: function() { plugin.changeDay(this, 7); }
 			}
 		},
 
@@ -698,7 +719,7 @@ monthsOffset: function(date) { // Always start on the quarter
 			var literal = false;
 			for (var iFormat = 0; iFormat &lt; format.length; iFormat++) {
 				if (literal) {
-					if (format.charAt(iFormat) === "'" &amp;&amp; !doubled("'")) {
+					if (format.charAt(iFormat) === '\'' &amp;&amp; !doubled('\'')) {
 						literal = false;
 					}
 					else {
@@ -707,23 +728,37 @@ monthsOffset: function(date) { // Always start on the quarter
 				}
 				else {
 					switch (format.charAt(iFormat)) {
-						case 'd': output += formatNumber('d', date.getDate(), 2); break;
-						case 'D': output += formatName('D', date.getDay(),
-							dayNamesShort, dayNames); break;
-						case 'o': output += formatNumber('o', this.dayOfYear(date), 3); break;
-						case 'w': output += formatNumber('w', calculateWeek(date), 2); break;
-						case 'm': output += formatNumber('m', date.getMonth() + 1, 2); break;
-						case 'M': output += formatName('M', date.getMonth(),
-							monthNamesShort, monthNames); break;
+						case 'd':
+							output += formatNumber('d', date.getDate(), 2);
+							break;
+						case 'D':
+							output += formatName('D', date.getDay(), dayNamesShort, dayNames);
+							break;
+						case 'o':
+							output += formatNumber('o', this.dayOfYear(date), 3);
+							break;
+						case 'w':
+							output += formatNumber('w', calculateWeek(date), 2);
+							break;
+						case 'm':
+							output += formatNumber('m', date.getMonth() + 1, 2);
+							break;
+						case 'M':
+							output += formatName('M', date.getMonth(), monthNamesShort, monthNames);
+							break;
 						case 'y':
 							output += (doubled('y', 2) ? date.getFullYear() :
 								(date.getFullYear() % 100 &lt; 10 ? '0' : '') + date.getFullYear() % 100);
 							break;
-						case '@': output += Math.floor(date.getTime() / 1000); break;
-						case '!': output += date.getTime() * 10000 + this._ticksTo1970; break;
-						case "'":
-							if (doubled("'")) {
-								output += "'";
+						case '@':
+							output += Math.floor(date.getTime() / 1000);
+							break;
+						case '!':
+							output += date.getTime() * 10000 + this._ticksTo1970;
+							break;
+						case '\'':
+							if (doubled('\'')) {
+								output += '\'';
 							}
 							else {
 								literal = true;
@@ -820,7 +855,7 @@ monthsOffset: function(date) { // Always start on the quarter
 			var iValue = 0;
 			for (var iFormat = 0; iFormat &lt; format.length; iFormat++) {
 				if (literal) {
-					if (format.charAt(iFormat) === "'" &amp;&amp; !doubled("'")) {
+					if (format.charAt(iFormat) === '\'' &amp;&amp; !doubled('\'')) {
 						literal = false;
 					}
 					else {
@@ -829,12 +864,24 @@ monthsOffset: function(date) { // Always start on the quarter
 				}
 				else {
 					switch (format.charAt(iFormat)) {
-						case 'd': day = getNumber('d'); break;
-						case 'D': getName('D', dayNamesShort, dayNames); break;
-						case 'o': doy = getNumber('o'); break;
-						case 'w': getNumber('w'); break;
-						case 'm': month = getNumber('m'); break;
-						case 'M': month = getName('M', monthNamesShort, monthNames); break;
+						case 'd':
+							day = getNumber('d');
+							break;
+						case 'D':
+							getName('D', dayNamesShort, dayNames);
+							break;
+						case 'o':
+							doy = getNumber('o');
+							break;
+						case 'w':
+							getNumber('w');
+							break;
+						case 'm':
+							month = getNumber('m');
+							break;
+						case 'M':
+							month = getName('M', monthNamesShort, monthNames);
+							break;
 						case 'y':
 							var iSave = iFormat;
 							shortYear = !doubled('y', 2);
@@ -854,16 +901,19 @@ monthsOffset: function(date) { // Always start on the quarter
 							month = date.getMonth() + 1;
 							day = date.getDate();
 							break;
-						case '*': iValue = value.length; break;
-						case "'":
-							if (doubled("'")) {
+						case '*':
+							iValue = value.length;
+							break;
+						case '\'':
+							if (doubled('\'')) {
 								checkLiteral();
 							}
 							else {
 								literal = true;
 							}
 							break;
-						default: checkLiteral();
+						default:
+							checkLiteral();
 					}
 				}
 			}
@@ -1088,7 +1138,7 @@ $.datepick.newDate(2014, 12, 25) */
 			this._super();
 		},
 
-		_instSettings: function(elem, options) {
+		_instSettings: function(elem) {
 			return {selectedDates: [], drawDate: null, pickingRange: false,
 				inline: ($.inArray(elem[0].nodeName.toLowerCase(), ['div', 'span']) > -1),
 				get: function(name) { // Get a setting value, computing if necessary
@@ -1232,9 +1282,9 @@ $.datepick.newDate(2014, 12, 25) */
 		/** Apply multiple event functions.
 			@param {function} fns The functions to apply.
 			@example onShow: $.datepick.multipleEvents(fn1, fn2, ...) */
-		multipleEvents: function(fns) {
+		multipleEvents: function() {
 			var funcs = arguments;
-			return function(args) {
+			return function() {
 				for (var i = 0; i &lt; funcs.length; i++) {
 					funcs[i].apply(this, arguments);
 				}
@@ -1490,7 +1540,7 @@ $.datepick.newDate(2014, 12, 25) */
 			}
 			var isFixed = false;
 			$(inst.elem).parents().each(function() {
-				isFixed |= $(this).css('position') === 'fixed';
+				isFixed = isFixed || ($(this).css('position') === 'fixed');
 				return !isFixed;
 			});
 			var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
@@ -1604,26 +1654,31 @@ $.datepick.newDate(2014, 12, 25) */
 					handled = true;
 				}
 				else { // Command keystrokes
-					var commands = inst.options.commands;
-					for (var name in commands) {
-						command = commands[name];
-						if (command.keystroke.keyCode === event.keyCode &amp;&amp;
-								!!command.keystroke.ctrlKey === !!(event.ctrlKey || event.metaKey) &amp;&amp; // jshint ignore:line
-								!!command.keystroke.altKey === event.altKey &amp;&amp; // jshint ignore:line
-								!!command.keystroke.shiftKey === event.shiftKey) { // jshint ignore:line
-							plugin.performAction(elem, name);
-							handled = true;
-							break;
+					for (var key in inst.options.commands) {
+						if (inst.options.commands.hasOwnProperty(key)) {
+							command = inst.options.commands[key];
+							/* jshint -W018 */ // Dislikes !!
+							if (command.keystroke.keyCode === event.keyCode &amp;&amp;
+									!!command.keystroke.ctrlKey === !!(event.ctrlKey || event.metaKey) &amp;&amp;
+									!!command.keystroke.altKey === event.altKey &amp;&amp;
+									!!command.keystroke.shiftKey === event.shiftKey) {
+							/* jshint +W018 */
+								plugin.performAction(elem, key);
+								handled = true;
+								break;
+							}
 						}
 					}
 				}
 			}
 			else { // Show on 'current' keystroke
 				command = inst.options.commands.current;
+				/* jshint -W018 */ // Dislikes !!
 				if (command.keystroke.keyCode === event.keyCode &amp;&amp;
-						!!command.keystroke.ctrlKey === !!(event.ctrlKey || event.metaKey) &amp;&amp; // jshint ignore:line
-						!!command.keystroke.altKey === event.altKey &amp;&amp; // jshint ignore:line
-						!!command.keystroke.shiftKey === event.shiftKey) { // jshint ignore:line
+						!!command.keystroke.ctrlKey === !!(event.ctrlKey || event.metaKey) &amp;&amp;
+						!!command.keystroke.altKey === event.altKey &amp;&amp;
+						!!command.keystroke.shiftKey === event.shiftKey) {
+				/* jshint +W018 */
 					plugin.show(elem);
 					handled = true;
 				}
@@ -1664,7 +1719,7 @@ $.datepick.newDate(2014, 12, 25) */
 			for (var i = 0; i &lt; dateFormat.length; i++) {
 				var ch = dateFormat.charAt(i);
 				if (literal) {
-					if (ch === "'" &amp;&amp; dateFormat.charAt(i + 1) !== "'") {
+					if (ch === '\'' &amp;&amp; dateFormat.charAt(i + 1) !== '\'') {
 						literal = false;
 					}
 					else {
@@ -1673,17 +1728,30 @@ $.datepick.newDate(2014, 12, 25) */
 				}
 				else {
 					switch (ch) {
-						case 'd': case 'm': case 'o': case 'w':
-							allowedChars += (hasNum ? '' : '0123456789'); hasNum = true; break;
-						case 'y': case '@': case '!':
-							allowedChars += (hasNum ? '' : '0123456789') + '-'; hasNum = true; break;
+						case 'd':
+						case 'm':
+						case 'o':
+						case 'w':
+							allowedChars += (hasNum ? '' : '0123456789');
+							hasNum = true;
+							break;
+						case 'y':
+						case '@':
+						case '!':
+							allowedChars += (hasNum ? '' : '0123456789') + '-';
+							hasNum = true;
+							break;
 						case 'J':
-							allowedChars += (hasNum ? '' : '0123456789') + '-.'; hasNum = true; break;
-						case 'D': case 'M': case 'Y':
+							allowedChars += (hasNum ? '' : '0123456789') + '-.';
+							hasNum = true;
+							break;
+						case 'D':
+						case 'M':
+						case 'Y':
 							return null; // Accept anything
-						case "'":
-							if (dateFormat.charAt(i + 1) === "'") {
-								allowedChars += "'";
+						case '\'':
+							if (dateFormat.charAt(i + 1) === '\'') {
+								allowedChars += '\'';
 							}
 							else {
 								literal = true;
@@ -1813,10 +1881,14 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 					(inst.options.rangeSelect ? 2 : 1), inst.selectedDates.length);
 				if (inst.options.rangeSelect) {
 					switch (inst.selectedDates.length) {
-						case 1: inst.selectedDates[1] = inst.selectedDates[0]; break;
-						case 2: inst.selectedDates[1] =
-							(inst.selectedDates[0].getTime() > inst.selectedDates[1].getTime() ?
-							inst.selectedDates[0] : inst.selectedDates[1]); break;
+						case 1:
+							inst.selectedDates[1] = inst.selectedDates[0];
+							break;
+						case 2:
+							inst.selectedDates[1] =
+								(inst.selectedDates[0].getTime() > inst.selectedDates[1].getTime() ?
+								inst.selectedDates[0] : inst.selectedDates[1]);
+							break;
 					}
 					inst.pickingRange = false;
 				}
@@ -1891,7 +1963,7 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 				inst.prevDate = plugin.newDate(inst.drawDate);
 				var show = this._checkMinMax((typeof year !== 'undefined' ?
 					plugin.newDate(year, month, 1) : plugin.today()), inst);
-				inst.drawDate = plugin.newDate(show.getFullYear(), show.getMonth() + 1, 
+				inst.drawDate = plugin.newDate(show.getFullYear(), show.getMonth() + 1,
 					(typeof day !== 'undefined' ? day : Math.min(inst.drawDate.getDate(),
 					plugin.daysInMonth(show.getFullYear(), show.getMonth() + 1))));
 				this._update(elem);
@@ -2029,11 +2101,13 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 					(date ? plugin.formatDate(inst.options[command.text], date, inst.getConfig()) :
 					inst.options[command.text]) + '&lt;/' + close + '>');
 			};
-			for (var name in inst.options.commands) {
-				addCommand('button', 'button type="button"', 'button', name,
-					inst.options.renderer.commandButtonClass);
-				addCommand('link', 'a href="javascript:void(0)"', 'a', name,
-					inst.options.renderer.commandLinkClass);
+			for (var key in inst.options.commands) {
+				if (inst.options.commands.hasOwnProperty(key)) {
+					addCommand('button', 'button type="button"', 'button', key,
+						inst.options.renderer.commandButtonClass);
+					addCommand('link', 'a href="javascript:void(0)"', 'a', key,
+						inst.options.renderer.commandLinkClass);
+				}
 			}
 			picker = $(picker);
 			if (monthsToShow[1] > 1) {
@@ -2046,9 +2120,11 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 			// Add datepicker behaviour
 			var self = this;
 			function removeHighlight() {
+				/* jshint -W040 */
 				(inst.inline ? $(this).closest('.' + self._getMarker()) : inst.div).
 					find(inst.options.renderer.daySelector + ' a').
 					removeClass(inst.options.renderer.highlightedClass);
+				/* jshint +W040 */
 			}
 			picker.find(inst.options.renderer.daySelector + ' a').hover(
 					function() {
@@ -2076,7 +2152,7 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 						self.showMonth(elem, year, inst.drawDate.getMonth() + 1, inst.drawDate.getDate());
 					}
 					catch (e) {
-						alert(e);
+						window.alert(e);
 					}
 				}).keydown(function(event) {
 					if (event.keyCode === 13) { // Enter
@@ -2372,7 +2448,7 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Mon Oct 03 2016 12:12:56 GMT+1100 (AUS Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Tue Oct 25 2016 20:47:53 GMT+1100 (AUS Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

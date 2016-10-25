@@ -4,31 +4,10 @@ module.exports = function (grunt) {
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 	var config = {
+		pkg: grunt.file.readJSON('package.json'),
 		clean: {
-			build: {
-				files: [
-					{
-						dot: true,
-						src: ['dist/*', '!dist/.git', 'doc/*', 'package/*']
-					}
-				]
-			},
-			package: {
-				files: [
-					{
-						dot: true,
-						src: ['src/js/*.min.js', 'src/js/*.map', 'src/js/*lang.js']
-					}
-				]
-			},
-			tests: {
-				files: [
-					{
-						dot: true,
-						src: ['test/*.lang.tests.html', 'test/*.min.tests.html']
-					}
-				]
-			}
+			build: ['dist/*', 'doc/*', 'report/*', 'temp/*'],
+			tests: ['test/*.lang.tests.html', 'test/*.min.tests.html']
 		},
 		concat: {
 			options: {
@@ -38,17 +17,23 @@ module.exports = function (grunt) {
 			},
 			lang: {
 				src: 'src/js/jquery.datepick-*.js',
-				dest: 'dist/jquery.datepick.lang.js'
+				dest: 'dist/js/jquery.datepick.lang.js'
 			}
 		},
 		copy: {
-			package: {
+			dist: {
 				files: [
 					{
 						expand: true,
-						cwd: 'dist',
+						cwd: 'src',
+						src: ['*.html', 'css/*.*', 'img/*.*', 'js/*.*'],
+						dest: 'dist'
+					},
+					{
+						expand: true,
+						cwd: 'src/bower_components/kbw-plugin/dist/js',
 						src: ['*.*'],
-						dest: 'src/js'
+						dest: 'dist/js'
 					}
 				]
 			}
@@ -57,38 +42,65 @@ module.exports = function (grunt) {
 			options: {
 				destination: 'doc'
 			},
-			all: {
-				src: ['src/js/jquery.*.js', '!src/js/jquery.*-.*.js'],
-			}
+			all: ['src/js/*.js', '!src/js/*-*.js'],
 		},
 		jshint: {
-			all: ['src/js/jquery.*.js']
+			options: {
+				jshintrc: true
+			},
+			all: ['src/js/*.js']
 		},
 		qunit: {
-			all: ['test/**/*.html']
+			options: {
+				coverage: {
+					disposeCollector: true,
+					src: ['src/js/*.js', '!src/js/*-*.js'],
+					instrumentedFiles: 'temp/',
+					htmlReport: 'report/',
+					linesThresholdPct: 80,
+					statementsThresholdPct: 80,
+					functionsThresholdPct: 75,
+					branchesThresholdPct: 75
+				}
+			},
+			all: ['test/*.html']
 		},
 		replace: {
-			langtest: {
+			dist: {
+				src: ['dist/index.html'],
+				dest: 'dist/index.html',
+				replacements: [
+					{
+						from: /bower_components\/jquery\/dist\/jquery.min.js/,
+						to: 'http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'
+					},
+					{
+						from: /bower_components\/kbw-plugin\/dist\/jquery.plugin.min.js/,
+						to: 'js/jquery.plugin.min.js'
+					}
+				]
+			},
+			testlang: {
 				src: ['test/datepick.tests.html'],
 				dest: 'test/datepick.lang.tests.html',
 				replacements: [
 				    {
 						from: /src\/js\/jquery.*-.*\.js/g,
-						to: 'dist/jquery.datepick.lang.js'
+						to: 'dist/js/jquery.datepick.lang.js'
 					}
 				]
 			},
-			mintest: {
+			testmin: {
 				src: ['test/datepick.tests.html'],
 				dest: 'test/datepick.min.tests.html',
 				replacements: [
 				    {
 						from: /src\/js\/jquery.*-.*\.js/g,
-						to: 'dist/jquery.datepick.lang.min.js'
+						to: 'dist/js/jquery.datepick.lang.min.js'
 					},
 				    {
 						from: /src\/js\/jquery\.(.*)\.js/g,
-						to: 'dist/jquery.$1.min.js'
+						to: 'dist/js/jquery.$1.min.js'
 					}
 				]
 			}
@@ -99,45 +111,53 @@ module.exports = function (grunt) {
 				sourceMap: true
 			},
 			plugin: {
-				files: {
-					'dist/jquery.datepick.min.js': ['src/js/jquery.datepick.js'],
-					'dist/jquery.datepick.ext.min.js': ['src/js/jquery.datepick.ext.js'],
-					'dist/jquery.datepick.validation.min.js': ['src/js/jquery.datepick.validation.js'],
-					'dist/jquery.datepick.lang.min.js': ['dist/jquery.datepick.lang.js']
-				}
+				files: [
+					{
+						expand: true,
+						cwd: 'src/js',
+						src: ['*.js', '!*-*.js'],
+						dest: 'dist/js',
+						ext: '.min.js',
+						extDot: 'last'
+					},
+					{
+						src: 'dist/js/jquery.datepick.lang.js',
+						dest: 'dist/js/jquery.datepick.lang.min.js'
+					}
+				]
 			}
 		},
 		zip: {
 			all: {
-				cwd: 'src',
-				src: ['src/*.html', 'src/css/*.datepick.css', 'src/img/*.gif',
-					'src/js/jquery.datepick*.js', 'src/js/jquery.datepick*.map'],
-				dest: 'package/jquery.datepick.package.zip'
+				cwd: 'dist',
+				src: ['dist/*.html', 'dist/css/*.*', 'dist/img/*.*', 'dist/js/*.*'],
+				dest: 'dist/jquery.datepick.package-<%= pkg.version %>.zip'
 			}
 		}
 	};
 	
 	grunt.initConfig(config);
 
-	grunt.registerTask('package', [
-		'copy:package',
-		'zip',
-		'clean:package'
+	grunt.registerTask('dist', [
+		'copy:dist',
+		'replace:dist',
+		'zip'
 	]);
 
 	grunt.registerTask('test', [
-		'replace',
+		'replace:testlang',
+		'replace:testmin',
 		'qunit',
 		'clean:tests'
 	]);
 
-	grunt.registerTask('build', [
+	grunt.registerTask('default', [
 		'clean:build',
 		'jshint',
 		'concat',
 		'uglify',
 		'test',
 		'jsdoc',
-		'package'
+		'dist'
 	]);
 };
